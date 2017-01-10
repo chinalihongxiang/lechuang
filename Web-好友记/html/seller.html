@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商户注册</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/seller.css"/>
+	<body>
+		<div class="mask">
+			<div class="show">
+				<div class="showMsg">邮箱格式不正确,请输入正确的邮箱</div>
+				<div class="showBtn">确定</div>
+			</div>
+		</div>
+		<div class="content">
+			<ul>
+				<li><div class="lititle">用户名：</div><div><input type="text"class="input" id="sname" /></div><div>用户名不可以存在特殊字符</div></li>
+				<li><div class="lititle">手机号码：</div><div><input type="text"class="input" id="stel" /></div><div>请输入11位规范手机号码</div></li>
+				<li><div class="lititle">QQ号码：</div><div><input type="text"class="input" id="sqq" /></div><div>淘客用来联系您的主要方式</div></li>
+				<li><div class="lititle">邮箱：</div><div><input type="text"class="input" id="semail" /></div><button id="sendcode">点击发送验证码</button></li>
+				<li><div class="lititle">验证码：</div><div><input type="text"class="input" id="sidcode" /></div></li>
+				<li><div class="lititle">密码：</div><div><input type="text"class="input" id="spwd" /></div><div>请填写数字与字母组合</div></li>
+				<li><div class="lititle">确认密码：</div><div><input type="text"class="input" id="sspwd" /></div><div>务必保证两次输入的密码一致</div></li>
+				<li><div class="lititle">自我简介：</div><div><textarea class="input" rows="5" cols="30" id="sintroduce"></textarea></div></li>
+			</ul>
+			<button class="sres">提交注册</button>
+		</div>
+	</body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="../js/seller.js"></script>
+</html>
