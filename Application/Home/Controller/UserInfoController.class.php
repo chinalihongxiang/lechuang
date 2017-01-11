@@ -5,11 +5,6 @@ class UserInfoController extends Controller {
 
 	//注册选择身份页面
 	public function choose(){
-        $seller = M('seller');
-        $arr = array(
-                'seller_name' => 'li'
-            );
-        $seller -> add($arr);
 		$this->display();
 	}
 
