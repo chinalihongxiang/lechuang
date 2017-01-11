@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><!-- 淘客注册页面 -->

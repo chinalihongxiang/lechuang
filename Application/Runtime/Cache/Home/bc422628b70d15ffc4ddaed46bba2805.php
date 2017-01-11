@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><!-- 选择注册身份页面 -->
