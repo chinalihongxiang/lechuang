@@ -126,12 +126,11 @@ $(function () {
 		//自定义弹窗式提示
 		function alertMsg (str) {
 			$('.showMsg').html(str);
-			$('.mask').show(1,'swing',function () {
-				$('.show').animate({top:'200px'},200);
-			})
+			$('.mask').css('display','block')
+			$('.show').animate({top:'200px'},200);
 			$('.showBtn').one('click',function () {
 				$('.show').animate({top:'-1000px'},200,'swing',function(){
-					$('.mask').hide(1);
+					$('.mask').css('display','none')
 				})
 			})
 		}
@@ -171,6 +170,6 @@ $(function () {
         }  
 		//密码验证
 		function checkPwd (str) {
-			return RegExp(/^[A-Za-z0-9]{6,16}$/).test(str);
+			return RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/).test(str);
 		}
 	
