@@ -40,7 +40,7 @@ class UserInfoController extends IndexController {
         //邮箱
         if( !check_email(I('email')) ) $this->ajax_res(0,'请输入正确的邮箱');
         //验证码
-        if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
+        //if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
         //邮箱是否已被注册
         if( !$this->is_new_email(I('email')) ) $this->ajax_res(0,'该邮箱已被注册');
         //密码
@@ -97,7 +97,7 @@ class UserInfoController extends IndexController {
         //邮箱
         if( !check_email(I('email')) ) $this->ajax_res(0,'请输入正确的邮箱');
         //验证码
-        if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
+        // if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
         //邮箱是否已被注册
         if( !$this->is_new_email(I('email')) ) $this->ajax_res(0,'该邮箱已被注册');
         //密码
