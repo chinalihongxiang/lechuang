@@ -51,7 +51,7 @@
 			},1000)
 		}
 		//邮箱验证
-		function checkEmail(str){ 
+		function checkEmail(str){
 			return RegExp(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/).test(str);  
 		} 
 		//用户名正则验证
@@ -60,10 +60,10 @@
 		}
 		//手机号码正则验证
 		function checkMobile(str) {
-    		return RegExp(/^(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/).test(str);  
+    		return RegExp(/^(13[0-9]|15[012356789]|18[0-9]|17[0-9]|14[57])[0-9]{8}$/).test(str);  
 		}
 		//QQ正则验证
-		function checkQQ(str) {  
+		function checkQQ(str) {
             return RegExp(/^[1-9][0-9]{4,9}$/).test(str);    
         }  
 		//密码验证
