@@ -118,13 +118,13 @@ function submit () {
 	window.pwd = $('#spwd').val();
 	window.spwd = $('#sspwd').val();
 	window.introduce = $('#sintroduce').val();
-	if ($('#sname').parent('div').next('div').html() !='<img src="../../../public/img/icon1.png" style="width: 16px;vertical-align: middle;margin-right: 5px;">可以注册'){
+	if (0){
 		return alertWMsg('用户名格式不正确')
-	}else if( !checkMobile(window.tel) ){
+	}else if( window.tel && !checkMobile(window.tel) ){
 		return alertWMsg('手机号码格式不正确')
-	}else if($('#sqq').parent('div').next('div').html() !='<img src="../../../public/img/icon1.png" style="width: 16px;vertical-align: middle;margin-right: 5px;">可以注册'){
+	}else if( !window.qq ){
 		return alertWMsg('QQ号码格式不正确')
-	}else if($('#spwd').parent('div').next('div').html() !='<img src="../../../public/img/icon1.png" style="width: 16px;vertical-align: middle;margin-right: 5px;">可以注册'){
+	}else if( !window.pwd || !window.spwd ){
 		return alertWMsg('密码格式不正确')
 	}else if(pwd != spwd){
 		return alertWMsg('两次输入的密码不相同');
