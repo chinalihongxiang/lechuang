@@ -60,7 +60,7 @@ class UserInfoController extends IndexController {
         return $save_data;
     }
 
-    //淘客注册接口
+    //淘客注册页面
     public function promoter_register(){
         //注册接口
         if( IS_POST ){

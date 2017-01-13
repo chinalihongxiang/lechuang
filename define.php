@@ -1,12 +1,12 @@
 <?php
 //验证邮箱发送邮箱
-$my_email         = 'lianzun2015@sina.com';
+$my_email         = '2686771140@qq.com';
 //验证邮箱服务器账号
-$my_smtp_account  = 'lianzun2015@sina.com';
+$my_smtp_account  = '2686771140';
 //验证邮箱服务器密码
-$my_smtp_pass    = 'lianzun2015';
+$my_smtp_pass    = 'paaiojkbmlsfdeef';
 //验证邮箱发送smtp服务器
-$email_smtp       = 'smtp.sina.com';
+$email_smtp       = 'smtp.qq.com';
 //验证邮箱发送smtp服务器端口
 $email_smtp_port  = 25;
 
