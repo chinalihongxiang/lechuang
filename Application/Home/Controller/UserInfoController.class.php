@@ -33,6 +33,8 @@ class UserInfoController extends IndexController {
         if( !I('name') ) $this->ajax_res(0,'请输入用户名');
         //手机号
         if( I('tel') && !check_phone(I('tel')) ) $this->ajax_res(0,'请输入正确的手机号码');
+        //手机号是否已被使用
+        if( I('tel') && !$this->is_new_phone(I('tel')) ) $this->ajax_res(0,'手机号码已被使用');
         //qq
         if( !I('qq') ) $this->ajax_res(0,'请输入正确的qq号码');
         //qq是否已被注册
@@ -40,7 +42,7 @@ class UserInfoController extends IndexController {
         //邮箱
         if( !check_email(I('email')) ) $this->ajax_res(0,'请输入正确的邮箱');
         //验证码
-        //if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
+        if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
         //邮箱是否已被注册
         if( !$this->is_new_email(I('email')) ) $this->ajax_res(0,'该邮箱已被注册');
         //密码
@@ -97,7 +99,7 @@ class UserInfoController extends IndexController {
         //邮箱
         if( !check_email(I('email')) ) $this->ajax_res(0,'请输入正确的邮箱');
         //验证码
-        // if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
+        if( I('idCode') != S(I('email')) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
         //邮箱是否已被注册
         if( !$this->is_new_email(I('email')) ) $this->ajax_res(0,'该邮箱已被注册');
         //密码

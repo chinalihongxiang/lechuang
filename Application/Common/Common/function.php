@@ -9,7 +9,6 @@ require './define.php';
 * 接收邮箱 $smtpemailto
 */
 function send_email($mailtitle,$mailcontent,$smtpemailto){
-	set_time_limit(0);
     require_once "./vendor/email.class.php";
     //smtp服务器
     $smtpserver     = EMAIL_SMTP;
@@ -26,7 +25,7 @@ function send_email($mailtitle,$mailcontent,$smtpemailto){
     //这里面的一个true是表示使用身份验证,否则不使用身份验证
     $smtp = new \smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);
     //是否显示发送的调试信息
-    $smtp->debug = true;
+    $smtp->debug = false;
     //发送
     $res = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
     if( $res ) return 1;
