@@ -123,6 +123,8 @@ class UserInfoController extends IndexController {
 
         //发送邮箱
         $send_to = I('email') ? I('email') : $this->ajax_res(0,'请填写您的邮箱');
+        //邮箱是否已被注册
+        if( !$this->is_new_email(I('email')) ) $this->ajax_res(0,'该邮箱已被注册');
         //验证码
         $num     = mt_rand(1000,9999);
         //邮件标题
