@@ -8,10 +8,13 @@ class GroupController extends IndexController {
 
 	//软件端群采集记录接收接口
 	public function get_log(){
+		set_time_limit(0);
 		//来源淘客id
 		$promoter_id = I('promoter_id') ? I('promoter_id') : $this->ajax_res(0,'无来源淘客id');
+		//json处理
+		$json = str_replace('&quot;','"',I('list'));
 		//数组判空
-		$list = !is_array(I('list')) ? json_decode(I('list'),true) : I('list');
+		$list = json_decode($json,true);
 		$request_num = count($list);
 		if( $request_num == 0 ) $this->ajax_res(0,'无数据');
 		//处理
@@ -128,15 +131,16 @@ class GroupController extends IndexController {
 	public function add_group(){
 		//数据判空
 		if( !I('GroupID') || !I('GroupName') ) $this->ajax_res(0,'数据有误');
+		$name = urldecode(I('GroupName'));
 		//判断是否存在
 		$group_id = M('group')->where(array('group_qq'=>I('GroupID')))->getField('group_id');
 		//如果存在 更新群名称
 		if( $group_id ){
-			M('group')->where(array('group_qq'=>I('GroupID')))->save(array('group_name'=>I('GroupName')));
+			M('group')->where(array('group_qq'=>I('GroupID')))->save(array('group_name'=>$name));
 			$this->ajax_res(1);
 		}
 		//如果不存在 添加
-		if( M('group')->add(array('group_qq'=>I('GroupID'),'group_name'=>I('GroupName'))) ) $this->ajax_res(1);
+		if( M('group')->add(array('group_qq'=>I('GroupID'),'group_name'=>$name)) ) $this->ajax_res(1);
 		$this->ajax_res(0,'添加失败');
 	}
 
