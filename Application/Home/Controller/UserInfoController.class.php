@@ -211,7 +211,7 @@ class UserInfoController extends IndexController {
             //数据验证
             $save_data = $this->check_seller_modify($seller_info,I('post.'));
             //保存
-            $save_res = M('seller')->where(array('seller_id'=>I('seller_id')))->save();
+            $save_res = M('seller')->where(array('seller_id'=>I('seller_id')))->save($save_data);
             //返回结果
             if( is_int($save_res) ) $this->ajax_res(1,'恭喜您，修改成功');
             $this->ajax_res(0,'抱歉，失败修改');
