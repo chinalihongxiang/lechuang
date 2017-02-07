@@ -26,6 +26,7 @@ class ItemDetailController extends IndexController {
 
 		//该商品券转化率
 		$item_info['coupon_roc'] = D('item')->get_item_coupon_roc($item_info);
+		exit;
 
 		//
 
