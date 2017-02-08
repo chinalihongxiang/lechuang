@@ -189,36 +189,9 @@ class UserInfoController extends IndexController {
 
     }
 
-    //商户个人中心
-    public function seller_info(){
-        $this->display;
-    }
-
     //淘客个人中心
     public function promoter_info(){
         $this->display;
-    }
-
-    //商户信息修改接口
-    public function seller_modify(){
-
-        //商户信息
-        $seller_info = D('Seller')->one_seller(I('seller_id'));
-        if( !$seller_info ) $this->ajax_res(0,'找不到该商户');
-
-        //修改商户信息
-        if( I('modify') == 'modify' ){
-            //数据验证
-            $save_data = $this->check_seller_modify($seller_info,I('post.'));
-            //保存
-            $save_res = M('seller')->where(array('seller_id'=>I('seller_id')))->save($save_data);
-            //返回结果
-            if( is_int($save_res) ) $this->ajax_res(1,'恭喜您，修改成功');
-            $this->ajax_res(0,'抱歉，失败修改');
-        }
-
-        //返回商户信息
-        $this->ajax_res(1,'获得商户信息成功',$seller_info);
     }
 
     //淘客信息修改接口
@@ -261,36 +234,6 @@ class UserInfoController extends IndexController {
 
         //返回淘客信息
         $this->ajax_res(1,'获得淘客信息成功',$promoter_info);
-    }
-
-    //验证商户修改信息
-    public function check_seller_modify($old_info,$new_info){
-        //名称
-        if( !$new_info['name'] ) $this->ajax_res(0,'请填写用户名称');
-        //手机号码格式
-        if( $new_info['tel'] && !check_phone($new_info['tel']) ) $this->ajax_res(0,'手机号码格式错误');
-        //手机号码是否更换 如果更换了 要验证是否已被使用
-        if( ($new_info['tel'] && $new_info['tel'] != $old_info['seller_phone']) && !$this->is_new_phone($new_info['tel']) ) $this->ajax_res(0,'该手机号已被使用');
-        //qq
-        if( !$new_info['qq'] ) $this->ajax_res(0,'请填写联系QQ号码');
-        //qq号码是否更换 如果更换了 要验证是否已被使用
-        if( $new_info['qq'] != $old_info['seller_qq'] && !$this->is_new_qq($new_info['qq']) ) $this->ajax_res(0,'QQ号码已被使用');
-        //邮箱
-        if( !$new_info['email'] || !check_email($new_info['email']) ) $this->ajax_res(0,'请输入正确的邮箱');
-        //邮箱是否更换 如果更换了 要验证是否已被使用
-        if( $old_info['seller_email'] != $new_info['email'] && !$this->is_new_email($new_info['email']) ) $this->ajax_res(0,'邮箱已被使用');
-        //邮箱是否更换 如果更换了 要验证验证码是否正确
-        if( $old_info['seller_email'] != $new_info['email'] && $new_info['idCode'] != S($new_info['email']) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
-        //入库数据
-        $save_data = array(
-                'seller_name'  => $new_info['name'],
-                'seller_phone' => $new_info['tel'],
-                'seller_qq'    => $new_info['qq'],
-                'seller_email' => $new_info['email'],
-                'seller_desc'  => $new_info['introduce'],
-                'update_time'   => time(),
-            );
-        return $save_data;
     }
 
     //验证淘客修改信息

@@ -10,9 +10,9 @@ class SellerModel extends Model{
     */
     public function one_seller($seller_id = '',$field = '*',$where = []){
         //按id查
-        if(  $seller_id > 0 ) return D('Seller')->field($field)->find();
+        if(  $seller_id > 0 ) return D('Seller')->field($field)->find($seller_id);
         //按条件查
-        if( is_array($where) count($where) > 0 ) return D('Seller')->field($field)->where($where)->find();
+        if( is_array($where) && count($where) > 0 ) return D('Seller')->field($field)->where($where)->find();
     }
 
 }
