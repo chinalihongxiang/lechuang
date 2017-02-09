@@ -1,8 +1,8 @@
 $(function(){
     $.ajax({
-        type:'get',
+        type:'',
         url:'Seller/modify',
-        data:{serller_id:'6'},
+        data:{seller_id:'6'},
         success:function(data){
             if(data.status == 0){
                 alertWMsg(data.msg)
