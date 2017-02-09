@@ -63,7 +63,7 @@ function checkUser(str){
 }
 //手机号码正则验证
 function checkMobile(str) {
-	return RegExp(/^(13[0-9]|15[012356789]|18[0-9]|17[0-9]|14[57])[0-9]{8}$/).test(str);  
+	return RegExp(/^(13[0-9]|15[0-9]|18[0-9]|17[0-9]|14[57])[0-9]{8}$/).test(str);  
 }
 //QQ正则验证
 function checkQQ(str) {
