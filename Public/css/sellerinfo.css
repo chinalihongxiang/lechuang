@@ -1,0 +1,11 @@
+.content ul li{list-style-type: none;margin-bottom: 20px;font-size: 16px;}
+.content ul li input{height: 25px;width: 300px;padding: 5px 0;}
+.content ul li .input{text-indent: 10px;border: none;}
+.content ul li div {display: inline-block;}
+.content ul li div:nth-child(2){border-radius: 5px;border: 1px solid #E2E2E2;padding: 1px;margin-left: 20px}
+.content ul li div:nth-child(3){text-indent: 10px;font-size: 12px;margin-left: 30px;}
+.lititle{width: 100px;text-align: right;}
+#sintroduce {vertical-align: text-top;}
+.sres,#sendcode{font-size: 20px;padding: 10px 20px;background-color: #00B2EE;color: #fff;display: block;margin: 0 auto;border-radius: 8px;cursor: pointer;}
+#sendcode{display: inline-block;font-size: 12px;padding: 8px 10px;border-radius: 5px;margin-left: 25px;}
+#sintroduce{padding: 10px;width: 500px}

@@ -8,29 +8,30 @@ $(function () {
 			$(this).parent('div').css({'borderColor':'#E2E2E2','boxShadow':'none'})
 		})
 		$('#sendcode').on('click',function () {
-			window.email = $('#semail').val();
-			if(email.length == 0){
-				return alertMsg('邮箱不能为空')
-			}else if(!checkEmail(email)){
-				return alertMsg('邮箱格式不正确,请输入正确的邮箱')
-			}
-			$.ajax({
-				type:"post",
-				url:"",
-				async:true,
-				data:{email:email},
-				success:function (data) {
-					if(data.status == 1){
-						sendCode();
-					}else{
-						alertWMsg(data.msg)
-					}
-				},
-				error:function () {
-					alertWMsg('连接超时,请稍后再试')
+		var _this = $(this);
+		window.email = $('#semail').val();
+		if(email.length == 0){
+			return alertMsg('邮箱不能为空')
+		}else if(!checkEmail(email)){
+			return alertMsg('邮箱格式不正确,请输入正确的邮箱')
+		}
+		$.ajax({
+			type:"post",
+			url:"/UserInfo/send_code",
+			async:true,
+			data:{email:email},
+			success:function (data) {
+				if(data.status == 1){
+					sendCode(_this);
+				}else{
+					alertWMsg(data.msg)
 				}
-			});
-		})
+			},
+			error:function () {
+				alertWMsg('连接超时,请稍后再试')
+			}
+		});
+	})
 		$('#sname').on('blur',function () {
 			window.name = $('#sname').val();
 			if (name.length == 0) {

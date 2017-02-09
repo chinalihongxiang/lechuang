@@ -2,7 +2,7 @@
 document.body.onselectstart=document.body.ondrag=function(){
 	return false;
 }	
-//输入框选中效果
+//输入框选中效果11
 if($('#sname')){
 	$('#sname').focus();
 	$('#sname').parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 0.2px 0.2px #00B2EE','transition':'all .3s'})
