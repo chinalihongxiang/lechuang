@@ -1,7 +1,18 @@
 //ie 6~9 无法选中文字
 document.body.onselectstart=document.body.ondrag=function(){
 	return false;
-}		
+}	
+//输入框选中效果
+if($('#sname')){
+	$('#sname').focus();
+	$('#sname').parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 0.2px 0.2px #00B2EE','transition':'all .3s'})
+	$('.content ul li .input').on('focus',function () {
+		$(this).parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 0.2px 0.2px #00B2EE','transition':'all .3s'})
+	})
+	$('.content ul li .input').on('blur',function () {
+		$(this).parent('div').css({'borderColor':'#E2E2E2','boxShadow':'none'})
+	})
+}	
 //自定义弹窗式提示
 function alertMsg (str) {
 	$('.showMsg').html(str);
