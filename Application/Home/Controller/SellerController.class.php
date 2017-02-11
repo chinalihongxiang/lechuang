@@ -20,6 +20,11 @@ class SellerController extends IndexController{
         $this->display();
     }
 
+    //商户店铺页面
+    public function store_page(){
+        $this->display();
+    }
+
     //商户信息修改接口
     public function modify(){
 
@@ -84,6 +89,8 @@ class SellerController extends IndexController{
 
         //店铺信息存入
         $store_id = M('store')->add($store_info);
+
+        //店铺凭证上传
 
         //返回结果
         if( !$store_id ) $this->ajax_res(0,'保存失败');
@@ -236,6 +243,44 @@ class SellerController extends IndexController{
 
 		//返回数据
 		$this->ajax_res(1,'获得店铺列表成功',$store_list);
+
+    }
+
+    /*店铺凭证图片保存接口
+    * params
+    * $files
+    */
+    public function store_img_upload(){
+
+        $path = 'seller_store/';
+
+        //实例化
+        $upload = new \Think\Upload();
+        //图片大小，最大为1M
+        $upload->maxSize = 1*1024*1024;
+        //禁止子目录创建
+        $upload->autoSub = true;
+        //图片类型
+        $upload->allowExts = array('jpg','png','gif');
+        //路径
+        $upload->savePath = $path;
+
+        //上传
+        $res = $upload->upload();
+
+        if (!$res) {
+            //捕获上传异常
+            $this->ajaxReturn(array(
+                    'status' => 0,
+                    'msg'    => $upload->getError()
+                ));
+        } else {
+            //返回图片路径
+            $this->ajaxReturn(array(
+                    'status' => 1,
+                    'url'    => "/Uploads"."/".$res['pic']['savepath'].$res['pic']['savename']
+                ));
+        }
 
     }
 
