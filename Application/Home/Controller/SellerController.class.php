@@ -87,15 +87,40 @@ class SellerController extends IndexController{
         //店铺信息验证
         $store_info = $this->check_store_add(I('post.'));
 
+        //店铺信息加商户信息
+        $store_info['seller_id'] = $seller_info['seller_id'];
+
         //店铺信息存入
         $store_id = M('store')->add($store_info);
 
         //店铺凭证上传
+        $this->store_pics($store_id,I('store_pic'));
 
         //返回结果
         if( !$store_id ) $this->ajax_res(0,'保存失败');
 
         $this->ajax_res(1,'添加成功，请等待审核通过',$store_id);
+
+    }
+
+    //店铺凭证上传
+    public function store_pics($store_id,$pics){
+
+        if( !$store_id ) return false;
+
+        //图片字符串转数组
+        $pic_arr = explode($pics, ',');
+
+        //凭证所属店铺
+        $add['store_id'] = $store_id;
+
+        //存入凭证
+        foreach ($pic_arr as $key => $value) {
+            //凭证地址
+            $add['pic_url'] = $value;
+            //添加记录
+            M('store_voucher')->add($add);
+        }
 
     }
 
@@ -196,7 +221,7 @@ class SellerController extends IndexController{
         if( !$seller_info ) $this->ajax_res(0,'找不到该店铺');
 
         //删除
-        $del = M('store')->delete($store_info['store_id']);
+        $del = M('store')->where(array('store_id'=>$store_info['store_id']))->save(array('status'=>4));
 
         //返回结果
         if( $del ) $this->ajax_res(1,'删除成功');
@@ -237,6 +262,11 @@ class SellerController extends IndexController{
 			->order($order)
 			->limit($page->firstRow, $page->listRows)
 			->select();
+
+        //加入店铺凭证图片
+        foreach ($store_list as $key => $value) {
+            $store_list[$key]['pic_list'] = M('store_voucher')->where(array('store_id'=>$value['store_id']))->select();
+        }
 
 		//空
 		$store_list = $store_list ? $store_list : [];
