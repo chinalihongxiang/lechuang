@@ -94,4 +94,57 @@ class ItemDetailController extends IndexController {
 
 	}
 
+	//关键词查询详情
+	public function keywords(){
+
+		//关键词
+		$keywords = I('keywords') ? I('keywords') : $this->ajax_res(0,'请输入关键词');
+
+		//关键词下商品
+		$item_id_list = M('item')->where(array(
+				'item_name' => array('like',"%$keywords%")
+			))->getField('item_id',true);
+
+		//无商品
+		if( !$item_id_list || count($item_id_list) <= 0 ) $this->ajax_res(0,'对不起，没有找到关键词下的商品');
+
+		//最高佣金比例
+		$arr['max_ratio'] = M('item')->where(array(
+				'item_id' => array('in',$item_id_list)
+			))->order('ratio desc')->getField('ratio');
+
+		//最低佣金比例
+		$arr['min_ratio'] = M('item')->where(array(
+				'item_id' => array('in',$item_id_list)
+			))->order('ratio asc')->getField('ratio');
+
+		//平均佣金比例
+		$arr['avg_ratio'] = M('item')->where(array(
+				'item_id' => array('in',$item_id_list)
+			))->avg('ratio');
+
+		//最高价格
+		$arr['max_price'] = M('item')->where(array(
+				'item_id' => array('in',$item_id_list)
+			))->order('price desc')->getField('price');
+
+		//最低价格
+		$arr['min_price'] = M('item')->where(array(
+				'item_id' => array('in',$item_id_list)
+			))->order('price asc')->getField('price');
+
+		//平均价格
+		$arr['avg_price'] = M('item')->where(array(
+				'item_id' => array('in',$item_id_list)
+			))->avg('price');
+
+		//商品列表
+		$arr['item_list'] = M('item')->where(array(
+				'item_id' => array('in',$item_id_list)
+			))->filed('alipay_item_id,item_id,ratio,price')->select();
+
+		$this->ajax_res(1,'成功',$arr);
+
+	}
+
 }
