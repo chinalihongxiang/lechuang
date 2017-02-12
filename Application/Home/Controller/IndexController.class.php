@@ -6,30 +6,6 @@ class IndexController extends Controller {
 	public function index(){
     }
 
-    //检查优惠券更新是否正常
-    public function coupon_err_check(){
-    	$arr = [];
-    	//最新一次更新时间
-    	$new_update = M('coupon_update')->order('coupon_update_id DESC')->find();
-    	array_push($arr,array(
-    			'title'   => '最新一次更新时间',
-    			'content' => date('Y-m-d H:i:s',$new_update['time']),
-    		));
-    	//本次应该更新多少优惠券
-    	
-    	//本次更新了多少个优惠券
-    	$this_coupon_num = M('coupon')->where(array('coupon_update_id'=>$new_update['coupon_update_id']))->count();
-    	array_push($arr,array(
-    			'title'   => '本次更新了多少个优惠券',
-    			'content' => $this_coupon_num,
-    		));
-
-    	//打印
-    	foreach ($arr as $key => $value) {
-    		echo $value['title']."：".$value['content']."<hr>";
-    	}
-    }
-
 	/*异步返回
 	* params
 	* 状态     $status 0-错误 1-正确
@@ -94,12 +70,15 @@ class IndexController extends Controller {
 
 	/*查看店铺id是否已存在
 	* params
-	* 手机号码 $alipay_store_id
+	* 淘宝天猫店铺id $alipay_store_id
 	*/
 	public function is_new_store($alipay_store_id){
 	    //表
         $store   = M('store');
-		$res = $store->where(array('alipay_store_id'=>$alipay_store_id))->count() > 0 ;
+		$res = $store->where(array(
+				'alipay_store_id' => $alipay_store_id,
+				'status'          => array('in',[1,2])
+			))->count() > 0 ;
 		if( $res ) return false;
 		return true;
 	}

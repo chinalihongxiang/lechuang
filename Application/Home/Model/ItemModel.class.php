@@ -16,7 +16,7 @@ class ItemModel extends Model{
 		$days = ($end_time - $appear_time) / 86400;
 
 		//处理
-		if( (int)$days == 0 ) $days = 1;
+		if( (int)$days <= 0 ) $days = 1;
 
 		//返回
 		return (int) $days;
@@ -49,6 +49,41 @@ class ItemModel extends Model{
 
 	}
 
+	//该商品某张单券转化率
+	public function get_one_coupon_roc($item_info,$coupon,$start = 0,$end = 0){
+
+		//开始时间
+		$start = $start ? $start : $item_info['create_time'];
+
+		//结束时间
+		$end   = $end ? $end : time();
+
+		//开始时间商品销量
+		$start_sale = $this->get_item_one_time_sale($item_info,$start);
+
+		//结束时间商品销量
+		$end_sale = $this->get_item_one_time_sale($item_info,$end);
+
+		//开始时间优惠券领券数
+		$start_coupon_take_num = D('coupon')->get_coupon_time_take_num($coupon,$time);
+
+		//结束时间优惠券领券数
+		$end_coupon_take_num = D('coupon')->get_coupon_time_take_num($coupon,$end);
+
+		//转化率
+		if( $end_coupon_take_num == $start_coupon_take_num ){
+			$roc = ( $end_sale - $start_sale ) / $end_coupon_take_num;
+		}else{
+			$roc = ( $end_sale - $start_sale ) / ( $end_coupon_take_num - $start_coupon_take_num );
+		}
+
+		//四位小数
+		$roc = round($roc,4)*100;
+
+		return $roc;
+
+	}
+
 	//该商品一段时间内的券转化率
 	public function get_item_coupon_roc($item_info,$start = 0,$end = 0){
 
@@ -63,8 +98,6 @@ class ItemModel extends Model{
 
 		//结束时间商品销量
 		$end_sale = $this->get_item_one_time_sale($item_info,$end);
-
-		exit;
 
 		//开始时间优惠券领券数
 		$start_coupon_take_num = $this->get_item_coupons_take_num($item_info,$start);
@@ -99,8 +132,6 @@ class ItemModel extends Model{
 			return $sale;
 		}
 
-		dump($last);
-
 		//查看距离该时间点最近的上一次更新的时间
 		$last = M('item_update')->where(array(
 				'time' => array('elt',$time),
@@ -113,9 +144,6 @@ class ItemModel extends Model{
 		$next = M('item_update')->where(array(
 				'time' => array('gt',$time),
 			))->order('time asc')->limit(1)->find();
-
-		dump($next);
-		exit;
 
 		//查看两者时间差
 		$next_abs = $next ? $next_time - $next['time'] : 0;

@@ -49,3 +49,8 @@ function check_email($email){
     if (preg_match("/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i",$email)) return true;
     return false;
 }
+
+//int转标准时间
+function intdate($int){
+    return date('Y-m-d H:i:s',$int);
+}
