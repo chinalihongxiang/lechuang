@@ -298,18 +298,21 @@ class SellerController extends IndexController{
         //上传
         $res = $upload->upload();
 
+        //设置返回格式
+        header('Content-type: text/html');
+
         if (!$res) {
             //捕获上传异常
-            $this->ajaxReturn(array(
+            echo json_encode(array(
                     'status' => 0,
                     'msg'    => $upload->getError()
                 ));
         } else {
             //返回图片路径
-            $this->ajaxReturn(array(
+            echo json_encode(array(
                     'status' => 1,
                     'url'    => "/Uploads"."/".$res['pic']['savepath'].$res['pic']['savename']
-                ));
+                ));   
         }
 
     }
