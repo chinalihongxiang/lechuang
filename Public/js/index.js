@@ -1,18 +1,34 @@
 //ie 6~9 无法选中文字
 document.body.onselectstart=document.body.ondrag=function(){
 	return false;
-}	
-//输入框选中效果11
-if($('#sname')){
-	$('#sname').focus();
-	$('#sname').parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 0.2px 0.2px #00B2EE','transition':'all .3s'})
-	$('.content ul li .input').on('focus',function () {
-		$(this).parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 0.2px 0.2px #00B2EE','transition':'all .3s'})
-	})
-	$('.content ul li .input').on('blur',function () {
-		$(this).parent('div').css({'borderColor':'#E2E2E2','boxShadow':'none'})
-	})
-}	
+}
+$(function(){
+	//输入框选中效果
+	if($('#sname')){
+		$('#sname').focus();
+		$('#sname').parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 5px #00B2EE','transition':'all .3s'})
+			$('.content ul li .input').on('focus',function () {
+				if($(this) != $('#sname')){
+					$('#sname').parent('div').css({'borderColor':'#E2E2E2','boxShadow':'none'})
+				}
+				$(this).parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 5px #00B2EE','transition':'all .3s'})
+			})
+			$('.content ul li .input').on('blur',function () {
+				$(this).parent('div').css({'borderColor':'#E2E2E2','boxShadow':'none'})
+			})
+	}
+	if($('#goodsSearch')){
+		$('#goodsSearch').focus();
+			$('#goodsSearch').parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 5px #00B2EE','transition':'all .3s'})
+
+		$('#goodsSearch').on('focus',function () {
+			$('#goodsSearch').parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 5px #00B2EE','transition':'all .3s'})
+		})
+		$('#goodsSearch').on('blur',function () {
+			$(this).parent('div').css({'borderColor':'#E2E2E2','boxShadow':'none'})
+		})
+	}
+})
 //自定义弹窗式提示
 function alertMsg (str) {
 	$('.showMsg').html(str);
@@ -66,22 +82,32 @@ function sendCode(obj) {
 }
 //邮箱验证
 function checkEmail(str){
-	return RegExp(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/).test(str);  
-} 
+	return RegExp(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/).test(str);
+}
 //用户名正则验证
 function checkUser(str){
 	return RegExp(/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9])*$/).test(str);
 }
 //手机号码正则验证
 function checkMobile(str) {
-	return RegExp(/^(13[0-9]|15[0-9]|18[0-9]|17[0-9]|14[57])[0-9]{8}$/).test(str);  
+	return RegExp(/^(13[0-9]|15[0-9]|18[0-9]|17[0-9]|14[57])[0-9]{8}$/).test(str);
 }
 //QQ正则验证
 function checkQQ(str) {
-    return RegExp(/^[1-9][0-9]{4,9}$/).test(str);    
-}  
+	return RegExp(/^[1-9][0-9]{4,9}$/).test(str);
+}
 //密码验证
 function checkPwd (str) {
 	return RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/).test(str);
+}
+function ShopId(str){
+	return RegExp(/^[0-9]*$/).test(str);
+}
+function checkUrl(url){
+	if ((url.indexOf("http://")>=0 || url.indexOf("https://")>=0)&&(url.indexOf("taobao.com")>=0 || url.indexOf("tmall.com")>=0)){
+		return true;
+	}else{
+		return false;
+	}
 }
 	

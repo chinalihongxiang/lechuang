@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1" />
+    <title>商户添加店铺页</title>
+    <link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/shopList.css"/>
+</head>
+<body>
+    <!--message-->
+    <div class="mask">
+        <div class="show">
+            <div class="showMsg"></div>
+            <div class="showBtn">确定</div>
+        </div>
+        <div class="showR">
+            <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+            <div class="showRBtn">确定</div>
+        </div>
+        <div class="showW">
+            <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+            <div class="showWBtn">确定</div>
+        </div>
+		<div class="showL">
+            <img src="__IMG__/loading.png" alt="">
+            <p>拼命加载中...</p>
+        </div>
+    </div>
+    <!--content-->
+    <div class="content">
+        <div class="addShopDivMask">
+            <div class="addShopDiv">
+                <h3>添加店铺</h3>
+                <img class="close" src="__IMG__/close.png" alt="">
+                    <ul class="addShop">
+                    <li>
+                        <div class="lititle">店铺名称：</div>
+                        <div><input type="text" class="input" id="sname" /></div>
+                        <div class="lititle">店铺ID：</div><div><input type="text" class="input" id="stid" /></div>
+                    </li>
+                    <li><div class="lititle">店铺链接：</div>
+                        <div><input type="text"class="input" id="slink" /></div><a onclick="window.open('http://jingyan.baidu.com/article/84b4f565eb6a9a60f6da32c4.html')">点击查看如何获得自己天猫店铺id</a>
+                    </li>
+                    <li><div class="lititle">店铺简介：</div>
+                        <div><textarea type="text"class="input" id="sint"></textarea></div>
+                    </li>
+                    <li>
+                        <div class="lititle">资质证明：</div>
+                        <div class="fileUp"><div><img src="__IMG__/fileUpImg.png" img-upload = "0" alt=""></div>   <input type="file" contenteditable="false" name="pic" accept="img/*"><span>点击上传图片</span></div>
+                        <div class="fileUp"><div><img src="__IMG__/fileUpImg.png" img-upload = "0" alt=""></div>   <input type="file" contenteditable="false"  name="pic" accept="img/*"><span>点击上传图片</span></div>
+                        <div class="fileUp"><div><img src="__IMG__/fileUpImg.png" img-upload = "0" alt=""></div><input type="file" contenteditable="false" name="pic" accept="img/*"><span>点击上传图片</span></div>
+                    </li>
+                    <li><div class="addShopCancel">取消</div><div class="addShopSave">保存</div></li>
+                </ul>
+            </div>
+        </div>
+		 <div class="modShopDivMask">
+            <div class="modShopDiv">
+                <h3>店铺修改</h3>
+                <img class="modclose" src="__IMG__/close.png" alt="">
+                <ul class="modShop">
+                    <li>
+                        <div class="lititle">店铺名称：</div>
+                        <div><input type="text" class="input" id="sname1" /></div>
+                        <div class="lititle">店铺ID：</div><div><input type="text" class="input" id="stid1" disabled="true"/></div>
+                    </li>
+                    <li><div class="lititle">店铺链接：</div>
+                        <div><input type="text"class="input" id="slink1" disabled="true"/></div><a onclick="window.open('http://jingyan.baidu.com/article/84b4f565eb6a9a60f6da32c4.html')">点击查看如何获得自己天猫店铺id</a>
+                    </li>
+                    <li><div class="lititle">店铺简介：</div>
+                        <div><textarea type="text"class="input" id="sint1"></textarea></div>
+                    </li>
+                    <li><div class="modShopCancel">取消</div><div class="modShopSave">保存</div></li>
+                </ul>
+            </div>
+        </div>
+        <div class="shopList">
+            <div class="line">
+                <div>店铺名</div>
+                <div>状态</div>
+                <div>操作</div>
+            </div>
+        </div>
+            <div class="addShopBtn">添加店铺</div>
+        <a href="shopList.html"><div class="bottom bottomActive">店铺列表</div></a><a href="sellerEnter.html"><div class="bottom ">排行榜</div></a>
+    </div>
+</body>
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/store_page.js" type="text/javascript" charset="utf-8"></script>
+</html>

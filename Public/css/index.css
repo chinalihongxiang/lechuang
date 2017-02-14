@@ -8,4 +8,12 @@
 .showBtn:hover{background-color: #00B2EE;color: #fff;}
 .showRBtn:hover{background-color: #32CD32;color: #fff;}
 .showWBtn:hover{background-color: #FF3030;color: #fff;}
+.showL{width: 150px;height: 125px;background-color: rgba(0,0,0,0.7);border-radius: 10px;display: none;position: absolute;top:50%;margin-top: -75px;left:50%;margin-left: -75px;text-align: center;padding-top: 25px}
+.showL img {width: 100px;height: 100px;animation: LoadImg 3s  linear infinite;}
+.showL p{color: #fff}
 .content{width: 800px;height: 540px;border: 1px solid #e2e2e2;box-sizing:border-box;padding: 40px;margin: 20px auto}
+@keyframes LoadImg
+{
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}

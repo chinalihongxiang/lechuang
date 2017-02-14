@@ -1,0 +1,38 @@
+h3{font-size: 30px;text-align: center;line-height: 50px;border-bottom: 1px solid #E2E2E2;margin-bottom: 10px;}
+.close,.modclose{position: absolute;right: 10px;top:8px;width: 30px;cursor: pointer}
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color: #00B2EE}
+.mCSB_scrollTools .mCSB_draggerRail{background-color: rgba(0,0,0,0.2)}
+.content{position: relative;padding: 40px 0;}
+.addShopDivMask,.modShopDivMask{position: absolute;background-color: rgba(0,0,0,0.6);width: 100%;height: 100%;top: 0;left: 0;padding:40px;box-sizing: border-box;display: none;z-index: 10}
+.addShopDiv,.modShopDiv{background-color: #fff;padding: 10px;border-radius: 8px;position: absolute;top:-1000px;left: 50%;margin-left: -359px;height: 400px;overflow: hidden}
+.addShop li,.modShop li{list-style-type: none;margin-bottom: 15px;font-size: 16px;}
+.modShop li:last-child {margin-top:80px;}
+.addShop li input,.modShop li input{height: 25px;}
+.addShop li .input,.modShop li .input{text-indent: 10px;border: none;}
+.addShop li div ,.modShop li div{display: inline-block;}
+.addShop li div:nth-child(2),.addShop li div:nth-child(4),.modShop li div:nth-child(2),.modShop li div:nth-child(4){border-radius: 5px;border: 1px solid #E2E2E2;padding: 1px;}
+.addShop li:first-child div:nth-child(3),.modShop li:first-child div:nth-child(3){margin-left: 100px}
+.lititle{width: 100px;text-align: right;}
+.addShop li:nth-child(2) a,.modShop li:nth-child(2) a {font-size: 12px;cursor: pointer;display: inline-block;margin-left: 203px;color: #4169E1;position:relative;top:-20px;}
+#sint,#sint1{width: 554px;height: 80px;line-height: 25px}
+.addShop li:nth-child(3) div:last-child,.fileUp,.modShop li:nth-child(3) div:last-child{vertical-align: top}
+.addShop li:last-child div,.modShop li:last-child div{font-size: 20px;color: #fff;border-radius: 8px;cursor: pointer;width: 200px;height: 60px;text-align: center;line-height: 60px;vertical-align: top;display: inline-block;border: none; padding: 0px;margin: 0 65px;}
+.addShop li:last-child div:first-child,.modShop li:last-child div:first-child{background-color: #FF3030}
+.addShop li:last-child div:last-child,.modShop li:last-child div:last-child{background-color: #00B2EE;}
+.fileUp{width: 140px;height: 140px;position: relative;border-radius: 0 !important;padding:0 !important; ;background-color: #E4E4E4;text-align: center;line-height: 100px;border: none !important;margin-right: 20px}
+.addShop .fileUp div {position: absolute;text-align: center;top:0;left: 0;width: 60px;height: 60px;padding: 40px;}
+.addShop .fileUp div img{width: 60px;height: 60px;}
+.modShop .fileUp div {position: absolute;text-align: center;top:0;left: 0;width: 140px;height: 140px;}
+.modShop .fileUp div img{width: 140px;height: 140px;}
+.fileUp input {width: 140px;height: 140px !important;border-radius: 0px !important;opacity: 0;cursor: pointer;position: absolute;top: 0;left: 0;z-index: 10;}
+.fileUp span {width: 140px;font-size: 14px;color: #fff;text-align: center;height: 30px;line-height: 30px;background-color: rgba(0,0,0,0.4);position: absolute;left: 0;bottom: 0}
+.shopList{width:100%;height: 400px;overflow: hidden}
+.shopList .line div{width: 33.33%;height: 40px;line-height: 40px;font-size: 16px;text-align: center;border-bottom: 1px solid #666;float: left}
+.shopList .line:first-child div { height: 50px;line-height: 50px;font-size: 25px;}
+.shopList .line div:last-child{display: flex;justify-content: space-around}
+.shopList .line div:last-child div {height: 30px;line-height: 30px;border-bottom: none;margin: 5px 20px;color: #fff;cursor: pointer;border-radius: 5px;}
+.shopListEd{background-color: #32CD32}
+.shopListDel{background-color: #FF3030}
+.addShopBtn{height:30px;margin: 10px auto;line-height: 30px;text-align: center;font-size: 16px;width: 300px;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
+.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottomActive{color: #fff;background-color: #00B2EE;}
