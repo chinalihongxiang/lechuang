@@ -82,4 +82,5 @@ class IndexController extends Controller {
 		if( $res ) return false;
 		return true;
 	}
+
 }

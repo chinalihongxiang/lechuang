@@ -76,8 +76,8 @@ class ItemDetailController extends IndexController {
 			//时间
 			$arr['time'] = intdate($value['create_time']);
 
-			//券id
-			$arr['alipay_coupon_id'] = M('coupon')->where(array('coupon_id'=>$value['coupon_id']))->getField('alipay_coupon_id');
+			//券价值
+			$arr['price'] = M('coupon')->where(array('coupon_id'=>$value['coupon_id']))->getField('price');
 
 			array_push($list, $arr);
 
@@ -102,14 +102,24 @@ class ItemDetailController extends IndexController {
 		if( !$item_id_list || count($item_id_list) <= 0 ) $this->ajax_res(0,'对不起，没有找到关键词下的商品');
 
 		//最高佣金比例
-		$arr['max_ratio'] = M('item')->where(array(
+		$arr['max_ratio'] = M('item')
+			->field('ratio,item_name')
+			->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->order('ratio desc')->getField('ratio');
+			))
+			->order('ratio desc')
+			->limit(1)
+			->select()[0];
 
 		//最低佣金比例
-		$arr['min_ratio'] = M('item')->where(array(
+		$arr['min_ratio'] = M('item')
+			->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->order('ratio asc')->getField('ratio');
+			))
+			->field('ratio,item_name')
+			->order('ratio asc')
+			->limit(1)
+			->select()[0];
 
 		//平均佣金比例
 		$arr['avg_ratio'] = M('item')->where(array(
@@ -117,24 +127,24 @@ class ItemDetailController extends IndexController {
 			))->avg('ratio');
 
 		//最高价格
-		$arr['max_price'] = M('item')->where(array(
+		$arr['max_price'] = M('item')->field('price,item_name')->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->order('price desc')->getField('price');
+			))->order('price desc')->limit(1)->select()[0];
 
 		//最低价格
-		$arr['min_price'] = M('item')->where(array(
+		$arr['min_price'] = M('item')->field('price,item_name')->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->order('price asc')->getField('price');
+			))->order('price asc')->limit(1)->select()[0];
 
-		//平均价格
-		$arr['avg_price'] = M('item')->where(array(
+		//平均转化率 avg_roc
+		$arr['avg_roc'] = M('item')->where(array(
 				'item_id' => array('in',$item_id_list)
 			))->avg('price');
 
 		//商品列表
 		$arr['item_list'] = M('item')->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->filed('alipay_item_id,item_id,ratio,price')->select();
+			))->field('alipay_item_id,item_id,ratio,price,item_name')->select();
 
 		$this->ajax_res(1,'成功',$arr);
 

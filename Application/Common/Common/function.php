@@ -54,3 +54,51 @@ function check_email($email){
 function intdate($int){
     return date('Y-m-d H:i:s',$int);
 }
+
+ /**
+ * 取得上个周一
+ * @return string
+ */
+function getLastMonday()
+{
+    if (date('l',time()) == 'Monday') return date('m月d日',strtotime('last monday'));
+
+    return date('m月d日',strtotime('-1 week last monday'));
+}
+
+/**
+ * 取得上个周日
+ * @return string
+ */
+function getLastSunday()
+{
+    return date('m月d日',strtotime('last sunday'));
+}
+
+//根据type返回开始时间
+function get_start_time($type){
+
+    //type = 1 今日
+    if( $type == 1 ) return strtotime(date('Y-m-d', time()));
+
+    //type = 2 昨天
+    if( $type == 2 ) return strtotime(date('Y-m-d', time())) - 24*60*60;
+
+    //type = 3 上周
+    if( $type == 3 ) return getLastMonday();
+
+}
+
+//根据type返回结束时间
+function get_end_time($type){
+
+    //type = 1 今日
+    if( $type == 1 ) return time();
+
+    //type = 2 昨天
+    if( $type == 2 ) return strtotime(date('Y-m-d', time()));
+
+    //type = 3 上周
+    if( $type == 3 ) return getLastSunday();
+
+}
