@@ -6,6 +6,11 @@ use Home\Controller\IndexController;
 
 class ItemDetailController extends IndexController {
 
+	//商品详情，关键词查询页面
+	public function page(){
+		$this->display();
+	}
+
 	//按照天猫或者淘宝id查商品
 	public function get_item_details_by_id(){
 
