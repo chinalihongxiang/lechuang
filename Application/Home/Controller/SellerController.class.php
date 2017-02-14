@@ -85,7 +85,7 @@ class SellerController extends IndexController{
         if( !$seller_info ) $this->ajax_res(0,'找不到该商户');
 
         //店铺信息验证
-        $store_info = $this->check_store_add(I('post.'));
+        $store_info = $this->check_store_add(I());
 
         //店铺信息加商户信息
         $store_info['seller_id'] = $seller_info['seller_id'];
@@ -109,7 +109,7 @@ class SellerController extends IndexController{
         if( !$store_id ) return false;
 
         //图片字符串转数组
-        $pic_arr = explode($pics, ',');
+        $pic_arr = explode(',',$pics);
 
         //凭证所属店铺
         $add['store_id'] = $store_id;
@@ -139,13 +139,13 @@ class SellerController extends IndexController{
     	$arr['store_desc'] = $store_info['store_desc'] ? $store_info['store_desc'] : $this->ajax_res(0,'请填写店铺简介');
 
     	//淘宝天猫店铺id
-    	$arr['alipay_store_id'] = $arr['alipay_store_id'] ? $arr['alipay_store_id'] : D('store')->get_alipay_store_id($arr['store_url']);
+    	$arr['alipay_store_id'] = $store_info['alipay_store_id'] ? $store_info['alipay_store_id'] : D('store')->get_alipay_store_id($store_info['store_url']);
 
     	//淘宝天猫店铺id是否唯一
-    	if( !$this->is_new_store($arr['alipay_store_id']) ) $this->ajax_res(0,'该店铺已被注册');
+    	if( !$this->is_new_store($store_info['alipay_store_id']) ) $this->ajax_res(0,'该店铺已被注册');
 
     	//店铺类型
-    	$arr['type'] = D('store')->get_store_type($arr['store_url']);
+    	$arr['type'] = D('store')->get_store_type($store_info['store_url']);
 
     	//创建时间
     	$arr['create_time'] = time();
@@ -252,15 +252,11 @@ class SellerController extends IndexController{
         //总数
 		$count = M('store')->where($where)->count();
 
-		//分页
-		$page = new Pagelist($count, 5);
-
 		//查询
 		$store_list = M('store')
 			->where($where)
 			->field($field)
 			->order($order)
-			->limit($page->firstRow, $page->listRows)
 			->select();
 
         //加入店铺凭证图片

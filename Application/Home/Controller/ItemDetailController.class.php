@@ -59,8 +59,8 @@ class ItemDetailController extends IndexController {
 	//该商品出现的采集群
 	public function group_list(){
 
-		//$alipay_item_id = I('alipay_item_id') ? I('alipay_item_id') : $this->ajax_res(0,'请输入商品淘宝天猫id');
-		$alipay_item_id = 541806600106;
+		$alipay_item_id = I('alipay_item_id') ? I('alipay_item_id') : $this->ajax_res(0,'请输入商品淘宝天猫id');
+
 		//id条件
 		$where = array('alipay_item_id'=>$alipay_item_id);
 
