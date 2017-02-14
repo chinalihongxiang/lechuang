@@ -32,21 +32,18 @@ class ItemDetailController extends IndexController {
 		//该商品券转化率
 		$item_info['coupon_roc'] = D('item')->get_item_coupon_roc($item_info);
 
+		//该商品优惠券列表
+		$item_info['coupon_list'] = $this->coupon_list($alipay_item_id);
+
+		//该商品出现的采集群
+		$item_info['group_list'] = $this->group_list($item_info);
+
 		$this->ajax_res(1,'获得商品信息成功',$item_info);
 
 	}
 
 	//商品优惠券列表
-	public function coupon_list(){
-
-		$alipay_item_id = I('alipay_item_id') ? I('alipay_item_id') : $this->ajax_res(0,'请输入商品淘宝天猫id');
-
-		//id条件
-		$where = array('alipay_item_id'=>$alipay_item_id);
-
-		//查找item表
-		$item_info = M('item')->where($where)->find();
-		if( !$item_info ) ajax_res(0,'抱歉，没找到该商品');
+	public function coupon_list($alipay_item_id){
 
 		//获得该商品优惠券列表
 		$item_coupons = D('item')->get_item_coupons($alipay_item_id);
@@ -57,21 +54,12 @@ class ItemDetailController extends IndexController {
 			$item_coupons[$key]['coupon_roc'] = D('item')->get_one_coupon_roc($item_info,$coupon);
 		}
 
-		$this->ajax_res(1,'成功',$item_coupons);
+		return $item_coupons;
 
 	}
 
 	//该商品出现的采集群
-	public function group_list(){
-
-		$alipay_item_id = I('alipay_item_id') ? I('alipay_item_id') : $this->ajax_res(0,'请输入商品淘宝天猫id');
-
-		//id条件
-		$where = array('alipay_item_id'=>$alipay_item_id);
-
-		//查找item表
-		$item_info = M('item')->where($where)->find();
-		if( !$item_info ) ajax_res(0,'抱歉，没找到该商品');		
+	public function group_list($item_info){
 
 		//获得该商品出现的采集群
 		$group_list = M('group_log')->where(array(
@@ -95,7 +83,7 @@ class ItemDetailController extends IndexController {
 
 		}
 
-		$this->ajax_res(1,'成功',$list);
+		return $list;
 
 	}
 
