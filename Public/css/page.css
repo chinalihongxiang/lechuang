@@ -1,0 +1,43 @@
+.content{position: relative;padding: 0;}
+.contentShowDiv{height: 40px;width: 758px;margin: 20px}
+.contentShowDiv div:first-child div:first-child{width: 400px;height: 40px;border: 1px solid #E2E2E2;display: inline-block;border-radius: 5px;box-sizing: border-box;margin-top: -10px}
+.contentShowDiv div:first-child div:first-child input{width:390px;height: 30px;border: none;font-size: 16px;text-indent: 15px;line-height: 30px;margin-top: 3px}
+.contentShowDiv div:first-child div:nth-child(2),.contentShowDiv div:first-child div:nth-child(3){width: 120px;height: 40px;line-height:40px;text-align: center;display: inline-block;background-color: #00B2EE;border-radius: 5px;color: #fff;font-size: 16px;margin-left: 53px;cursor: pointer;position: relative; top: 3px;;}
+.contentAddDiv,.contentAddDiv1,.contentAddDiv2{width: 758px;margin: 0 20px 20px;height: 390px;border: 1px solid #E2E2E2;display: none}
+.contentAddDiv{display: block}
+.goodsInfo{height: 90px;box-sizing: border-box;padding: 10px 20px;border-bottom: 1px solid #E2E2E2}
+.goodsInfo ul {list-style: none;}
+.goodsInfo ul li{float: left;background-color: #008B45;font-size: 16px;width: 232px;margin-right: 10px;cursor: default}
+.goodsInfo ul li:hover{transform: scale(1.02);box-shadow: 2px 2px 3px rgba(0,0,0,0.6)}
+.goodsInfo ul li:nth-child(3n){margin-right: 0}
+.goodsInfo ul li:nth-child(n+4){margin-top: 10px}
+.goodsInfo ul li div{font-size: 16px;line-height: 30px;display: inline-block;height: 30px;color: #fff;}
+.goodsInfo ul li:first-child div:first-child {width: 90px;text-indent:10px}
+.goodsInfo ul li:nth-child(n+2) div:first-child{width: 120px;text-indent: 10px}
+.goodsInfo ul li:first-child div:last-child {width: 140px;}
+.goodsInfo ul li:nth-child(n+2) div:last-child{width: 100px;text-align: center}
+.goodsMore{height: 280px;box-sizing: border-box;margin-top: 20px}
+.goodsMoreLeft,.goodsMoreRight {float: left;width: 50%;text-align: center;}
+.goodsMore h2 {font-size: 25px;line-height: 40px;border-bottom: 1px solid #E2E2E2}
+.goodsMoreLeftTable,.goodsMoreRightTable{height: 207px;overflow: hidden}
+.goodsMore table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666}
+.goodsMore table{width: 80%;margin-left: 10%;font-size: 16px;line-height: 30px;margin-top: 20px;border: 1px solid #E2E2E2}
+.goodsMore table tr {width: 100%;}
+.goodsInfo1{height: 132px;box-sizing: border-box;padding: 10px 0 10px 20px;border-bottom: 1px solid #E2E2E2}
+.goodsInfo1 ul {list-style: none;}
+.goodsInfo1 ul li{float: left;background-color: #008B45;font-size: 16px;line-height: 25px;width: 232px;margin-right: 10px;cursor: default}
+.goodsInfo1 ul li:nth-child(n+4){margin-top: 10px}
+.goodsInfo1 ul li:hover{transform: scale(1.02);box-shadow: 2px 2px 3px rgba(0,0,0,0.6)}
+.goodsInfo1 ul li div div{display: inline-block;color: #fff}
+.goodsInfo1 ul li>div:first-child{width: 100%;border-bottom: 1px solid #E2E2E2;text-align: center;color: #fff}
+.goodsInfo1 ul li>div:last-child div{text-align: center;}
+.goodsInfo1 ul li:nth-child(3n) div:last-child{width: 100%;text-align: center;color: #fff}
+.goodsInfo1 ul li>div:last-child>div:first-child{width: 150px;box-sizing: border-box;border-right: 1px solid #E2E2E2;}
+.goodsInfo1 ul li>div:last-child>div:last-child{width: 82px;}
+.goodsMore1{height: 240px;padding-bottom: 20px;}
+.goodsMore1 table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666;text-align: center}
+.goodsMore1 table tr td{max-width:150px;}
+.goodsMore1 table{width: 95%;margin-left: 2.5%;font-size: 16px;line-height: 29px;margin-top: 20px;border: 1px solid #E2E2E2}
+.goodsMore1 table tr {width: 100%;}
+.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottomActive{color: #fff;background-color: #00B2EE;}

@@ -1,4 +1,6 @@
 $(function(){
+	$('.mask').show();
+    $('.showL').show();
     $(".shopList,.addShopDiv,.modShopDiv").niceScroll({
         cursorcolor:"#00B2EE",
         cursoropacitymax:1,
@@ -123,8 +125,6 @@ function  addShop(){
     })
 }
 function shopListLoad(){
-    $('.mask').show();
-    $('.showL').show();
     $.ajax({
         type:'get',
         url:'/seller/store_list',
