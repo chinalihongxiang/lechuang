@@ -21,7 +21,7 @@ class ItemDetailController extends IndexController {
 
 		//查找item表
 		$item_info = M('item')->where($where)->find();
-		if( !$item_info ) ajax_res(0,'抱歉，没找到该商品');
+		if( !$item_info ) $this->ajax_res(0,'抱歉，没找到该商品');
 
 		//参与活动天数
 		$item_info['join_days'] = D('item')->get_item_join_time($item_info);
