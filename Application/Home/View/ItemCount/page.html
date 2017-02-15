@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1" />
+    <title>商品统计数据榜</title>
+</head>
+<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/skin/layer.css"/>
+<link rel="stylesheet" href="__CSS__/ItemCountPage.css">
+<style>
+
+</style>
+<body>
+    <!--信息提示-->
+    <div class="mask">
+        <div class="show">
+            <div class="showMsg"></div>
+            <div class="showBtn">确定</div>
+        </div>
+        <div class="showR">
+            <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+            <div class="showRBtn">确定</div>
+        </div>
+        <div class="showW">
+            <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+            <div class="showWBtn">确定</div>
+        </div>
+		<div class="showL">
+            <img src="__IMG__/loading.png" alt="">
+            <p>拼命加载中...</p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="contentShowDiv">
+            <div class="contentShowDivLeft">
+                <div>
+                    <span>商品排行榜</span>
+                    <select id="selectType">
+                        <option value="0">领券量</option>
+                        <option value="1">销量</option>
+                        <option value="2">转化率</option>
+                    </select>
+                </div>
+                <div class="showDivLeftUl showDivLeftUlHead">
+                    <ul>
+                        <li>排序</li>
+                        <li>名称</li>
+                        <li>领券量↑</li>
+                        <li>销量↑</li>
+                        <li>转化率</li>
+                    </ul>
+                </div>
+                <div class="showDivLeftDiv showDivLeftUl showDivLeftUlContent">
+                </div>
+            </div>
+            <div class="contentShowDivRight">
+                <h2>商品数据总览</h2>
+                <ul class="showDivRightUl">
+                    <li>
+                        <div>新券个数</div>
+                        <div>【暂无数据】</div>
+                    </li>
+                    <li>
+                        <div>商品总量</div>
+                        <div>【暂无数据】</div>
+                    </li>
+                    <li>
+                        <div>总计销量</div>
+                        <div>【暂无数据】</div>
+                    </li>
+                    <li>
+                        <div>平均转化</div>
+                        <div>【暂无数据】</div>
+                    </li>
+                    <li>
+                        <div>平均佣金比例</div>
+                        <div>【暂无数据】</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a href="../Seller/store_page.html"><div class="bottom">店铺列表</div></a><a href="../Seller/enter.html"><div class="bottom  bottomActive">排行榜</div></a>
+    </div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/ItemCountPage.js" type="text/javascript" charset="utf-8"></script>
+</html>

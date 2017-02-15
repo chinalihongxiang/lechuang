@@ -61,7 +61,7 @@ $('.searchByKey').on('click',function(){
     window.keywords = $('#goodsSearch').val();
     if(keywords.length == 0){return alertMsg('关键词不能为空')};
     $.ajax({
-        type:'get',
+        type:'post',
         url:'/itemDetail/keywords',
         data:{keywords:keywords},
         beforeSend:function(){

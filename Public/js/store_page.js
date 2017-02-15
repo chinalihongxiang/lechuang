@@ -1,6 +1,4 @@
 $(function(){
-	$('.mask').show();
-    $('.showL').show();
     $(".shopList,.addShopDiv,.modShopDiv").niceScroll({
         cursorcolor:"#00B2EE",
         cursoropacitymax:1,
@@ -129,7 +127,13 @@ function shopListLoad(){
         type:'get',
         url:'/seller/store_list',
         data:{seller_id:'6'},
+		beforeSend:function(){
+			$('.mask').show();
+			$('.showL').show();
+		},
         success: function (data) {
+			$('.mask').hide();
+            $('.showL').hide();
             if(data.status == 1){
                 if(data.data){
                     var str = '';
@@ -139,15 +143,16 @@ function shopListLoad(){
                     })
                 }else{
                     var str = '<div class="line"><div>暂无数据</div><div>暂无数据</div><div>暂无数据</div></div>';
-                }
-                $('.mask').hide();
-                $('.showL').hide();
+                }                
                 $('.shopList').append(str);
             }else{
+				
                 alertWMsg(data.msg)
             }
         },
         error: function () {
+			$('.mask').hide();
+            $('.showL').hide();
             alertWMsg('连接超时,请稍后再试');
         }
     })
