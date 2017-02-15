@@ -62,8 +62,11 @@ class ItemCountController extends IndexController {
 			$list[$key]['link'] = item_link($value['alipay_item_id'],$value['type']);
 		}
 
+		$arr['item_list'] = $list;
+		$arr['item_all_count'] = $this->all();
+
 		//返回
-		if( count($list) > 0 ) $this->ajax_res(1,'成功',$list);
+		if( count($list) > 0 ) $this->ajax_res(1,'成功',$arr);
 
 	}
 
@@ -80,13 +83,12 @@ class ItemCountController extends IndexController {
 		$arr['item_sale_sum'] = M('item')->where(array('status'=>0))->sum('sale');
 
 		//平均佣金比例
-		$arr['item_ratio_avg'] = M('item')->where(array('status'=>0))->avg('ratio');
+		$arr['item_ratio_avg'] = round(M('item')->where(array('status'=>0))->avg('ratio'),2);
 
 		//平均转化率
 		$arr['roc_avg'] = $this->get_roc_avg();
 
-		//返回
-		$this->ajax_res(1,'成功',$arr);
+		return $arr;
 
 	}
 
