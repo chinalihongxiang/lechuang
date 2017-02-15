@@ -139,7 +139,7 @@ function shopListLoad(){
                     var str = '';
                     $(data.data).each(function(i,e){
                         if(e.status == 1){var status = '正常'}else if(e.status == 2){var status = '待审核'}else if(e.status == 3){var status = '审核未通过'};
-                        str += '<div class="line"><div>'+e.store_name+'</div><div>'+status+'</div><div><div class="shopListEd" shopId = '+e.store_id+'>编辑</div><div class="shopListDel" shopId = '+e.store_id+'>删除</div></div></div>'
+                        str += '<div class="line"><div>'+e.store_name+'</div><div>'+status+'</div><div><div class="shopListEd" shopId = '+e.store_id+'>编辑</div><div class="shopListDel" shopId = '+e.store_id+' shopName = '+e.store_name+'>删除</div></div></div>'
                     })
                 }else{
                     var str = '<div class="line"><div>暂无数据</div><div>暂无数据</div><div>暂无数据</div></div>';
@@ -207,11 +207,17 @@ function modShop(Obj){
     })
 }
 function delShop(Obj){
- var store_id = $(Obj).attr('shopId');
- $.ajax({
+	localStorage.shopId = $(Obj).attr('shopId');
+	var shopName = $(Obj).attr('shopName');
+	alertCMsg('确定要删除店铺名为 "'+shopName+'" 的店铺吗?');
+ }
+$(document).on('click','.showCBtn',function() {
+	$('.showC').animate({top:'-1000px'},200,'swing',function(){
+		$('.mask').css('display','none');
+		$.ajax({
 			type:'get',
 			url:'/seller/del_store',
-			data:{seller_id:6,store_id:store_id,modify:'modify'},
+			data:{seller_id:6,store_id:localStorage.shopId,modify:'modify'},
 			success:function(data){
 				if(data.status == 1){
 					alertRMsg(data.msg);
@@ -226,4 +232,8 @@ function delShop(Obj){
 				alertWMsg('连接超时,请稍后再试')
 			}
 		})
+	})
+})
+ function delShopAjax(store_id){
+	 
  }

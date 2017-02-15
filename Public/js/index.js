@@ -62,6 +62,18 @@ function alertWMsg (str) {
 		})
 	})
 }
+//自定义选择信息提示
+function alertCMsg (str) {
+	$('.showCMsg p').html(str);
+	$('.mask').css('display','block')
+	$('.showC').animate({top:'200px'},200);
+	$('.showCBtncancel').one('click',function () {
+		$('.showC').animate({top:'-1000px'},200,'swing',function(){
+			$('.mask').css('display','none');			
+		})
+	})
+	
+}
 //发送验证码倒计时
 function sendCode(obj) {
 	var _this  = obj;

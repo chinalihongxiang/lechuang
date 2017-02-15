@@ -1,5 +1,5 @@
 h3{font-size: 30px;text-align: center;line-height: 50px;border-bottom: 1px solid #E2E2E2;margin-bottom: 10px;}
-.close,.modclose{position: absolute;right: 10px;top:8px;width: 30px;cursor: pointer}
+.close,.modclose{position: absolute;right: 10px;top:8px;width: 20px;cursor: pointer}
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color: #00B2EE}
 .mCSB_scrollTools .mCSB_draggerRail{background-color: rgba(0,0,0,0.2)}
 .content{position: relative;padding: 40px 0;}
