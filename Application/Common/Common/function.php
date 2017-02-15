@@ -61,9 +61,9 @@ function intdate($int){
  */
 function getLastMonday()
 {
-    if (date('l',time()) == 'Monday') return date('m月d日',strtotime('last monday'));
+    if (date('l',time()) == 'Monday') return strtotime('last monday');
 
-    return date('m月d日',strtotime('-1 week last monday'));
+    return strtotime('-1 week last monday');
 }
 
 /**
@@ -72,7 +72,7 @@ function getLastMonday()
  */
 function getLastSunday()
 {
-    return date('m月d日',strtotime('last sunday'));
+    return strtotime('last sunday');
 }
 
 //根据type返回开始时间
@@ -101,4 +101,13 @@ function get_end_time($type){
     //type = 3 上周
     if( $type == 3 ) return getLastSunday();
 
+}
+
+//根据天猫淘宝id返回商品链接
+function item_link($alipay_item_id,$type){
+
+    if( $type == 1 )  return 'https://detail.tmall.com/item.htm?id='.$alipay_item_id;
+
+    if( $type == 2 )  return 'https://item.taobao.com/item.htm?id='.$alipay_item_id;
+    
 }

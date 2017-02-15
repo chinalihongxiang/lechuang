@@ -12,7 +12,7 @@ class CouponModel extends Model{
 		//获得本次更新的优惠券领券量
 		$take_num = M('coupon_log')->where(array(
 				'update_id' => array('elt',$coupon_update_id),
-				'coupon_id'   => $$coupon_info['coupon_id']
+				'coupon_id'   => $coupon_info['coupon_id']
 			))->limit(1)->order('coupon_log_id desc')->getField('value');
 
 		//返回

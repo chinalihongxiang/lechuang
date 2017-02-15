@@ -127,6 +127,9 @@ class ItemModel extends Model{
 		//结束时间领券数
 		$end_take = $this->get_item_coupons_take_num($item,$end);
 
+		dump($start_take);
+		dump($end_take);
+
 		return $end_take - $start_take;
 
 	}
