@@ -7,7 +7,7 @@ class PromoterController extends IndexController{
 
 	//淘客个人中心
     public function info(){
-        $this->display;
+        $this->display();
     }
 
     //淘客信息修改接口
