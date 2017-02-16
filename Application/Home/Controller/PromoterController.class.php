@@ -50,6 +50,7 @@ class PromoterController extends IndexController{
 
         //返回淘客信息
         $this->ajax_res(1,'获得淘客信息成功',$promoter_info);
+        
     }
 
     //验证淘客修改信息
@@ -225,7 +226,7 @@ class PromoterController extends IndexController{
             );
 
         return M('promoter_log')->add($add);
-        
+
     }
 
 }

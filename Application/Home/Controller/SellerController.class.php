@@ -10,11 +10,6 @@ class SellerController extends IndexController{
 		$this->display();
 	}
 
-	//商户主界面接口
-	public function enter_info(){
-		$this->ajax_res(1);
-	}
-
 	//商户个人中心页面
     public function info(){
         $this->display();
@@ -23,6 +18,42 @@ class SellerController extends IndexController{
     //商户店铺页面
     public function store_page(){
         $this->display();
+    }
+
+    //商户查看淘客统计榜页面
+    public function promoter_count_page(){
+        $this->display();
+    }
+
+    //商户查看淘客详情页面
+    public function promoter_detail_page(){
+        $this->display();
+    }
+
+    //商户查看淘客统计榜接口
+    public function promoter_count(){
+
+        //淘客信息查询
+        $promoter = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
+        if( !$promoter ) $this->ajax_res(0,'未找到该淘客');
+
+        //获得列表 type : 接单个数-item_sum 总领券量-take_sum 总计销量-sale_sum 转化率-roc_avg
+        $item_list = D('promoter')->item_count_list(I('type'));
+
+        dump($promoter_item_list);
+        
+    }
+
+    //商户查看淘客详情接口
+    public function promoter_detail(){
+
+
+        
+    }
+
+    //商户主界面接口
+    public function enter_info(){
+        $this->ajax_res(1);
     }
 
     //商户信息修改接口
