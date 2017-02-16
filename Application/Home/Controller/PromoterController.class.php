@@ -10,6 +10,90 @@ class PromoterController extends IndexController{
         $this->display();
     }
 
+    //淘客主界面
+    public function enter(){
+
+        $this->display();
+    }
+
+    //淘客主界面接口
+    public function enter_info(){
+        
+        //淘客信息
+        $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
+        if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
+
+        //优惠券列表
+        $promoter_info['group_list'] = M('group')->field('group_name,group_qq')->limit(10)->select();
+
+        //放单网站
+        $promoter_info['website_list'] = array(
+                array(
+                        'title' => '网站A',
+                        'link'  => 'ww.a.c'
+                    ),
+                array(
+                        'title' => '网站B',
+                        'link'  => 'ww.a.c'
+                    ),
+                array(
+                        'title' => '网站C',
+                        'link'  => 'ww.a.c'
+                    ),
+                array(
+                        'title' => '网站D',
+                        'link'  => 'ww.a.c'
+                    ),
+            );
+        
+        return $this->ajax_res(1,'成功',$promoter_info);
+
+    }
+
+    //淘客上传任务界面
+    public function my_coupon(){
+
+        $this->display();
+
+    }
+
+    //上传新优惠券
+    public function new_task(){
+
+        //淘客信息
+        $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
+        if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
+
+        //优惠券链接
+        if( !I('coupon_link') ) $this->ajax_res(0,'请上传优惠券链接');
+
+        //任务总量
+        if( (int)I('taks_num') <= 0 ) $this->ajax_res(0,'请上传任务总量');
+
+        //返回成功
+        $this->ajax_res(1,'上传成功');
+
+    }
+
+    //按商品名称查询
+    public function search_item(){
+
+        if( I('item_name') ) {
+
+            //默认给出淘客最新添加的十条优惠券
+            $list = M('coupon')->where(1,1)->limit(10)->field('price,status,end_time,take_num,11 as item_name,23 as item_sale,11.11 as roc,56.23 as deal_num')->select();
+
+            $this->ajax_res(1,'成功',$list);
+
+        }
+
+        //默认给出淘客最新添加的十条优惠券
+        $list = M('coupon')->where(1,1)->limit(10)->field('price,status,end_time,take_num,22 as item_name,45 as item_sale,23.12 as roc,56.99 as deal_num')->select();
+
+        $this->ajax_res(1,'成功',$list);
+
+    }
+
     //淘客信息修改接口
     public function modify(){
 
@@ -20,21 +104,21 @@ class PromoterController extends IndexController{
         //修改淘客信息
         if( I('modify') == 'modify' ){
             //数据验证
-            $save_data = $this->check_promoter_modify($promoter_info,I('post.'));
+            $save_data = $this->check_promoter_modify($promoter_info,I());
             //保存
-            $save_res = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->save();
+            $save_res = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->save($save_data);
             //保存淘客QQ
             if( !is_array(I('promoter_qq')) || count(I('promoter_qq')) == 0 ) $this->ajax_res(0,'请输入至少一个联系QQ');
+            //删除淘客所有QQ
+            $had_add = M('promoter_qq')->where(array(
+                    'promoter_id' => I('promoter_id'),
+                ))->delete();
             foreach (I('promoter_qq') as $key => $value) {
                 $index = $key+1;
                 //判空
                 if( !$value['qq'] ) $this->ajax_res(0,'请填写您的第'.$index.'个QQ号码');
-                //查看该QQ该淘客是否已添加
-                $had_add = M('promoter_qq')->where(array(
-                        'promoter_id' => I('promoter_id'),
-                        'qq'          => $value['qq'],
-                    ))->find();
-                if( $had_add ) continue;
+                //备注
+                if( !$value['desc'] ) $this->ajax_res(0,'请填写您的第'.$index.'个QQ备注');
                 //是否已被使用
                 if( !$this->is_new_qq($value['qq']) ) $this->ajax_res(0,'您添加的第'.$index.'个QQ号码已被使用');
                 //入库
@@ -48,6 +132,9 @@ class PromoterController extends IndexController{
             $this->ajax_res(0,'抱歉，失败修改');
         }
 
+        //淘客QQ
+        $promoter_info['promoter_qq'] = M('promoter_qq')->field('qq,desc')->where(array('promoter_id'=>$promoter_info['promoter_id']))->select();
+
         //返回淘客信息
         $this->ajax_res(1,'获得淘客信息成功',$promoter_info);
         
@@ -56,23 +143,23 @@ class PromoterController extends IndexController{
     //验证淘客修改信息
     public function check_promoter_modify($old_info,$new_info){
         //名称
-        if( !$new_info['name'] ) $this->ajax_res(0,'请填写用户名称');
+        if( !$new_info['promoter_name'] ) $this->ajax_res(0,'请填写用户名称');
         //手机号码格式
-        if( $new_info['tel'] && !check_phone($new_info['tel']) ) $this->ajax_res(0,'手机号码格式错误');
+        if( $new_info['promoter_phone'] && !check_phone($new_info['promoter_phone']) ) $this->ajax_res(0,'手机号码格式错误');
         //手机号码是否更换 如果更换了 要验证是否已被使用
-        if( ($new_info['tel'] && $new_info['tel'] != $old_info['promoter_phone']) && !$this->is_new_phone($new_info['tel']) ) $this->ajax_res(0,'该手机号已被使用');
+        if( ($new_info['promoter_phone'] && $new_info['promoter_phone'] != $old_info['promoter_phone']) && !$this->is_new_phone($new_info['promoter_phone']) ) $this->ajax_res(0,'该手机号已被使用');
         //邮箱
-        if( !$new_info['email'] || !check_email($new_info['email']) ) $this->ajax_res(0,'请输入正确的邮箱');
+        if( !$new_info['promoter_email'] || !check_email($new_info['promoter_email']) ) $this->ajax_res(0,'请输入正确的邮箱');
         //邮箱是否更换 如果更换了 要验证是否已被使用
-        if( $old_info['promoter_email'] != $new_info['email'] && !$this->is_new_email($new_info['email']) ) $this->ajax_res(0,'邮箱已被使用');
+        if( $old_info['promoter_email'] != $new_info['promoter_email'] && !$this->is_new_email($new_info['promoter_email']) ) $this->ajax_res(0,'邮箱已被使用');
         //邮箱是否更换 如果更换了 要验证验证码是否正确
-        if( $old_info['promoter_email'] != $new_info['email'] && $new_info['idCode'] != S($new_info['email']) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
+        if( $old_info['promoter_email'] != $new_info['promoter_email'] && $new_info['idCode'] != S($new_info['promoter_email']) ) $this->ajax_res(0,'验证码错误或过期，请重新发送');
         //入库数据
         $save_data = array(
-                'promoter_name'  => $new_info['name'],
-                'promoter_phone' => $new_info['tel'],
-                'promoter_email' => $new_info['email'],
-                'promoter_desc'  => $new_info['introduce'],
+                'promoter_name'  => $new_info['promoter_name'],
+                'promoter_phone' => $new_info['promoter_phone'],
+                'promoter_email' => $new_info['promoter_email'],
+                'promoter_desc'  => $new_info['promoter_desc'],
                 'update_time'   => time(),
             );
         return $save_data;

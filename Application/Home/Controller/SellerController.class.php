@@ -27,28 +27,46 @@ class SellerController extends IndexController{
 
     //商户查看淘客详情页面
     public function promoter_detail_page(){
+
+
+
         $this->display();
     }
 
     //商户查看淘客统计榜接口
     public function promoter_count(){
 
-        //淘客信息查询
-        $promoter = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
-        if( !$promoter ) $this->ajax_res(0,'未找到该淘客');
-
         //获得列表 type : 接单个数-item_sum 总领券量-take_sum 总计销量-sale_sum 转化率-roc_avg
         $item_list = D('promoter')->item_count_list(I('type'));
 
-        dump($promoter_item_list);
+        $this->ajax_res(1,'成功',$item_list);
         
     }
 
     //商户查看淘客详情接口
     public function promoter_detail(){
 
+        //淘客信息
+        $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
+        if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
 
-        
+        //淘客新券数
+        $promoter_info['new_coupon_num'] = 1;
+        //总领券数
+        $promoter_info['all_take_sum'] = 1;
+        //总计销量
+        $promoter_info['all_sale_sum'] = 1;
+        //平均转化率
+        $promoter_info['roc_avg'] = 10.11;
+        //推广能力评分
+        $promoter_info['promot_point'] = 1.1;
+        //淘客综合评分
+        $promoter_info['all_point'] = 1.1;
+        //优惠券列表
+        $promoter_info['coupon_list'] = M('coupon')->field('price,123 as item_name,take_num,12.23 as roc,status')->limit(10)->select();
+
+        return $this->ajax_res(1,'成功',$promoter_info);
+
     }
 
     //商户主界面接口

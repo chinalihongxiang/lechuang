@@ -18,24 +18,67 @@ class PromoterModel extends Model{
     //淘客排行榜
     public function item_count_list($type){
 
-        //条件
-        $where['promoter.promoter_id'] = 6;
+        //类型 type : 接单个数-item_sum 总领券量-take_sum 总计销量-sale_sum 转化率-roc_avg
 
-        //字段
-        $field = '*';
+        //选出排行榜淘客
+        $promoter_list = M('promoter')->field('promoter_id,promoter_name,123 as promoter_qq')->where(1,1)->select();
 
-        //联查
-        $join = array(
-                'left join group_log on group_log.promoter_id = promoter.promoter_id',
-                // 'left join item on item.item_id = promoter_log.item_id',
-                // 'left join coupon on coupon.alipay_item_id = item.alipay_item_id'
-            );
+        //循环处理
+        if( $type == 'item_sum' ){
+            foreach ($promoter_list as $key => $promoter) {
+                //接单个数
+                $promoter_list[$key]['item_sum'] = 1;
+                //领券量
+                $promoter_list[$key]['take_sum'] = 1;
+                //销量
+                $promoter_list[$key]['sale_sum'] = 1;
+                //转化率
+                $promoter_list[$key]['roc_avg'] = 10.11;
+            }
+            return $promoter_list;
+        }
 
-        //条数
-        $limit = 10;
+        if( $type == 'take_sum' ){
+            foreach ($promoter_list as $key => $promoter) {
+                //接单个数
+                $promoter_list[$key]['item_sum'] = 2;
+                //领券量
+                $promoter_list[$key]['take_sum'] = 2;
+                //销量
+                $promoter_list[$key]['sale_sum'] = 2;
+                //转化率
+                $promoter_list[$key]['roc_avg'] = 10.12;
+            }
+            return $promoter_list;
+        }
 
-        //查询
-        $list = M('promoter')->field($field)->where($where)->join($join)->limit($limit)->select();
+        if( $type == 'sale_sum' ){
+            foreach ($promoter_list as $key => $promoter) {
+                //接单个数
+                $promoter_list[$key]['item_sum'] = 3;
+                //领券量
+                $promoter_list[$key]['take_sum'] = 3;
+                //销量
+                $promoter_list[$key]['sale_sum'] = 3;
+                //转化率
+                $promoter_list[$key]['roc_avg'] = 10.13;
+            }
+            return $promoter_list;
+        }
+
+        if( $type == 'roc_avg' ){
+            foreach ($promoter_list as $key => $promoter) {
+                //接单个数
+                $promoter_list[$key]['item_sum'] = 4;
+                //领券量
+                $promoter_list[$key]['take_sum'] = 4;
+                //销量
+                $promoter_list[$key]['sale_sum'] = 4;
+                //转化率
+                $promoter_list[$key]['roc_avg'] = 10.14;
+            }
+            return $promoter_list;
+        }
 
     }
 
