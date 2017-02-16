@@ -1,0 +1,14 @@
+.content {padding: 20px 40px;}
+.content ul li{list-style-type: none;margin-bottom: 12px;font-size: 16px;}
+.content ul li input{height: 25px;width: 300px;padding: 5px 0;}
+.content ul li .input{text-indent: 10px;border: none;}
+.content ul li div {display: inline-block;}
+.content ul li:nth-child(-n+2) div:last-child{margin-left:20px}
+.content ul li div:nth-child(2){border-radius: 5px;border: 1px solid #E2E2E2;padding: 1px;margin-left: 20px;}
+.content ul li:nth-child(3) div:nth-child(3) input,.content ul li:nth-child(4) div:nth-child(3) input,.content ul li:nth-child(5) div:nth-child(3) input {width: 136px;}
+.content ul li:nth-child(3) div:nth-child(3),.content ul li:nth-child(4) div:nth-child(3),.content ul li:nth-child(5) div:nth-child(3) {margin-left: 20px}
+.lititle{width: 100px;text-align: right;}
+#sintroduce {vertical-align: text-top;}
+.sres,#sendcode{font-size: 20px;padding: 10px 20px;background-color: #00B2EE;color: #fff;display: block;margin: 0 auto;border-radius: 8px;cursor: pointer;}
+#sendcode{display: inline-block;font-size: 12px;padding: 8px 10px;border-radius: 5px;margin-left: 10px;}
+#sintroduce{padding: 10px;width: 500px;height: 60px}

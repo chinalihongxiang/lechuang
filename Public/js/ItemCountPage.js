@@ -49,10 +49,6 @@ function goodsListload(){
         type:'get',
         url:'/ItemCount/search',
         data:{type:'take'},
-        beforeSend:function(){
-            $('.mask').show();
-            $('.showL').show();
-        },
         complete:function(){
             $('.mask').hide();
             $('.showL').hide();

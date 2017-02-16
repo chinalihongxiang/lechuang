@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1" />
+    <title>淘客修改页</title>
+    <link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/promoterinfo.css"/>	
+</head>
+<body>
+<!--message-->
+<div class="mask">
+    <div class="show">
+        <div class="showMsg"></div>
+        <div class="showBtn">确定</div>
+    </div>
+    <div class="showR">
+        <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+        <div class="showRBtn">确定</div>
+    </div>
+    <div class="showW">
+        <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+        <div class="showWBtn">确定</div>
+    </div>
+</div>
+<!--content-->
+<div class="content">
+    <ul>
+        <li><div class="lititle">用户名：</div><div><input type="text" class="input" id="sname"/></div><div modify="1"></div></li>
+        <li><div class="lititle">手机号码：</div><div><input type="text" class="input" id="stel" /></div><div modify="1"></div></li>
+        <li><div class="lititle">QQ号码1：</div><div><input type="text" class="input sqq" id="sqq1" /></div><div><div>备注:</div><div><input type="text" class="input sqqint" id="sqqint1"/></div></div></li>
+        <li><div class="lititle">QQ号码2：</div><div><input type="text" class="input sqq" id="sqq2" disabled="disabled" /></div><div><div>备注:</div><div><input type="text" class="input sqqint" id="sqqint2" disabled="disabled" /></div></div></li>
+        <li><div class="lititle">QQ号码3：</div><div><input type="text" class="input sqq" id="sqq3" disabled="disabled"/></div><div><div>备注:</div><div><input type="text" class="input sqqint" id="sqqint3" disabled="disabled" /></div></div></li>
+        <li><div class="lititle">邮箱：</div><div><input type="text" class="input" id="semail" /></div><button style="display: none" id="sendcode">点击发送验证码</button></li>
+        <li style="display: none"><div class="lititle">验证码：</div><div><input type="text"class="input" id="sidcode" /></div></li>
+        <li><div class="lititle">自我简介：</div><div><textarea class="input" rows="5" cols="30" id="sintroduce"></textarea></div></li>
+    </ul>
+    <button class="sres">提交修改</button>
+</div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/promoterinfo.js" type="text/javascript" charset="utf-8"></script>
+</html>

@@ -127,13 +127,11 @@ function shopListLoad(){
         type:'get',
         url:'/seller/store_list',
         data:{seller_id:'6'},
-		beforeSend:function(){
-			$('.mask').show();
-			$('.showL').show();
-		},
-        success: function (data) {
+		complete: function(){
 			$('.mask').hide();
             $('.showL').hide();
+		},
+        success: function (data) {
             if(data.status == 1){
                 if(data.data){
                     var str = '';
@@ -151,8 +149,6 @@ function shopListLoad(){
             }
         },
         error: function () {
-			$('.mask').hide();
-            $('.showL').hide();
             alertWMsg('连接超时,请稍后再试');
         }
     })
@@ -234,6 +230,3 @@ $(document).on('click','.showCBtn',function() {
 		})
 	})
 })
- function delShopAjax(store_id){
-	 
- }
