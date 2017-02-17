@@ -218,7 +218,7 @@ $(document).on('click','.sres',function(){
     }else{
 
         $.ajax({
-            type:"get",
+            type:"post",
             url:"/Promoter/modify",
             async:true,
             data:user,

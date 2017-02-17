@@ -124,7 +124,7 @@ function  addShop(){
 }
 function shopListLoad(){
     $.ajax({
-        type:'get',
+        type:'post',
         url:'/seller/store_list',
         data:{seller_id:'6'},
 		complete: function(){

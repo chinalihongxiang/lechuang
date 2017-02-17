@@ -113,13 +113,27 @@ function checkPwd (str) {
 	return RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/).test(str);
 }
 function ShopId(str){
-	return RegExp(/^[0-9]*$/).test(str);
+	return RegExp(/^[1-9][0-9]*$/).test(str);
 }
+//链接验证
 function checkUrl(url){
 	if ((url.indexOf("http://")>=0 || url.indexOf("https://")>=0)&&(url.indexOf("taobao.com")>=0 || url.indexOf("tmall.com")>=0)){
 		return true;
 	}else{
 		return false;
 	}
+}
+function checkCouponUrl(url){
+	if ((url.indexOf("http://")>=0 || url.indexOf("https://")>=0)&&(url.indexOf("sellerId")>=0 || url.indexOf("sellerid")>=0 || url.indexOf("seller_id")>=0 || url.indexOf("seller_Id")>=0) && (url.indexOf("activityId")>=0 || url.indexOf("activityid")>=0 || url.indexOf("activity_id")>=0 || url.indexOf("activity_Id")>=0)){
+		return true;
+	}else{
+		return false;
+	}
+}
+//获取url里面的参数
+function GetQueryString(name){
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
 }
 	

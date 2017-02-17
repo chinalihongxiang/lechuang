@@ -1,0 +1,21 @@
+.content{position: relative;padding: 40px 0;}
+.contentShowDiv{height: 450px;}
+.contentShowDivTop{width: 698px;height: 150px;padding: 0 50px;}
+.contentShowDivTop div{float: left}
+.contentShowDivTop div a {display: block}
+.contentShowDivTop div a:hover{text-decoration: none}
+.contentShowDivTopLeft {width: 300px;}
+.contentShowDivTopLeft a {height: 150px;font-size: 50px;line-height: 150px;text-align: center;color: #fff;background-color: #32CD32;border-radius: 10px;}
+.contentShowDivTopRight {width: 350px;margin-left: 48px}
+.contentShowDivTopRight a {height: 60px;font-size: 25px;line-height: 60px;text-align: center;color: #fff;background-color: #FFB90F;border-radius: 10px}
+.contentShowDivTopRight a:last-child{margin-top: 30px;background-color: #1C86EE;}
+.contentShowDivBottom {width: 698px;height: 260px;padding: 0 50px;margin-top: 20px}
+.contentShowDivBottomLeft,.contentShowDivBottomRight {width: 50%;float: left;}
+.contentShowDivBottom h2 {font-size: 30px;text-align: center;line-height: 70px;}
+.contentShowDivBottomLeftTable,.contentShowDivBottomUl{height: 190px;overflow: hidden}
+.contentShowDivBottomLeftTable table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666;text-align: center}
+.contentShowDivBottomLeftTable table{width: 100%;line-height: 30.49px;font-size: 16px}
+.contentShowDivBottomUl ul{list-style:none;width: 100%;text-align: center;}
+.contentShowDivBottomUl ul li a {font-size: 25px;line-height: 39px;cursor:pointer}
+.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottomActive{color: #fff;background-color: #00B2EE;}

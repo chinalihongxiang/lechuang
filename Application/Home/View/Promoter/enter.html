@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
+    <title>商户主页面</title>
+</head>
+<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/promoterEnter.css"/>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
+<script>
+    $(function(){
+        $(".contentShowDivBottomLeftTable,.contentShowDivBottomUl").niceScroll({
+            cursorcolor:"#00B2EE",
+            cursoropacitymax:1,
+            hwacceleration:true,
+            touchbehavior:false,
+            sensitiverail:true,
+            hidecursordelay:1000,
+            bouncescroll:true,
+            cursorwidth:"5px",
+            cursorborder:"0",
+            cursorborderradius:"5px",
+            spacebarenabled:true,
+        });
+    })
+</script>
+<body>
+<!--信息提示-->
+<div class="mask">
+    <div class="show">
+        <div class="showMsg"></div>
+        <div class="showBtn">确定</div>
+    </div>
+    <div class="showR">
+        <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+        <div class="showRBtn">确定</div>
+    </div>
+    <div class="showW">
+        <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+        <div class="showWBtn">确定</div>
+    </div>
+    <div class="showL">
+        <img src="__IMG__/loading.png" alt="">
+        <p>拼命加载中...</p>
+    </div>
+</div>
+<div class="content">
+    <div class="contentShowDiv">
+        <div class="contentShowDivTop">
+            <div class="contentShowDivTopLeft">
+                <a href="my_coupon.html">我的优惠券</a>
+            </div>
+            <div class="contentShowDivTopRight">
+                <a href="item_count.html">商品统计数据榜</a>
+                <a href="item_details.html">商品查询</a>
+            </div>
+        </div>
+        <div class="contentShowDivBottom">
+            <div class="contentShowDivBottomLeft">
+                <h2>最新采集群排行榜</h2>
+                <div class="contentShowDivBottomLeftTable">
+                    <table>
+                        <tr>
+                            <td>排名</td>
+                            <td>群名称</td>
+                            <td>群号</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                        </tr>                 
+                    </table>
+                </div>
+            </div>
+            <div class="contentShowDivBottomRight">
+                <h2>放单网站</h2>
+                <div class="contentShowDivBottomUl">
+                    <ul>
+                        <li><a href="">暂无数据</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="enter.html"><div class="bottom bottomActive">主页面</div></a><a href="my_coupon.html"><div class="bottom ">我的优惠券</div></a>
+</div>
+</body>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/promoterEnter.js" type="text/javascript" charset="utf-8"></script>
+</html>

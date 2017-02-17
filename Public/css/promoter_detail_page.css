@@ -1,0 +1,24 @@
+.content{position: relative;padding: 20px 0;}
+.contentShowDiv{height: 470px;}
+.contentShowDiv>div:first-child{height: 80px;width: 758px;margin: 0 auto;}
+.contentShowDivHead div ,.contentShowDiv div:first-child div{display: inline-block;}
+.contentShowDivHead:hover{box-shadow: 3px 3px 5px rgba(0,0,0,0.4);}
+.contentShowDivHead div{font-size: 20px;line-height: 60px;background-color: #EE4000;height: 60px;text-align: center;color: #fff}
+.contentShowDivHead div:first-child{width: 200px;}
+.contentShowDivHead div:last-child{width: 300px;}
+.contentShowDivTbk{width: 758px;margin: 0 20px 20px;height: 370px;border: 1px solid #E2E2E2;margin: 0 auto;overflow: hidden}
+.tbkInfo{height: 90px;box-sizing: border-box;padding: 10px 20px;border-bottom: 1px solid #E2E2E2}
+.tbkInfo ul {list-style: none;}
+.tbkInfo ul li{float: left;background-color: #008B45;font-size: 16px;width: 232px;margin-right: 10px;cursor:default;}
+.tbkInfo ul li:hover{transform: scale(1.02);box-shadow: 2px 2px 3px rgba(0,0,0,0.6)}
+.tbkInfo ul li:nth-child(3n){margin-right: 0}
+.tbkInfo ul li:nth-child(n+4){margin-top: 10px}
+.tbkInfo ul li div{font-size: 16px;line-height: 30px;display: inline-block;height: 30px;color: #fff;text-indent: 10px}
+.tbkInfo ul li div:first-child {width: 120px;}
+.tbkInfo ul li div:last-child {width: 100px;text-align: center}
+.tbkInfoMore {height: 260px;box-sizing: border-box;overflow: hidden}
+.tbkInfoMore table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666;text-align: center}
+.tbkInfoMore table{width: 95%;margin-left: 2.5%;font-size: 16px;line-height: 33px;margin-top: 20px;border: 1px solid #E2E2E2;margin-bottom: 20px}
+.tbkInfoMore table tr {width: 100%;}
+.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottomActive{color: #fff;background-color: #00B2EE;}

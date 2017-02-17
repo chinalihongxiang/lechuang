@@ -1,0 +1,16 @@
+.content{position: relative;padding: 20px 0;}
+.contentShowDiv{height: 470px;}
+.contentShowDivTop{width: 758px;padding: 0 20px}
+.contentShowDivTopAdd {margin-bottom: 20px;}
+.contentShowDivTopAdd div,#selectTime,.searchInput,.searchBtn{display: inline-block}
+.addInput,.searchInput{width: 250px;padding: 1px;box-sizing: border-box;height: 100%;border: 1px solid #e2e2e2;border-radius: 3px;margin-right: 20px}
+.addInput input,.searchInput input {width: 245px;border: none;height: 35px;text-indent: 10px}
+.addBtn,.searchBtn {background-color: #00B2EE;color: #fff;font-size: 16px;padding: 16.5px 25px;margin-left: 60px;border-radius: 5px;cursor: pointer}
+.searchInput{margin:0 50px;width: 500px}
+.searchInput input{width: 495px}
+.searchBtn{margin-left: 70px;}
+.contentShowDivBottom{height: 320px;margin-top: 20px;overflow:hidden;padding: 0 20px;}
+.contentShowDivBottom table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666;text-align: center;word-break: keep-all;}
+.contentShowDivBottom table{line-height: 30.9px;font-size: 16px;min-width: 758px}
+.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottomActive{color: #fff;background-color: #00B2EE;}
