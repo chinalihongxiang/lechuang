@@ -28,8 +28,6 @@ class SellerController extends IndexController{
     //商户查看淘客详情页面
     public function promoter_detail_page(){
 
-
-
         $this->display();
     }
 

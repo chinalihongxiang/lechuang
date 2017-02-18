@@ -10,9 +10,18 @@ class PromoterController extends IndexController{
         $this->display();
     }
 
+    //淘客商品统计
+    public function item_count(){
+        $this->display();
+    }
+
+    //淘客查询商品
+    public function item_details(){
+        $this->display();
+    }
+
     //淘客主界面
     public function enter(){
-
         $this->display();
     }
 
@@ -77,6 +86,10 @@ class PromoterController extends IndexController{
 
     //按商品名称查询
     public function search_item(){
+
+        //淘客信息
+        $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
+        if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
 
         if( I('item_name') ) {
 
