@@ -32,28 +32,8 @@ class PromoterController extends IndexController{
         $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
         if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
 
-        //优惠券列表
+        //采集群列表
         $promoter_info['group_list'] = M('group')->field('group_name,group_qq')->limit(10)->select();
-
-        //放单网站
-        $promoter_info['website_list'] = array(
-                array(
-                        'title' => '网站A',
-                        'link'  => 'ww.a.c'
-                    ),
-                array(
-                        'title' => '网站B',
-                        'link'  => 'ww.a.c'
-                    ),
-                array(
-                        'title' => '网站C',
-                        'link'  => 'ww.a.c'
-                    ),
-                array(
-                        'title' => '网站D',
-                        'link'  => 'ww.a.c'
-                    ),
-            );
         
         return $this->ajax_res(1,'成功',$promoter_info);
 
@@ -180,23 +160,25 @@ class PromoterController extends IndexController{
 
     //淘客跑单记录接收接口
     public function get_log(){
-
         set_time_limit(0);
-
         //来源淘客id
         $promoter_id = I('promoter_id') ? I('promoter_id') : $this->ajax_res(0,'无来源淘客id');
-
-        //来源淘客是否存在
-        if( M('promoter')->where(array('promoter_id'=>$promoter_id))->count() != 1 ) $this->ajax_res(0,'来源淘客非法');
-
         //json处理
         $json = str_replace('&quot;','"',I('list'));
-
         //数组判空
         $list = json_decode($json,true);
         $request_num = count($list);
         if( $request_num == 0 ) $this->ajax_res(0,'无数据');
-
+        //给入库数据添加键名
+        foreach ($list as $key => $value) {
+            $list[$key] = array();
+            $list[$key]['IsTmail']  = $value[0];
+            $list[$key]['ItemID']   = $value[1];
+            $list[$key]['CouponID'] = $value[2];
+            $list[$key]['SellerID'] = $value[3];
+            $list[$key]['GroupID']  = $value[4];
+            $list[$key]['TimeID']   = $value[5];
+        }
         //处理
         $group_log_id_arr = [];
         foreach ( $list as $key => $log ) {
@@ -326,6 +308,78 @@ class PromoterController extends IndexController{
             );
 
         return M('promoter_log')->add($add);
+
+    }
+
+    //放单网站
+    public function websiteList(){
+
+        //网站数组
+        $website_list = array(
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+            array(
+                    'title' => '网站A',
+                    'link'  => 'ww.a.c',
+                    'send_link' => '',
+                    'point' => ''
+                ),
+        );
+
+        //返回网站数组
+        $this->ajax_res(1,'成功',$website_list);
 
     }
 

@@ -13,39 +13,62 @@ class ItemCountController extends IndexController {
 
 	//商品列表
 	public function search(){
+		set_time_limit(0);
+
+		//条数
+		$limit = 20;
+
+		//类型
+		if( I('date_type') == 'week' ){
+			//取周增量
+			$field = '
+				item.item_name,
+				item.week_sale_add,
+				coupon.week_take_add,
+				item.type,
+				item.alipay_item_id,
+				roc
+			';
+			//排序 销量
+			if( I('type') == 'sale' ) $order = 'item.week_sale_add desc ,item.create_time desc';
+			//排序 领券量
+			if( I('type') == 'take' ) $order = 'coupon.week_take_add desc ,item.create_time desc';
+			//排序 转化率
+			if( I('type') == 'roc' )  $order = 'roc desc,item.create_time desc';
+			//只取领券数增量大于商品销量的
+			$having = "coupon.week_take_add > item.week_sale_add";
+		}else{
+			//取日增量
+			$field = '
+				item.item_name,
+				item.day_sale_add,
+				coupon.day_take_add,
+				item.type,
+				item.alipay_item_id,
+				roc
+			';
+			//排序 销量
+			if( I('type') == 'sale' ) $order = 'item.day_sale_add desc,item.create_time desc';
+			//排序 领券量
+			if( I('type') == 'take' ) $order = 'coupon.day_take_add desc,item.create_time desc';
+			//排序 转化率
+			if( I('type') == 'roc' )  $order = 'roc desc,item.create_time desc';
+			//只取领券数增量大于商品销量的
+			$having = "coupon.day_take_add >= item.day_sale_add";
+		}
 
 		//条件
 		$where = array(
 				'item.status'   => 0,
 				'coupon.status' => 0,
+				'coupon.coupon_update_id' => array('gt',0),
+				'item.item_update_id'=>array('gt',0)
 			);
-
-		//字段
-		$field = '
-				item.item_name,
-				item.sale,
-				coupon.take_num,
-				item.type,
-				item.alipay_item_id,
-				FORMAT((item.sale/coupon.take_num)*100,2) as roc
-				';
 
 		//联查
 		$join = array(
-                    'left join coupon on coupon.alipay_item_id = item.alipay_item_id',
+                    'join coupon on coupon.alipay_item_id = item.alipay_item_id',
                 );
-
-		//条数
-		$limit = 20;
-
-		//排序 销量
-		if( I('type') == 'sale' ) $order = 'item.sale desc';
-
-		//排序 领券量
-		if( I('type') == 'take' ) $order = 'coupon.take_num desc';
-
-		//排序 转化率
-		if( I('type') == 'roc' )  $order = 'roc desc';
 
 		//列表
 		$list = M('item')
@@ -54,7 +77,7 @@ class ItemCountController extends IndexController {
 			->where($where)
 			->limit($limit)
 			->order($order)
-			->having("coupon.take_num > item.sale")
+			->having($having)
 			->select();
 
 		//添加链接
@@ -62,11 +85,8 @@ class ItemCountController extends IndexController {
 			$list[$key]['link'] = item_link($value['alipay_item_id'],$value['type']);
 		}
 
-		$arr['item_list'] = $list;
-		$arr['item_all_count'] = $this->all();
-
 		//返回
-		if( count($list) > 0 ) $this->ajax_res(1,'成功',$arr);
+		if( count($list) > 0 ) $this->ajax_res(1,'成功',$list);
 
 	}
 
@@ -77,63 +97,18 @@ class ItemCountController extends IndexController {
 		$arr['coupon_num'] = M('coupon')->where(array('status'=>0))->count();
 
 		//商品数
-		$arr['item_num'] = M('item')->where(array('status'=>0))->count();
+		$arr['item_num'] = D('Item')->effective_count('all_num');
 
 		//总计销量
-		$arr['item_sale_sum'] = M('item')->where(array('status'=>0))->sum('sale');
+		$arr['item_sale_sum'] = D('Item')->effective_count('all_sale');
 
 		//平均佣金比例
-		$arr['item_ratio_avg'] = round(M('item')->where(array('status'=>0))->avg('ratio'),2);
+		$arr['item_ratio_avg'] = round(D('Item')->effective_count('ratio_avg'),2);
 
 		//平均转化率
-		$arr['roc_avg'] = $this->get_roc_avg();
+		$arr['roc_avg'] = round(D('Item')->effective_count('roc_avg'),2);
 
 		return $arr;
-
-	}
-
-	//平均转化率
-	public function get_roc_avg(){
-
-		//条件
-		$where = array(
-				'item.status'   => 0,
-				'coupon.status' => 0,
-			);
-
-		//字段
-		$field = '
-			item.sale,
-			coupon.take_num,
-			FORMAT((item.sale/coupon.take_num)*100,2) as roc
-			';
-
-		//联查
-		$join = array(
-                    'left join coupon on coupon.alipay_item_id = item.alipay_item_id',
-                );
-
-		//列表
-		$list = M('item')
-			->field($field)
-			->join($join)
-			->where($where)
-			->having("coupon.take_num > item.sale")
-			->select();
-
-		//总数
-		$count = count($list);
-
-		//全部转化率相加
-		$all_roc = 0;
-		foreach ($list as $key => $value) {
-			$all_roc = $all_roc + $value['roc'];
-		}
-
-		//转化率
-		$roc = $all_roc/$count;
-
-		return round($roc,2);
 
 	}
 

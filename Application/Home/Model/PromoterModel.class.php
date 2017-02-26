@@ -20,6 +20,9 @@ class PromoterModel extends Model{
 
         //类型 type : 接单个数-item_sum 总领券量-take_sum 总计销量-sale_sum 转化率-roc_avg
 
+        //淘客所接单
+        $promoter_item_count = M('');
+
         //选出排行榜淘客
         $promoter_list = M('promoter')->field('promoter_id,promoter_name,123 as promoter_qq')->where(1,1)->select();
 

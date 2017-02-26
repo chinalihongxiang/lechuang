@@ -17,6 +17,16 @@ class GroupController extends IndexController {
 		$list = json_decode($json,true);
 		$request_num = count($list);
 		if( $request_num == 0 ) $this->ajax_res(0,'无数据');
+		//给入库数据添加键名
+		foreach ($list as $key => $value) {
+			$list[$key] = array();
+			$list[$key]['IsTmail']  = $value[0];
+			$list[$key]['ItemID']   = $value[1];
+			$list[$key]['CouponID'] = $value[2];
+			$list[$key]['SellerID'] = $value[3];
+			$list[$key]['GroupID']  = $value[4];
+			$list[$key]['TimeID']   = $value[5];
+		}
 		//处理
 		$group_log_id_arr = [];
 		foreach ( $list as $key => $log ) {
@@ -142,6 +152,41 @@ class GroupController extends IndexController {
 		//如果不存在 添加
 		if( M('group')->add(array('group_qq'=>I('GroupID'),'group_name'=>$name)) ) $this->ajax_res(1);
 		$this->ajax_res(0,'添加失败');
+	}
+
+	//采集群排行榜
+	public function goodGroups(){
+
+		//根据新单数占总单数的比例来排行
+		$p = I('p') ? I('p') : 1;
+		$p_size = 10;
+
+		//总数
+		$count = M('group')->where(1,1)->count();
+
+		//采集群总单量 100~200之间
+
+		//条件
+		$where = array(
+				'today_new_coupon_num' 	  => array(array('gt',100),array('lt',200)),
+				'today_repeat_coupon_num' => array('lt',30),
+				'today_roc_avg'           => array('lt',100)
+			);
+
+		//字段
+		$field = '*,50*(today_all_take/today_new_coupon_num*1000) + 50*today_roc_avg as point
+			';
+
+		//排序
+		$order = 'point desc';
+
+		$list = M('group')->field($field)->where($where)->order($order)->limit( ($p-1)*$p_size , $p_size )->select();
+
+		$list = $list ? $list : [];
+
+		//返回数据
+		$this->ajax_res(1,'返回成功',$list);
+
 	}
 
 }

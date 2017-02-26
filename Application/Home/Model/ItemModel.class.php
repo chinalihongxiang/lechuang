@@ -3,6 +3,37 @@ namespace Home\Model;
 use Think\Model;
 class ItemModel extends Model{
 
+	//商品库有效商品个数
+	public function effective_count($type){
+
+		//条件
+		$where = array(
+				'item.status'   => 0,
+				'coupon.status' => 0,
+				'coupon.coupon_update_id' => array('gt',0),
+				'item.item_update_id'=> array('gt',0)
+			);
+
+		//联查
+		$join = array(
+                    'join coupon on coupon.alipay_item_id = item.alipay_item_id',
+                );
+
+		//有效商品总数
+		if( $type == 'all_num' ) return  M('item')->join($join)->where($where)->count();
+
+		//总计销量
+		if( $type == 'all_sale' ) return  M('item')->join($join)->where($where)->sum('sale');
+
+		//平均佣金比例
+		if( $type == 'ratio_avg' ) return  M('item')->join($join)->where($where)->avg('ratio');
+
+		//平均转化率
+		$where['roc'] = array('neq',0);
+		if( $type == 'roc_avg' ) return  M('item')->join($join)->where($where)->avg('roc');
+
+	}
+
     //参与活动天数
 	public function get_item_join_time($item_info){
 
@@ -33,104 +64,11 @@ class ItemModel extends Model{
 	//该商品所有优惠券已领券数
 	public function get_item_coupon_take_num($item_info){
 
-		//获得该商品所有优惠券
-		$coupons = $this->get_item_coupons($item_info['alipay_item_id']);
-
-		//获得这些优惠券所有已领券数
-		$take_num = 0;
-		foreach ($coupons as $key => $value) {
-			//单张优惠券当前已领券数
-			$the_num = (int)$value['take_num'];
-			//求和
-			$take_num = $take_num + $the_num;
-		}
+		$take_num = M('coupon')->where(array(
+				'alipay_item_id' => $item_info['alipay_item_id']
+			))->sum('take_num');
 
 		return $take_num;
-
-	}
-
-	//该商品某张单券转化率
-	public function get_one_coupon_roc($item_info,$coupon,$start = 0,$end = 0){
-
-		//开始时间
-		$start = $start ? $start : $item_info['create_time'];
-
-		//结束时间
-		$end   = $end ? $end : time();
-
-		//销量变化
-		$start_end_sale = $this->start_end_sale($item_info,$start,$end);
-
-		//优惠券领券数变化
-		$start_end_one_take_num = D('coupon')->start_end_one_take_num($coupon,$time,$end);
-
-		//转化率为0
-		if( (int)$start_end_one_take_num == 0 ) return 0;
-
-		//转化率不为0
-		$roc = $start_end_sale/$start_end_one_take_num;
-
-		//四位小数
-		$roc = round($roc,4)*100;
-
-		return $roc;
-
-	}
-
-	//商品一段时间内的券转化率
-	public function get_item_coupon_roc($item_info,$start = 0,$end = 0){
-
-		//开始时间
-		$start = $start ? $start : $item_info['create_time'];
-
-		//结束时间
-		$end   = $end ? $end : time();
-
-		//商品销量变化
-		$start_end_sale = $this->start_end_sale($item_info,$start,$end);
-
-		//商品领券数变化
-		$start_end_take_num = $this->start_end_take_num($item_info,$start,$end);
-
-		//转化率为零
-		if( (int)$start_end_take_num == 0 ) return 0;
-
-		//转化率不为零
-		$roc = $start_end_sale / $start_end_take_num;
-
-		//四位小数
-		$roc = round($roc,4)*100;
-
-		return $roc;
-
-	}
-
-	//商品销量变化
-	public function start_end_sale($item_info,$start,$end){
-
-		//开始时间商品销量
-		$start_sale = $this->get_item_one_time_sale($item_info['item_id'],$start);
-
-		//结束时间商品销量
-		$end_sale = $this->get_item_one_time_sale($item_info['item_id'],$end);
-
-		return $end_sale - $start_sale;
-
-	}
-
-	//商品领券数变化
-	public function start_end_take_num($item,$start,$end){
-
-		//开始时间领券数
-		$start_take = $this->get_item_coupons_take_num($item,$start);
-
-		//结束时间领券数
-		$end_take = $this->get_item_coupons_take_num($item,$end);
-
-		dump($start_take);
-		dump($end_take);
-
-		return $end_take - $start_take;
 
 	}
 

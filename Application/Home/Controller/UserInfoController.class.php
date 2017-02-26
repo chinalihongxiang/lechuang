@@ -160,13 +160,13 @@ class UserInfoController extends IndexController {
             //商户登录
             if( $seller ){
                 if( $seller['seller_pass'] != $the_pass ) $this->ajax_res(0,'密码错误，请重新输入');
-                $this->ajax_res(1,'登陆成功',array('type'=>'seller','seller_id'=>$seller['seller_id'],'url'=>''));
+                $this->ajax_res(1,'登陆成功',array('type'=>'seller','seller_id'=>$seller['seller_id'],'url'=>U('/seller/store_page')));
             }
             //淘客登录
             $promoter = M('promoter')->where(array('promoter_phone'=>$account))->find();
             if( $promoter ){
                 if( $promoter['promoter_pass'] != $the_pass ) $this->ajax_res(0,'密码错误，请重新输入');
-                $this->ajax_res(1,'登陆成功',array('type'=>'promoter','promoter_id'=>$promoter['promoter_id'],'url'=>''));
+                $this->ajax_res(1,'登陆成功',array('type'=>'promoter','promoter_id'=>$promoter['promoter_id'],'url'=>U('/Promoter/enter') ));
             }
             $this->ajax_res(0,'该用户不存在');
         }
