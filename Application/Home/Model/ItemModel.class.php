@@ -8,29 +8,22 @@ class ItemModel extends Model{
 
 		//条件
 		$where = array(
-				'item.status'   => 0,
-				'coupon.status' => 0,
-				'coupon.coupon_update_id' => array('gt',0),
-				'item.item_update_id'=> array('gt',0)
+				'status'   => 0,
+				'item_update_id'=> array('gt',0)
 			);
 
-		//联查
-		$join = array(
-                    'join coupon on coupon.alipay_item_id = item.alipay_item_id',
-                );
-
 		//有效商品总数
-		if( $type == 'all_num' ) return  M('item')->join($join)->where($where)->count();
+		if( $type == 'all_num' ) return  M('item')->where($where)->count();
 
-		//总计销量
-		if( $type == 'all_sale' ) return  M('item')->join($join)->where($where)->sum('sale');
+		//总计销量增量
+		if( $type == 'all_sale' ) return  M('item')->where($where)->sum('sale');
 
 		//平均佣金比例
-		if( $type == 'ratio_avg' ) return  M('item')->join($join)->where($where)->avg('ratio');
+		if( $type == 'ratio_avg' ) return  M('item')->where($where)->avg('ratio');
 
 		//平均转化率
 		$where['roc'] = array('neq',0);
-		if( $type == 'roc_avg' ) return  M('item')->join($join)->where($where)->avg('roc');
+		if( $type == 'roc_avg' ) return  M('item')->where($where)->avg('roc');
 
 	}
 

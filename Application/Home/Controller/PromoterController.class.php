@@ -317,66 +317,61 @@ class PromoterController extends IndexController{
         //网站数组
         $website_list = array(
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '大淘客',
+                    'link'  => 'www.dataoke.com',
+                    'uv'    => '3w'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '淘采助手',
+                    'link'  => 'www.tkcaiji.com',
+                    'uv'    => '2000'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '超级淘客',
+                    'link'  => 'www.haodanku.com',
+                    'uv'    => '1.6w'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '懒淘客',
+                    'link'  => 'www.lantaoke.net',
+                    'uv'    => '5000'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '淘客联盟',
+                    'link'  => 'www.taoke6688.com',
+                    'uv'    => '无'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '淘客喵',
+                    'link'  => 'www.taokemiao.com',
+                    'uv'    => '2500'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '淘客助手',
+                    'link'  => 'www.taokezhushou.com',
+                    'uv'    => '3.2w'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '实惠猪',
+                    'link'  => 'www.shihuizhu.com',
+                    'uv'    => '2500'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '优买吧',
+                    'link'  => 'www.youmaiba.com',
+                    'uv'    => '640'
                 ),
             array(
-                    'title' => '网站A',
-                    'link'  => 'ww.a.c',
-                    'send_link' => '',
-                    'point' => ''
+                    'title' => '好折宝',
+                    'link'  => 'www.haozhebao.com',
+                    'uv'    => '7000'
                 ),
         );
+
+        //添加http
+        foreach ($website_list as $key => $value) {
+            $website_list[$key]['link'] = "http://".$value['link'];
+        }
 
         //返回网站数组
         $this->ajax_res(1,'成功',$website_list);

@@ -13,7 +13,6 @@ class ItemCountController extends IndexController {
 
 	//商品列表
 	public function search(){
-		set_time_limit(0);
 
 		//条数
 		$limit = 20;
@@ -22,62 +21,50 @@ class ItemCountController extends IndexController {
 		if( I('date_type') == 'week' ){
 			//取周增量
 			$field = '
-				item.item_name,
-				item.week_sale_add,
-				coupon.week_take_add,
-				item.type,
-				item.alipay_item_id,
-				roc
+				item_name,
+				week_sale_add,
+				type,
+				alipay_item_id,
+				roc,
+				take_num
 			';
 			//排序 销量
-			if( I('type') == 'sale' ) $order = 'item.week_sale_add desc ,item.create_time desc';
+			if( I('type') == 'sale' ) $order = 'week_sale_add desc';
 			//排序 领券量
-			if( I('type') == 'take' ) $order = 'coupon.week_take_add desc ,item.create_time desc';
+			if( I('type') == 'take' ) $order = 'create_time desc';
 			//排序 转化率
-			if( I('type') == 'roc' )  $order = 'roc desc,item.create_time desc';
-			//只取领券数增量大于商品销量的
-			$having = "coupon.week_take_add > item.week_sale_add";
+			if( I('type') == 'roc' )  $order = 'roc desc';
 		}else{
 			//取日增量
 			$field = '
-				item.item_name,
-				item.day_sale_add,
-				coupon.day_take_add,
-				item.type,
-				item.alipay_item_id,
-				roc
+				item_name,
+				day_sale_add,
+				type,
+				alipay_item_id,
+				roc,
+				take_num
 			';
 			//排序 销量
-			if( I('type') == 'sale' ) $order = 'item.day_sale_add desc,item.create_time desc';
+			if( I('type') == 'sale' ) $order = 'day_sale_add desc';
 			//排序 领券量
-			if( I('type') == 'take' ) $order = 'coupon.day_take_add desc,item.create_time desc';
+			if( I('type') == 'take' ) $order = 'create_time desc';
 			//排序 转化率
-			if( I('type') == 'roc' )  $order = 'roc desc,item.create_time desc';
-			//只取领券数增量大于商品销量的
-			$having = "coupon.day_take_add >= item.day_sale_add";
+			if( I('type') == 'roc' )  $order = 'roc desc';
+			$order = 'create_time desc';
 		}
 
 		//条件
 		$where = array(
-				'item.status'   => 0,
-				'coupon.status' => 0,
-				'coupon.coupon_update_id' => array('gt',0),
-				'item.item_update_id'=>array('gt',0)
+				'status'   => 0,
+				'item_update_id'=>array('gt',0)
 			);
-
-		//联查
-		$join = array(
-                    'join coupon on coupon.alipay_item_id = item.alipay_item_id',
-                );
 
 		//列表
 		$list = M('item')
 			->field($field)
-			->join($join)
 			->where($where)
-			->limit($limit)
 			->order($order)
-			->having($having)
+			->limit($limit)
 			->select();
 
 		//添加链接
@@ -108,7 +95,7 @@ class ItemCountController extends IndexController {
 		//平均转化率
 		$arr['roc_avg'] = round(D('Item')->effective_count('roc_avg'),2);
 
-		return $arr;
+		$this->ajax_res(1,'成功',$arr);
 
 	}
 
