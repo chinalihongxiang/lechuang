@@ -67,23 +67,79 @@ class PromoterController extends IndexController{
     //按商品名称查询
     public function search_item(){
 
+        $p = I('p') ? I('p') : 1;
+        $p_size = 10;
+
         //淘客信息
         $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
         if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
 
+        //按商品名称搜索
         if( I('item_name') ) {
 
-            //默认给出淘客最新添加的十条优惠券
-            $list = M('coupon')->where(1,1)->limit(10)->field('price,status,end_time,take_num,11 as item_name,23 as item_sale,11.11 as roc,56.23 as deal_num')->select();
+            //条件
+            $where = array(
+                    'item.item_name' => array('like',"%$item_name%"),
+                    'promoter_log.promoter_id' => $promoter_info['promoter_id']
+                );
 
-            $this->ajax_res(1,'成功',$list);
+            //联查商品表与淘客跑单记录表
+            $join = array(
+                    'left join item on item.item_id = promoter_log.item_id'
+                );
 
+            //商品信息数组
+            $item_list = M('promoter_log')->join($join)->where($where)->select();
+
+            //优惠券列表
+            $coupon_list = [];
+            foreach ($item_list as $key => $value) {
+                $coupon_info = M('coupon')->where(array('coupon_id'=>$coupon_id))->find();
+                array_push($coupon_list, $coupon_info);
+            }
+
+            //返回结果
+            $this->ajax_res(1,'成功',array(
+                    'item_list'   => $item_list,
+                    'coupon_list' => $coupon_list
+                ));
         }
 
-        //默认给出淘客最新添加的十条优惠券
-        $list = M('coupon')->where(1,1)->limit(10)->field('price,status,end_time,take_num,22 as item_name,45 as item_sale,23.12 as roc,56.99 as deal_num')->select();
+        //总数
+        $count = M('promoter_log')->where(array(
+                'promoter_id' => $promoter_info['promoter_id']
+            ))->count();
 
-        $this->ajax_res(1,'成功',$list);
+        //分页
+        $log_list = M('promoter_log')->where(array(
+                'promoter_id' => $promoter_info['promoter_id']
+            ))->limit(($p-1)*$p_size,$p_size)->select();
+
+        //优惠券id数组与商品id数组
+        $coupon_id_list = [];
+        $item_id_list   = [];
+        foreach ($log_list as $key => $value) {
+            array_push($coupon_id_list, $value['coupon_id']);
+            array_push($item_id_list, $value['item_id']);
+        }
+
+        //本次获得的优惠券
+        $coupon_list = M('coupon')->where(array(
+                'coupon_id' => array('in',$coupon_id_list)
+            ))->select();
+
+        //本次获得的商品
+        $item_list = M('item')->where(array(
+                'item_id' => array('in',$item_id_list)
+            ))->select();
+
+        $this->ajax_res(1,'成功',array(
+                'coupon_list' => $coupon_list,
+                'item_list'   => $item_list,
+                'count'       => $count,
+                'p'           => $p,
+                'p_size'      => $p_size
+            ));
 
     }
 
