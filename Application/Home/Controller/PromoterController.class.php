@@ -259,7 +259,7 @@ class PromoterController extends IndexController{
                     $log['IsTmail'],
                     $create_time
                 );
-            if( !$coupon_id ) continue;
+            if( !$coupon_id || M('promoter_log')->where(array('coupon_id'=>$coupon_id))->find() ) continue;
             //商品
             $item_id = $this->get_log_item(
                     $log['ItemID'],
