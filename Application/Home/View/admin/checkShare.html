@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
+    <title>好单审核</title>
+</head>
+<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/kkpager_blue.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/adminCheckShare.css"/>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
+<script>
+    $(function(){
+        $(".contentShowDivTable,.GoodsDetailDivShowD").niceScroll({
+            cursorcolor:"#00B2EE",
+            cursoropacitymax:1,
+            hwacceleration:true,
+            touchbehavior:false,
+            sensitiverail:true,
+            hidecursordelay:500,
+            bouncescroll:true,
+            cursorwidth:"5px",
+            cursorborder:"0",
+            cursorborderradius:"5px",
+            spacebarenabled:true,
+        });
+    })
+</script>
+<body>
+    <!--信息提示-->
+    <div class="mask">
+        <div class="show">
+            <div class="showMsg"></div>
+            <div class="showBtn">确定</div>
+        </div>
+        <div class="showR">
+            <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+            <div class="showRBtn">确定</div>
+        </div>
+        <div class="showW">
+            <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+            <div class="showWBtn">确定</div>
+        </div>
+        <div class="showL">
+            <img src="__IMG__/loading.png" alt="">
+            <p>拼命加载中...</p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="GoodsDetailMask">
+            <div class="GoodsDetailDiv">
+                <div class="GoodsDetailDivClose">
+                    <img src="__IMG__/close.png" alt="">
+                </div>
+                <div class="GoodsDetailDivShow">
+                    <h2>商品描述</h2>
+                    <div class="GoodsDetailDivShowD">
+                        <img src="__IMG__/success.png" alt=""><br/>
+                        复制成功</br>
+                        复制成功</br>
+                        复制成功</br>
+                        复制成功</br>
+                        复制成功</br>
+                        复制成功</br>
+                        复制成功</br>
+                    </div>
+                    <div class="GoodsDetailDivShowCopy" isGood="0">加精</div>
+                    <div class="GoodsDetailDivShowPraise" isRead="0">设为已读</div>
+                </div>
+            </div>
+        </div>
+        <div class="contentShowDiv">
+            <div class="contentShowDivTap">好单分享审核</div>
+            <div class="contentShowDivTable">
+                <table>
+                    <tr>
+                        <td>好单详情</td>
+                        <td>状态</td>							
+                        <td>发布时间</td>
+						<td>操作</td>
+                    </tr>
+                    <tr>
+						<td><div class="GoodsDetail">查看详情</div></td>
+                        <td>未读</td>
+                        <td>2012-12-30<br/>23:59:59</td>
+						<td><div class="GoodsDetailDivShowCopy" isGood="0" style="margin:0 5px 0 0;">加精</div><div class="GoodsDetailDivShowPraise" isRead="0" style="margin:0 5px 0 0;">已读</div></td>
+                    </tr>
+                </table>
+            </div>
+        <div id="kkpager"></div>
+		</div>
+    </div>
+</body>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
+<script src="__JS__/kkpager.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+		window.p = 1;
+        Load(p);
+	})
+    //商品详情
+    $(document).on('click', '.GoodsDetail',function () {
+        document.body.onselectstart=document.body.ondrag=function(){
+            return true;
+        }
+		var  shareId = $(this).attr('shareId');
+		$(listArr).each(function(i,e){
+			if(e.share_id == shareId){
+				if(e.status == 0){
+						var status = '<div class="GoodsDetailDivShowCopy" isGood="0" shareId="'+shareId+'">加精</div><div class="GoodsDetailDivShowPraise" isRead="0" shareId="'+shareId+'">已读</div>';
+					}else if(e.status == 1){
+						var status = '<div class="GoodsDetailDivShowPraise" isRead="0" shareId="'+shareId+'">已读</div>'
+					}else if(e.status == 2){
+						var status = '<div class="GoodsDetailDivShowCopy" isGood="0" shareId="'+shareId+'">加精</div>'
+					}
+				var content = e.content.replace(/&amp;quot;/g,'"').replace(/&amp;lt;/g,'<').replace(/&amp;gt;/g,'>').replace(/\n/g,'');
+				var str = '<h2>'+e.title+'</h2><div class="GoodsDetailDivShowD">'+content+'</div>' +status;
+			}
+			$('.GoodsDetailDivShow').html(str)
+		})
+        $('.GoodsDetailMask').show();
+        $('.GoodsDetailDiv').animate({top:'50%'},200);
+        $('.GoodsDetailDivClose').one('click', function () {
+            $('.GoodsDetailDiv').animate({top:'-800px'},200, function () {
+                $('.GoodsDetailMask').hide();
+                document.body.onselectstart=document.body.ondrag=function(){
+                    return false;
+                }
+            });
+        })
+    })
+    //加精
+    $(document).on('click','.GoodsDetailDivShowCopy', function () {
+		var shareId = $(this).attr('shareId');
+            $.ajax({
+				url:'/admin/dealShare',
+				type:'post',
+				data:{status:'1',share_id:shareId},
+				success:function(data){
+					if(data.status == 1){						
+						if(!$('.GoodsDetailMask').is(":hidden")){
+							$('.GoodsDetailDiv').animate({top:'-800px'},200, function () {
+								$('.GoodsDetailMask').hide();
+								document.body.onselectstart=document.body.ondrag=function(){
+									return false;
+								}
+							})							
+						}
+						Load(p);
+					}else{
+						alertWMsg(data.msg)
+					}
+				},
+				error:function(){
+					alertWMsg('连接超时,请稍后再试')
+				}
+			})
+    })
+    //已读
+    $(document).on('click','.GoodsDetailDivShowPraise', function () {
+        var shareId = $(this).attr('shareId');
+            $.ajax({
+				url:'/admin/dealShare',
+				type:'post',
+				data:{status:'2',share_id:shareId},
+				success:function(data){
+					if(data.status == 1){
+						if(!$('.GoodsDetailMask').is(":hidden")){
+							$('.GoodsDetailDiv').animate({top:'-800px'},200, function () {
+								$('.GoodsDetailMask').hide();
+								document.body.onselectstart=document.body.ondrag=function(){
+									return false;
+								}
+							})							
+						}
+						Load(p);
+					}else{
+						alertWMsg(data.msg)
+					}
+				},
+				error:function(){
+					alertWMsg('连接超时,请稍后再试')
+				}
+			})
+    })
+    //获取本地时间 并按照 yyyy-mm-dd hh:mm:ss 输出
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        var strHours = date.getHours();
+        var strMinutes = date.getMinutes();
+        var strSeconds = date.getSeconds();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        if(strHours < 10){
+            strHours = "0" + strHours;
+        }
+        if(strMinutes < 10){
+            strMinutes = "0" + strMinutes;
+        }
+        if(strSeconds < 10){
+            strSeconds = "0" + strSeconds;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate
+                + " " + strHours + seperator2 + strMinutes
+                + seperator2 + strSeconds;
+        return currentdate;
+    }
+	function Load(n){
+		$.ajax({
+			url:'/admin/shareList',
+			type:'post',
+			data:{p:n},
+			success:function(data){
+				if(data.status == 1){
+					window.listArr = data.data.list;
+					var str = '<table><tr><td>好单详情</td><td>状态</td><td>发布时间</td><td>操作</td></tr>'
+					$(data.data.list).each(function(i,e){
+						if(e.status == 0){
+							var status = '<td>未读</td><td>'+e.create_time.split(' ')[0]+'<br/>'+e.create_time.split(' ')[1]+'</td><td><div class="GoodsDetailDivShowCopy" isGood="0" style="margin:0 5px 0 0;" shareId = "'+e.share_id +'">加精</div><div class="GoodsDetailDivShowPraise" isRead="0" style="margin:0 5px 0 0;" shareId = "'+e.share_id +'">已读</div></td></tr>';
+						}else if(e.status == 1){
+							var status = '<td>已加精</td><td>'+e.create_time.split(' ')[0]+'<br/>'+e.create_time.split(' ')[1]+'</td><td><div class="GoodsDetailDivShowPraise" isRead="0" style="margin:0 5px 0 0;" shareId = "'+e.share_id +'">已读</div></td></tr>'
+						}else if(e.status == 2){
+							var status = '<td>已读</td><td>'+e.create_time.split(' ')[0]+'<br/>'+e.create_time.split(' ')[1]+'</td><td><div class="GoodsDetailDivShowCopy" isGood="0" style="margin:0 5px 0 0;" shareId = "'+e.share_id +'">加精</div></td></tr>'
+						}
+						
+						str +='<tr><td><div class="GoodsDetail" shareId = "'+e.share_id +'">查看详情</div></td>'+status;
+					})
+					str +='</table>';
+					$('.contentShowDivTable').html(str);
+					var totalPage = Math.ceil(data.data.count/data.data.p_size);
+					var totalRecords = data.data.count;
+					var pageNo = data.data.p;				
+					kkpager.generPageHtml({
+						pno : pageNo,
+						//总页码
+						total : totalPage,
+						//总数据条数
+						totalRecords : totalRecords,
+						isGoPage:false,
+						isShowTotalPage:false,
+						isShowCurrPage:false,
+						mode : 'click',//默认值是link，可选link或者click
+						click : function(n){
+							window.p = n;	
+							this.selectPage(n);
+							Load(p);
+							return false;
+						}
+					})
+				}else{
+					alertWMsg(data.msg)
+				}
+			},
+			error:function(){
+				alertWMsg('连接超时,请稍后再试')
+			}
+		})
+	}
+    
+</script>
+</html>

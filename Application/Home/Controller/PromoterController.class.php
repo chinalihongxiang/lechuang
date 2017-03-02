@@ -219,6 +219,7 @@ class PromoterController extends IndexController{
         set_time_limit(0);
         //来源淘客id
         $promoter_id = I('promoter_id') ? I('promoter_id') : $this->ajax_res(0,'无来源淘客id');
+        if( !M('promoter')->find($promoter_id) ) $this->ajax_res(0,'无来源淘客id');
         //json处理
         $json = str_replace('&quot;','"',I('list'));
         //数组判空

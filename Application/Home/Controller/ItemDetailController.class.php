@@ -30,7 +30,7 @@ class ItemDetailController extends IndexController {
 		$item_info['coupon_take_num'] = D('item')->get_item_coupon_take_num($item_info);
 
 		//该商品券转化率
-		$item_info['coupon_roc'] = $item_info['roc'];
+		$item_info['coupon_roc'] = D('item')->get_item_coupon_roc($item_info);
 
 		//该商品优惠券列表
 		$item_info['coupon_list'] = $this->coupon_list($alipay_item_id);
@@ -47,6 +47,12 @@ class ItemDetailController extends IndexController {
 
 		//获得该商品优惠券列表
 		$item_coupons = D('item')->get_item_coupons($alipay_item_id);
+
+		//循环
+		foreach ($item_coupons as $key => $coupon) {
+			//单券转化率
+			$item_coupons[$key]['coupon_roc'] = D('item')->get_one_coupon_roc($item_info,$coupon);
+		}
 
 		return $item_coupons;
 
@@ -89,9 +95,7 @@ class ItemDetailController extends IndexController {
 
 		//关键词下商品
 		$item_id_list = M('item')->where(array(
-				'item_name' => array('like',"%$keywords%"),
-				'status'    => 0,
-				'item_update_id' => array('neq',0)
+				'item_name' => array('like',"%$keywords%")
 			))->getField('item_id',true);
 
 		//无商品
@@ -135,7 +139,7 @@ class ItemDetailController extends IndexController {
 		//平均转化率 avg_roc
 		$arr['avg_roc'] = M('item')->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->avg('roc');
+			))->avg('price');
 
 		//商品列表
 		$arr['item_list'] = M('item')->where(array(

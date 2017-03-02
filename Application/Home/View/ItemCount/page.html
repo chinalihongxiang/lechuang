@@ -46,14 +46,20 @@
                         <option value="1">销量</option>
                         <option value="2">转化率</option>
                     </select>
+					<select id="selectTime">
+						<option value="0">昨天</option>
+						<option value="1">上周</option>
+					</select>
                 </div>
                 <div class="showDivLeftUl showDivLeftUlHead">
                     <ul>
                         <li>排序</li>
                         <li>名称</li>
-                        <li>领券量↑</li>
-                        <li>销量↑</li>
+                        <li>领券量</li>
+                        <li>销量</li>
                         <li>转化率</li>
+						<li>放单人</li>
+                        <li>时间</li>
                     </ul>
                 </div>
                 <div class="showDivLeftDiv showDivLeftUl showDivLeftUlContent">
@@ -85,13 +91,23 @@
                 </ul>
             </div>
         </div>
-        <a href="../Seller/store_page.html"><div class="bottom">店铺列表</div></a><a href="../Seller/enter.html"><div class="bottom  bottomActive">排行榜</div></a>
+        <a href="../seller/store_page.html"><div class="bottom">店铺列表</div></a><a href="../seller/enter.html"><div class="bottom bottomActive">排行榜</div></a><div class="bottom slideShowBtn bottomLast">行业交流</div>
+        <div class="bottom bottomSilde">
+            <div><a href="../seller/shares.html">交流列表</a></div>
+            <div><a href="../seller/myWords.html">我的留言</a></div>
+        </div>
     </div>
+	问题:商品排行榜的商品重复,考虑多个优惠券导致商品重复,建议给数据时在数据总量计算之后过滤掉重复商品id<br/>
+	问题:商品排行榜中有些商品商品名为空,超链接打不开,考虑是否是由于优惠券或商品已过期的原因,建议筛选排行榜数据时,只筛选当日新券排行榜,这样更有参考意义<br/>
+	
 </body>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js"></script>
 <script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
 <script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/enter.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/jquery.waypoints.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/jquery.countup.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="__JS__/ItemCountPage.js" type="text/javascript" charset="utf-8"></script>
 </html>
