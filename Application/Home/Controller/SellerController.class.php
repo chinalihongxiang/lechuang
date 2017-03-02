@@ -238,7 +238,8 @@ class SellerController extends IndexController{
 
         	//保存
         	$save = M('store')->where(array(
-        			'seller_id'=>I('seller_id')
+        			'seller_id'=>I('seller_id'),
+                    'store_id' =>I('store_id')
         		))->save($store_info);
 
         	//修改成功

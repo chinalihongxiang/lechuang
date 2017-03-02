@@ -144,7 +144,13 @@ class ItemDetailController extends IndexController {
 		//商品列表
 		$arr['item_list'] = M('item')->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->field('alipay_item_id,item_id,ratio,price,item_name')->select();
+			))->field('alipay_item_id,item_id,ratio,price,type,item_name')->select();
+
+		//商品链接
+		foreach ($arr['item_list'] as $key => $value) {
+			$value['link'] = item_link($value['alipay_item_id'],$value['type']);
+			$arr['item_list'][$key] = $value;
+		}
 
 		$this->ajax_res(1,'成功',$arr);
 

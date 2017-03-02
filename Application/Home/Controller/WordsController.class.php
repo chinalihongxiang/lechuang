@@ -30,6 +30,9 @@ class WordsController extends IndexController {
 		$arr['user_id'] = I('promoter_id') ? I('promoter_id') : I('seller_id');
 		if( !$arr['user_id'] ) $this->ajax_res(0,'无用户信息');
 
+		//验证是否是用户
+		if( !M('promoter')->find(I('promoter_id')) && !M('seller')->find(I('seller')) ) $this->ajax_res(0,'无用户信息');
+
 		//类型
 		$arr['type'] = I('promoter_id') ? 1 : 2;
 
