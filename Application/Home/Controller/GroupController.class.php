@@ -165,8 +165,6 @@ class GroupController extends IndexController {
 		//总数
 		$count = M('group')->where(1,1)->count();
 
-		//采集群总单量 100~200之间
-
 		//条件
 		$where = array(
 				'today_new_coupon_num' 	  => array(array('gt',100),array('lt',200)),

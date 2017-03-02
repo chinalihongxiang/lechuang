@@ -27,13 +27,13 @@ class ItemDetailController extends IndexController {
 		$item_info['join_days'] = D('item')->get_item_join_time($item_info);
 
 		//该商品所有优惠券已领券数
-		$item_info['coupon_take_num'] = D('item')->get_item_coupon_take_num($item_info);
+		$item_info['coupon_take_num'] = $item_info['take_num'];
 
 		//该商品券转化率
-		$item_info['coupon_roc'] = D('item')->get_item_coupon_roc($item_info);
+		$item_info['coupon_roc'] = $item_info['roc'];
 
 		//该商品优惠券列表
-		$item_info['coupon_list'] = $this->coupon_list($alipay_item_id);
+		$item_info['coupon_list'] = $this->coupon_list($alipay_item_id,$item_info['roc']);
 
 		//该商品出现的采集群
 		$item_info['group_list'] = $this->group_list($item_info);
@@ -43,7 +43,7 @@ class ItemDetailController extends IndexController {
 	}
 
 	//商品优惠券列表
-	public function coupon_list($alipay_item_id){
+	public function coupon_list($alipay_item_id,$roc){
 
 		//获得该商品优惠券列表
 		$item_coupons = D('item')->get_item_coupons($alipay_item_id);
@@ -51,7 +51,7 @@ class ItemDetailController extends IndexController {
 		//循环
 		foreach ($item_coupons as $key => $coupon) {
 			//单券转化率
-			$item_coupons[$key]['coupon_roc'] = D('item')->get_one_coupon_roc($item_info,$coupon);
+			$item_coupons[$key]['coupon_roc'] = $roc;
 		}
 
 		return $item_coupons;
@@ -122,9 +122,9 @@ class ItemDetailController extends IndexController {
 			->select()[0];
 
 		//平均佣金比例
-		$arr['avg_ratio'] = M('item')->where(array(
+		$arr['avg_ratio'] = round(M('item')->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->avg('ratio');
+			))->avg('ratio'),2);
 
 		//最高价格
 		$arr['max_price'] = M('item')->field('price,item_name')->where(array(
@@ -137,9 +137,9 @@ class ItemDetailController extends IndexController {
 			))->order('price asc')->limit(1)->select()[0];
 
 		//平均转化率 avg_roc
-		$arr['avg_roc'] = M('item')->where(array(
+		$arr['avg_roc'] = round(M('item')->where(array(
 				'item_id' => array('in',$item_id_list)
-			))->avg('price');
+			))->avg('roc'),2);
 
 		//商品列表
 		$arr['item_list'] = M('item')->where(array(

@@ -16,6 +16,13 @@
 		        success:function(data){
 		        }
 		    })
+		    $.ajax({
+		        type:'get',
+		        url:'/Cron/updatePromoter',
+		        data:{},
+		        success:function(data){
+		        }
+		    })
 		},1000*60*1);
 	})
 </script>

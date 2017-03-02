@@ -108,8 +108,17 @@ class CronController extends Controller {
 		//更新页数
 		$index_s++;
 
-		//缓存记录
-		S('allItemUpdate_index',$index_s);
+		if( $index_s >= $times ){
+
+			//缓存记录
+			S('allItemUpdate_index',0);
+
+		}else{
+			//缓存记录
+			S('allItemUpdate_index',$index_s);
+		}
+
+		
 		file_put_contents('allItemUpdate.txt','index_s:'.$index_s.' '.intdate(time()).PHP_EOL,FILE_APPEND);
 
 	}
@@ -129,9 +138,65 @@ class CronController extends Controller {
 
 		//取得商品转化率
 		$arr['roc'] = $arr['take_num'] ? ($info['sale'] / $arr['take_num'])*100 : 0;
+		if( $arr['roc'] < 5 || $arr['roc'] > 50 ) $arr['roc'] = 0;
 
 		//更新该商品
 		M('item')->where(array('item_id'=>$item_id))->save($arr);
+
+	}
+
+	//淘客数据更新
+	public function updatePromoter(){
+		set_time_limit();
+
+		//获得所有淘客id数组
+		$promoter_id_list = M('promoter')->getField('promoter_id',true);
+
+		//循环处理每个淘客信息
+		foreach ($promoter_id_list as $key => $id) {
+			$this->deal_promoter($id);
+		}
+
+	}
+
+	//处理单个淘客数据
+	public function deal_promoter($promoter_id){
+
+		//接单id数组
+		$coupon_id_list = M('promoter_log')->where(array(
+				'promoter_id' => $promoter_id
+			))->getField('coupon_id',true);
+		$coupon_id_list = array_unique($coupon_id_list);
+
+		//接单个数
+		$arr['coupon_sum'] = count($coupon_id_list);
+
+		//总领券量
+		$arr['take_num'] = $coupon_id_list ? M('coupon')->where(array(
+				'coupon_id' => array('in',$coupon_id_list),
+				'status'    => 0
+			))->sum('take_num') : 0 ;
+
+		//商品id数组
+		$item_id_list = M('promoter_log')->where(array(
+				'promoter_id' => $promoter_id
+			))->getField('item_id',true);
+		$item_id_list = array_unique($item_id_list);
+
+		//总销量
+		$arr['sale_num'] = $item_id_list ? M('item')->where(array(
+				'item_id' => array('in',$item_id_list),
+				'status'  => 0
+			))->sum('sale') : 0 ;
+
+		//转化率
+		$arr['roc_avg'] = ($arr['sale_num']/$arr['take_num'])*100;
+		if( $arr['roc_avg'] > 50 ) $arr['roc_avg'] = 50;
+
+		//存入该淘客记录
+		M('promoter')->where(array(
+				'promoter_id' => $promoter_id
+			))->save($arr);
 
 	}
 

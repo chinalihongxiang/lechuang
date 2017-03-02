@@ -50,7 +50,10 @@ class ItemModel extends Model{
 	//获得某商品所有优惠券
 	public function get_item_coupons($alipay_item_id){
 
-		return M('coupon')->where(array('alipay_item_id'=>$alipay_item_id))->select();
+		return M('coupon')->where(array(
+				'alipay_item_id' => $alipay_item_id,
+				'status'         => 0
+			))->select();
 
 	}
 

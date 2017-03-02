@@ -20,65 +20,43 @@ class PromoterModel extends Model{
 
         //类型 type : 接单个数-item_sum 总领券量-take_sum 总计销量-sale_sum 转化率-roc_avg
 
-        //选出排行榜淘客
-        $promoter_list = M('promoter')->field('promoter_id,promoter_name,123 as promoter_qq')->where(1,1)->select();
+        //条件
+        $where = array(
+                'roc_avg'  => array('gt',0),
+                'sale_num' => array('gt',0),
+                'take_num' => array('gt',0)
+            );
 
-        //循环处理
+        //排序
         if( $type == 'item_sum' ){
-            foreach ($promoter_list as $key => $promoter) {
-                //接单个数
-                $promoter_list[$key]['item_sum'] = 1;
-                //领券量
-                $promoter_list[$key]['take_sum'] = 1;
-                //销量
-                $promoter_list[$key]['sale_sum'] = 1;
-                //转化率
-                $promoter_list[$key]['roc_avg'] = 10.11;
-            }
-            return $promoter_list;
+            $order = 'coupon_sum desc';
         }
 
         if( $type == 'take_sum' ){
-            foreach ($promoter_list as $key => $promoter) {
-                //接单个数
-                $promoter_list[$key]['item_sum'] = 2;
-                //领券量
-                $promoter_list[$key]['take_sum'] = 2;
-                //销量
-                $promoter_list[$key]['sale_sum'] = 2;
-                //转化率
-                $promoter_list[$key]['roc_avg'] = 10.12;
-            }
-            return $promoter_list;
+            $order = 'take_num desc';
         }
 
         if( $type == 'sale_sum' ){
-            foreach ($promoter_list as $key => $promoter) {
-                //接单个数
-                $promoter_list[$key]['item_sum'] = 3;
-                //领券量
-                $promoter_list[$key]['take_sum'] = 3;
-                //销量
-                $promoter_list[$key]['sale_sum'] = 3;
-                //转化率
-                $promoter_list[$key]['roc_avg'] = 10.13;
-            }
-            return $promoter_list;
+            $order = 'sale_num desc';
         }
 
         if( $type == 'roc_avg' ){
-            foreach ($promoter_list as $key => $promoter) {
-                //接单个数
-                $promoter_list[$key]['item_sum'] = 4;
-                //领券量
-                $promoter_list[$key]['take_sum'] = 4;
-                //销量
-                $promoter_list[$key]['sale_sum'] = 4;
-                //转化率
-                $promoter_list[$key]['roc_avg'] = 10.14;
-            }
-            return $promoter_list;
+            $order = 'roc_avg desc';
         }
+
+        //字段
+        $field = 'promoter_id,promoter_name,coupon_sum as item_sum,take_num as take_sum,sale_num as sale_sum,roc_avg';
+
+        //选出排行榜淘客
+        $promoter_list = M('promoter')->field($field)->where($where)->limit(20)->order($order)->select();
+
+        //获得淘客qq
+        foreach ($promoter_list as $key => $value) {
+            $value['promoter_qq'] = M('promoter_qq')->where(array('promoter_id'=>$value['promoter_id']))->getField('qq');
+            $promoter_list[$key] = $value;
+        }
+
+        return $promoter_list;
 
     }
 

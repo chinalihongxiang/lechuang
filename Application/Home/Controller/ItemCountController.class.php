@@ -17,45 +17,28 @@ class ItemCountController extends IndexController {
 		//条数
 		$limit = 20;
 
-		//类型
-		if( I('date_type') == 'week' ){
-			//取周增量
-			$field = '
-				item_name,
-				week_sale_add,
-				type,
-				alipay_item_id,
-				roc,
-				take_num
-			';
-			//排序 销量
-			if( I('type') == 'sale' ) $order = 'week_sale_add desc';
-			//排序 领券量
-			if( I('type') == 'take' ) $order = 'create_time desc';
-			//排序 转化率
-			if( I('type') == 'roc' )  $order = 'roc desc';
-		}else{
-			//取日增量
-			$field = '
-				item_name,
-				day_sale_add,
-				type,
-				alipay_item_id,
-				roc,
-				take_num
-			';
-			//排序 销量
-			if( I('type') == 'sale' ) $order = 'day_sale_add desc';
-			//排序 领券量
-			if( I('type') == 'take' ) $order = 'create_time desc';
-			//排序 转化率
-			if( I('type') == 'roc' )  $order = 'roc desc';
-			$order = 'create_time desc';
-		}
+		$field = '
+			item_name,
+			sale,
+			type,
+			alipay_item_id,
+			roc,
+			take_num
+		';
+		$order = 'take_num desc';
+		//排序 销量
+		if( I('type') == 'sale' ) $order = 'sale desc';
+		//排序 领券量
+		if( I('type') == 'take' ) $order = 'take_num desc';
+		//排序 转化率
+		if( I('type') == 'roc' )  $order = 'roc desc';
 
 		//条件
 		$where = array(
 				'status'   => 0,
+				'sale'     => array('gt',0),
+				'take_num' => array('gt',0),
+				'roc'      => array(array('lt',50),array('gt',5)),
 				'item_update_id'=>array('gt',0)
 			);
 

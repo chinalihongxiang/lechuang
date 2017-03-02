@@ -77,6 +77,8 @@ class PromoterController extends IndexController{
         //按商品名称搜索
         if( I('item_name') ) {
 
+            $item_name = I('item_name');
+
             //条件
             $where = array(
                     'item.item_name' => array('like',"%$item_name%"),
@@ -85,23 +87,43 @@ class PromoterController extends IndexController{
 
             //联查商品表与淘客跑单记录表
             $join = array(
-                    'left join item on item.item_id = promoter_log.item_id'
+                    'left join promoter_log on promoter_log.item_id = item.item_id'
                 );
 
             //商品信息数组
-            $item_list = M('promoter_log')->join($join)->where($where)->select();
+            $log_list = M('item')->join($join)->where($where)->select();
 
-            //优惠券列表
-            $coupon_list = [];
-            foreach ($item_list as $key => $value) {
-                $coupon_info = M('coupon')->where(array('coupon_id'=>$coupon_id))->find();
-                array_push($coupon_list, $coupon_info);
+            //商品的优惠券
+            $coupon_id_list = [];
+            foreach ($log_list as $key => $value) {
+                array_push($coupon_id_list, $value['coupon_id']);
+            }
+
+            //本次获得的优惠券
+            $coupon_list = M('coupon')->where(array(
+                'coupon_id' => array('in',$coupon_id_list)
+            ))->select();
+
+            //本次获得的商品
+            foreach ($coupon_list as $key => $value) {
+                $item = M('item')->where(array('alipay_item_id'=>$value['alipay_item_id']))->find();
+                $value['item_name'] = $item['item_name'];
+                $value['sale']      = $item['sale'];
+                $value['roc']       = $item['roc'];
+
+                $value['status'] = $value['status'] == 0 ? '进行中' : '已失效';
+                $value['end_time'] = intdate($value['end_time']);
+                $value['link'] = item_link($item['alipay_item_id'],$item['type']);
+
+                $coupon_list[$key] = $value;
             }
 
             //返回结果
             $this->ajax_res(1,'成功',array(
-                    'item_list'   => $item_list,
-                    'coupon_list' => $coupon_list
+                    'coupon_list' => $coupon_list,
+                    'count'       => count($coupon_list),
+                    'p'           => 1,
+                    'p_size'      => 10
                 ));
         }
 
@@ -117,10 +139,8 @@ class PromoterController extends IndexController{
 
         //优惠券id数组与商品id数组
         $coupon_id_list = [];
-        $item_id_list   = [];
         foreach ($log_list as $key => $value) {
             array_push($coupon_id_list, $value['coupon_id']);
-            array_push($item_id_list, $value['item_id']);
         }
 
         //本次获得的优惠券
@@ -129,13 +149,21 @@ class PromoterController extends IndexController{
             ))->select();
 
         //本次获得的商品
-        $item_list = M('item')->where(array(
-                'item_id' => array('in',$item_id_list)
-            ))->select();
+        foreach ($coupon_list as $key => $value) {
+            $item = M('item')->where(array('alipay_item_id'=>$value['alipay_item_id']))->find();
+            $value['item_name'] = $item['item_name'];
+            $value['sale']      = $item['sale'];
+            $value['roc']       = $item['roc'];
+
+            $value['status'] = $value['status'] == 0 ? '进行中' : '已失效';
+            $value['end_time'] = intdate($value['end_time']);
+            $value['link'] = item_link($item['alipay_item_id'],$item['type']);
+
+            $coupon_list[$key] = $value;
+        }
 
         $this->ajax_res(1,'成功',array(
                 'coupon_list' => $coupon_list,
-                'item_list'   => $item_list,
                 'count'       => $count,
                 'p'           => $p,
                 'p_size'      => $p_size
