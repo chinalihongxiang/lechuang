@@ -100,9 +100,9 @@ class PromoterController extends IndexController{
             }
 
             //本次获得的优惠券
-            $coupon_list = M('coupon')->where(array(
+            $coupon_list = $coupon_id_list ? M('coupon')->where(array(
                 'coupon_id' => array('in',$coupon_id_list)
-            ))->select();
+            ))->select() : [];
 
             //本次获得的商品
             foreach ($coupon_list as $key => $value) {
