@@ -111,3 +111,10 @@ function item_link($alipay_item_id,$type){
     if( $type == 2 )  return 'https://item.taobao.com/item.htm?id='.$alipay_item_id;
     
 }
+
+//根据天猫淘宝id返回优惠券链接
+function coupon_link($alipay_coupon_id,$alipay_seller_id){
+
+    return "https://shop.m.taobao.com/shop/coupon.htm?sellerId=".$alipay_seller_id."&activityId=".$alipay_coupon_id."&v=0";
+    
+}

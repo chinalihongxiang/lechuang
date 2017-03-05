@@ -128,7 +128,7 @@ class UserInfoController extends IndexController {
         //验证码
         $num     = mt_rand(1000,9999);
         //邮件标题
-        $title   = '淘友记邮箱验证';
+        $title   = mb_convert_encoding('淘友记邮箱验证', 'GBK', 'UTF-8');
         //邮件内容
         $content = '【淘友记】请在五分钟内输入验证码：'.$num;
         //发送

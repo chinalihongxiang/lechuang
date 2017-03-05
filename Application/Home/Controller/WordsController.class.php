@@ -254,4 +254,45 @@ class WordsController extends IndexController {
 
 	}
 
+	/*店铺凭证图片保存接口
+    * params
+    * $files
+    */
+    public function store_img_upload(){
+
+        $path = 'words/';
+
+        //实例化
+        $upload = new \Think\Upload();
+        //图片大小，最大为1M
+        $upload->maxSize = 1*1024*1024;
+        //禁止子目录创建
+        $upload->autoSub = true;
+        //图片类型
+        $upload->allowExts = array('jpg','png','gif');
+        //路径
+        $upload->savePath = $path;
+
+        //上传
+        $res = $upload->upload();
+
+        //设置返回格式
+        header('Content-type: text/html');
+
+        if (!$res) {
+            //捕获上传异常
+            echo json_encode(array(
+                    'status' => 0,
+                    'msg'    => $upload->getError()
+                ));
+        } else {
+            //返回图片路径
+            echo json_encode(array(
+                    'status' => 1,
+                    'url'    => "/Uploads"."/".$res['pic']['savepath'].$res['pic']['savename']
+                ));   
+        }
+
+    }
+
 }

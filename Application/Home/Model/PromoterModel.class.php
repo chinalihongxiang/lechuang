@@ -53,6 +53,7 @@ class PromoterModel extends Model{
         //获得淘客qq
         foreach ($promoter_list as $key => $value) {
             $value['promoter_qq'] = M('promoter_qq')->where(array('promoter_id'=>$value['promoter_id']))->getField('qq');
+            $value['promoter_qq'] = substr_replace($value['promoter_qq'],'****', -4);
             $promoter_list[$key] = $value;
         }
 

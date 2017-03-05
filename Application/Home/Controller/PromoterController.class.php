@@ -115,6 +115,9 @@ class PromoterController extends IndexController{
                 $value['end_time'] = intdate($value['end_time']);
                 $value['link'] = item_link($item['alipay_item_id'],$item['type']);
 
+                //优惠券链接
+                $value['coupon_link'] = coupon_link($value['alipay_coupon_id'],$value['alipay_seller_id']);
+
                 $coupon_list[$key] = $value;
             }
 
@@ -144,9 +147,9 @@ class PromoterController extends IndexController{
         }
 
         //本次获得的优惠券
-        $coupon_list = M('coupon')->where(array(
+        $coupon_list = $coupon_id_list ? M('coupon')->where(array(
                 'coupon_id' => array('in',$coupon_id_list)
-            ))->select();
+            ))->select() : [];
 
         //本次获得的商品
         foreach ($coupon_list as $key => $value) {
@@ -158,6 +161,9 @@ class PromoterController extends IndexController{
             $value['status'] = $value['status'] == 0 ? '进行中' : '已失效';
             $value['end_time'] = intdate($value['end_time']);
             $value['link'] = item_link($item['alipay_item_id'],$item['type']);
+
+            //优惠券链接
+            $value['coupon_link'] = coupon_link($value['alipay_coupon_id'],$value['alipay_seller_id']);
 
             $coupon_list[$key] = $value;
         }

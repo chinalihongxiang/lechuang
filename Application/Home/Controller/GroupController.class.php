@@ -181,6 +181,11 @@ class GroupController extends IndexController {
 
 		$list = M('group')->field($field)->where($where)->order($order)->limit( ($p-1)*$p_size , $p_size )->select();
 
+		foreach ($list as $key => $value) {
+			$value['group_name'] = $value['group_name'] ? $value['group_name'] : $value['group_qq'];
+			$list[$key] = $value;
+		}
+
 		$list = $list ? $list : [];
 
 		//返回数据

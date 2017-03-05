@@ -103,7 +103,7 @@ class ItemDetailController extends IndexController {
 
 		//最高佣金比例
 		$arr['max_ratio'] = M('item')
-			->field('ratio,item_name')
+			->field('ratio,item_name,alipay_item_id,type')
 			->where(array(
 				'item_id' => array('in',$item_id_list)
 			))
@@ -116,7 +116,7 @@ class ItemDetailController extends IndexController {
 			->where(array(
 				'item_id' => array('in',$item_id_list)
 			))
-			->field('ratio,item_name')
+			->field('ratio,item_name,alipay_item_id,type')
 			->order('ratio asc')
 			->limit(1)
 			->select()[0];
@@ -127,12 +127,12 @@ class ItemDetailController extends IndexController {
 			))->avg('ratio'),2);
 
 		//最高价格
-		$arr['max_price'] = M('item')->field('price,item_name')->where(array(
+		$arr['max_price'] = M('item')->field('price,item_name,alipay_item_id,type')->where(array(
 				'item_id' => array('in',$item_id_list)
 			))->order('price desc')->limit(1)->select()[0];
 
 		//最低价格
-		$arr['min_price'] = M('item')->field('price,item_name')->where(array(
+		$arr['min_price'] = M('item')->field('price,item_name,alipay_item_id,type')->where(array(
 				'item_id' => array('in',$item_id_list)
 			))->order('price asc')->limit(1)->select()[0];
 
@@ -143,8 +143,11 @@ class ItemDetailController extends IndexController {
 
 		//商品列表
 		$arr['item_list'] = M('item')->where(array(
-				'item_id' => array('in',$item_id_list)
-			))->field('alipay_item_id,item_id,ratio,price,type,item_name')->select();
+				'item_id' => array('in',$item_id_list),
+				'take_num'=> array('gt',0),
+				'sale'    => array('gt',0),
+				'roc'     => array('gt',0)
+			))->field('alipay_item_id,item_id,ratio,price,type,item_name,take_num,sale,roc')->select();
 
 		//商品链接
 		foreach ($arr['item_list'] as $key => $value) {
