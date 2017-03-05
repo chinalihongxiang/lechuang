@@ -1,4 +1,9 @@
 $(function(){
+	if(window.localStorage.sellerId){
+		window.seller_id = window.localStorage.sellerId;
+	}else{
+		return alertWMsg('用户信息拉取失败,如果多次失败,请联系淘友记客服')
+	}
     $(".shopList,.addShopDiv,.modShopDiv").niceScroll({
         cursorcolor:"#00B2EE",
         cursoropacitymax:1,
@@ -13,6 +18,12 @@ $(function(){
         spacebarenabled:true,
     });
     shopListLoad();
+})
+$('.slideShowBtn').on('click',function(){
+	if($(".bottomSilde").is(":hidden")){
+		return $('.bottomSilde').slideDown(200);
+	}
+	$('.bottomSilde').slideUp(200);
 })
 $('.addShopBtn').on('click',function(){
     $('.addShopDivMask').show();
@@ -104,9 +115,9 @@ function  addShop(){
     var end = store_pic.length - 1;
     store_pic = store_pic.substr(0,end);
     $.ajax({
-        type:'get',
+        type:'post',
         url:'/Seller/add_store',
-        data:{seller_id:'6',store_name:sname,store_url:slink,store_desc:sint,store_pic:store_pic,alipay_store_id:stid},
+        data:{seller_id:seller_id,store_name:sname,store_url:slink,store_desc:sint,store_pic:store_pic,alipay_store_id:stid},
         success:function(data){
             if(data.status == 1){
                 alertRMsg(data.msg);
@@ -126,13 +137,13 @@ function shopListLoad(){
     $.ajax({
         type:'post',
         url:'/seller/store_list',
-        data:{seller_id:'6'},
-		complete: function(){
-			$('.mask').hide();
-            $('.showL').hide();
+        data:{seller_id:seller_id},
+		beforeSend:function(){
+			$('.mask,.showL').show();
 		},
         success: function (data) {
             if(data.status == 1){
+				$('.mask,.showL').hide();
                 if(data.data){
                     var str = '';
                     $(data.data).each(function(i,e){
@@ -144,11 +155,12 @@ function shopListLoad(){
                 }                
                 $('.shopList').append(str);
             }else{
-				
+				$('.showL').hide();
                 alertWMsg(data.msg)
             }
         },
         error: function () {
+			$('.showL').hide();
             alertWMsg('连接超时,请稍后再试');
         }
     })
@@ -158,7 +170,7 @@ function modShop(Obj){
     $.ajax({
         type:'post',
         url:'/seller/modify_store',
-        data:{seller_id:6,store_id:store_id},
+        data:{seller_id:seller_id,store_id:store_id},
         success:function(data){
             if(data.status == 1){
                 $('#sname1').val(data.data.store_name);
@@ -173,7 +185,7 @@ function modShop(Obj){
                     $.ajax({
                         type:'post',
                         url:'/seller/modify_store',
-                        data:{modify:'modify',seller_id:6,store_id:store_id,store_name:sname,store_desc:sint},
+                        data:{modify:'modify',seller_id:seller_id,store_id:store_id,store_name:sname,store_desc:sint},
                         success:function(data){
                             if(data.status == 1){
                                 alertRMsg(data.msg);
@@ -211,9 +223,9 @@ $(document).on('click','.showCBtn',function() {
 	$('.showC').animate({top:'-1000px'},200,'swing',function(){
 		$('.mask').css('display','none');
 		$.ajax({
-			type:'get',
+			type:'post',
 			url:'/seller/del_store',
-			data:{seller_id:6,store_id:localStorage.shopId,modify:'modify'},
+			data:{seller_id:seller_id,store_id:localStorage.shopId,modify:'modify'},
 			success:function(data){
 				if(data.status == 1){
 					alertRMsg(data.msg);

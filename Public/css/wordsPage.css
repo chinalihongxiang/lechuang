@@ -1,0 +1,59 @@
+.content{position: relative;padding: 0px 0;overflow: hidden;}
+.addNrMask,.GoodsDetailMask{width: 100%;height: 100%;position: absolute;top:0;left: 0;background-color: rgba(0,0,0,0.4);display: none;z-index: 100000}
+.addNr,.addNr1{width: 600px;position: absolute;background-color: #fff;border-radius: 5px;height: 330px;top:-1000px;left: 50%;margin-top: -165px;margin-left: -300px;z-index: 100000}
+.typeN { padding: 0 50px;text-align: right}
+.close,.close1{width: 20px;position: absolute;top:5px;right: 5px;cursor: pointer}
+.addNrTheme {width:540px;margin: 20px auto 10px;height: 30px;line-height: 30px;border: 1px solid #e2e2e2}
+.addNrTheme input {width: 535px;height: 25px;text-indent:10px;border: none}
+.addNr .edui-container{margin: 30px auto 20px;}
+.addNr1 .edui-container{margin: 10px auto;}
+.edui-popup-emotion {width: 400px !important;}
+.edui-tab-nav .edui-tab-item:last-child{display: none}
+.edui-body-container,.edui-body-container div{height: 160px ;line-height: 20px}
+.layui-layer-content {height:auto !important}
+.addNrBtn,.addNrBtn1 {height: 50px;font-size: 30px;line-height: 50px;width: 250px;margin: 0 auto;text-align: center;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
+.mesMore {position: absolute;right: 5px;top: 30px;display: none}
+.mesMore img,.mesDivclose img {width: 20px;cursor: pointer}
+.mesDiv{ height: 100%;width: 270px;background-color: #fff;position: absolute;right:-500px;top:0;z-index: 1000;border-left: 1px solid #e2e2e2}
+.mesNew {width: 60%;height: 20px;border-radius:10px;background-color: #00B2EE;color:#fff;font-size: 14px;line-height: 20px;position: absolute;top:50px;left: 20%;z-index: 10000;text-align: center;display: none}
+.mesNew span {font-size: 20px;color: #fff}
+.mesNew a{color: #fff;cursor: pointer}
+.mesDiv h2 {font-size: 30px;text-align: center;line-height: 50px;border-bottom: 1px solid #e2e2e2}
+.mesDivclose{position: absolute;top:5px;right: 5px;}
+.mesDivCon{height: 420px;width: 250px;border: 1px solid #e2e2e2;margin: 10px auto;overflow: hidden}
+.addN img{width: 15px;cursor: pointer}
+.addN {display: inline-block;margin-left: 10px}
+.mesDiv p {font-size: 14px;padding:0 10px;line-height: 16px}
+.mesDiv p a {font-size: 16px; color: #00B2EE;float: right}
+.mesDivCon ul{list-style-type: none;width: 230px;height: 400px;margin: 10px auto}
+.mesDivCon ul li {max-height: 80px;overflow: hidden;border-bottom: 1px solid #e2e2e2;padding-bottom: 5px;margin-bottom: 5px}
+.mesDivConinfo {height: 15px;}
+.mesDivConinfo div {display: inline-block;}
+.mesDivConinfo div:nth-child(1){float: left}
+.mesDivConinfo div:nth-child(2){float: right}
+.mesDivCon ul li h5 {font-size: 14px;line-height: 16px;background-color:#e6e6e6}
+.mesDivCon ul li h6 {text-align: right}
+.praise {font-size: 12px;line-height: 16px;cursor: pointer}
+.praise:hover{text-decoration: underline}
+.praise span{font-size: 14px;line-height: 16px;}
+.pageBtnWrap{float:right !important;margin-right:40px !important;}
+.contentShowDiv{height: 490px;}
+.contentShowDivTap {height: 50px;border-bottom: 1px solid #e2e2e2;width: 718px;margin: 0 auto;text-align: center;font-size: 30px;line-height: 50px}
+.contentShowDivTap a {font-size: 14px;color: #00B2EE}
+.contentShowDivTable {width: 718px;height: 350px;margin: 20px auto;overflow: hidden}
+.contentShowDivTable table,tr,td {border: 1px solid #e2e2e2;border-collapse:collapse;}
+.contentShowDivTable td {font-size: 16px;line-height: 29.7px;text-align: center}
+.contentShowDivTable table tr td:nth-child(2){width:170px;}
+.contentShowDivTable table {width: 716px;}
+.GoodsDetail {padding: 3px 0;background-color: #00B2EE;border-radius: 5px;color: #fff;cursor: pointer;margin: 0 8px}
+.GoodsDetailDiv {width: 700px;height: 400px;position: absolute;top:-800px;left: 50%;margin-top: -200px;margin-left:-350px;background-color: #fff;border-radius: 10px;box-sizing: border-box;padding-top: 30px;}
+.GoodsDetailDivClose {position: absolute;right: 5px;top: 5px;cursor: pointer}
+.GoodsDetailDivClose img {width: 20px;}
+.GoodsDetailDivShow h2 {width: 80%;margin-left:10%;font-size: 18px;text-align: center;border: 1px solid #e2e2e2;line-height: 30px;box-sizing: border-box;}
+.GoodsDetailDivShowD {width: 80%;margin-left:10%;font-size: 16px;border: 1px solid #e2e2e2;box-sizing:border-box;height: 280px;border-top:none;overflow: hidden;line-height: 20px}
+.GoodsDetailDivShowCopy,.GoodsDetailDivShowPraise,.GoodsDetailDivShowbad{width:80px;text-align:center;background-color: #00B2EE;font-size: 16px;line-height: 30px;border-radius: 3px;color: #fff;float: right;margin-right: 70px;margin-top: 15px;cursor: pointer}
+.fixedBr{width: 28px;height: 150px;position: absolute;bottom: 60px;right: 0}
+.fixedBrImgtap img{width: 25px;margin-bottom: 5px;cursor: pointer}
+.bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border: 1px solid #e2e2e2;border-collapse: collapse;border-bottom: none;border-top:none}
+.bottomActive{color: #fff;background-color: #00B2EE;}
+.bottomLast{border-right: none}

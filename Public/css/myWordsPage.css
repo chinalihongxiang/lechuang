@@ -1,0 +1,24 @@
+.content{position: relative;padding: 20px 0;}
+.addNrMask{width: 100%;height: 100%;position: absolute;top:0;left: 0;background-color: rgba(0,0,0,0.4);display: none}
+.addNr{width: 600px;position: absolute;background-color: #fff;border-radius: 5px;height: 330px;top:-1000px;left: 50%;margin-top: -165px;margin-left: -300px}
+.typeN { padding: 0 50px;text-align: right}
+.close{width: 20px;position: absolute;top:5px;right: 5px;cursor: pointer}
+.edui-container{margin: 30px auto 20px}
+.edui-popup-emotion {width: 400px !important;}
+.edui-tab-nav .edui-tab-item:last-child{display: none}
+.edui-body-container,.edui-body-container div{height: 160px}
+.edui-body-container div{line-height: 16px}
+.pageBtnWrap{float:right !important;margin-right:20px !important;}
+.contentShowDiv{height: 448px;width: 758px;margin: 0 20px 20px;border: 1px solid #e2e2e2;}
+.contentShowDivTable {height: 320px;width: 718px;margin: 20px auto 15px;}
+.contentShowDivTable table{width: 100%;box-sizing:border-box;}
+.contentShowDivTable table,td{border: 1px solid #e2e2e2;font-size: 16px;}
+.contentShowDivTable table tr:first-child td{text-align:center}
+.contentShowDivTable table tr td:last-child{text-align:center;width:20%}
+.contentShowDivTable table tr td:first-child{width:25%}
+.contentShowDivTable table tr{height:52px;line-height:16px}
+.contentShowDivTable table tr td img {height:16px;}
+.contentShowDivBtn,.addNrBtn {height: 50px;font-size: 30px;line-height: 50px;width: 250px;margin: 0 auto;text-align: center;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
+.bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right:1px solid #e2e2e2;border-collapse: collapse;}
+.bottomActive{color: #fff;background-color: #00B2EE;}
+.bottomLast{border-right: none}

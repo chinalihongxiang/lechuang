@@ -6,7 +6,11 @@
 .showDivUl ul li {list-style: none;width: 100px;text-align: center;height: 30px;line-height: 30px;float: left;margin-right: 16.3px;font-size: 16px}
 .contentShowDivUlHead ul li {background-color: #EE4000;color: #fff;margin-top: 20px}
 .showDivUl ul li:last-child{margin-right: 0}
-.contentShowDivUl{width: 100%;height: 380px;overflow: hidden}
+.contentShowDivUl{width: 100%;height: 360px;overflow: hidden}
 .contentShowDivUl ul{margin: 7px 0;}
-.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right: 1px solid #e2e2e2;}
 .bottomActive{color: #fff;background-color: #00B2EE;}
+.bottomLast{border-right: none}
+.bottomSilde {width: 33.5%;position: absolute;right: 0;bottom: 48px;border: 1px solid #e2e2e2;height: 96px;display: none;border-right:none;}
+.bottomSilde a:hover{ text-decoration: none}
+.bottomSilde div:first-child{border-bottom: 1px solid #e2e2e2}

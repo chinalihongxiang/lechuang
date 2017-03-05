@@ -20,5 +20,9 @@
 .tbkInfoMore table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666;text-align: center}
 .tbkInfoMore table{width: 95%;margin-left: 2.5%;font-size: 16px;line-height: 33px;margin-top: 20px;border: 1px solid #E2E2E2;margin-bottom: 20px}
 .tbkInfoMore table tr {width: 100%;}
-.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right: 1px solid #e2e2e2;}
 .bottomActive{color: #fff;background-color: #00B2EE;}
+.bottomLast{border-right: none}
+.bottomSilde {width: 33.5%;position: absolute;right: 0;bottom: 48px;border: 1px solid #e2e2e2;height: 96px;display: none;border-right:none;}
+.bottomSilde a:hover{ text-decoration: none}
+.bottomSilde div:first-child{border-bottom: 1px solid #e2e2e2}

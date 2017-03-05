@@ -1,22 +1,6 @@
 $(function(){
-    $('#selectType').chosen({disable_search:true}).change(function(){
-        var type = $(this).val();
-        switch(type)
-        {
-            case '0':
-                type = 'take';
-                break;
-            case '1':
-                type = 'sale';
-                break;
-            case '2':
-                type = 'roc';
-                break;
-            default:
-                return alertMsg('选择排序方式时发生错误,请刷新页面后重试')
-                break;
-        }
-        goodsListType(type);
+    $('#selectType,#selectTime').chosen({disable_search:true}).change(function(){       
+        goodsListType();
     });
     $(".showDivLeftUlContent").niceScroll({
         cursorcolor:"#00B2EE",
@@ -31,7 +15,8 @@ $(function(){
         cursorborderradius:"5px",
         spacebarenabled:true,
     });
-    goodsListload();
+    goodsListType();
+	goodsAllList();
 })
 
 $(document).on('mouseenter', '.showGoodsName',function(){
@@ -51,34 +36,19 @@ $(document).on('mouseenter', '.showTips',function(){
 $(document).on('mouseleave','.showGoodsName,.showTips', function(){
     layer.closeAll('tips');
 });
-function goodsListload(){
+function goodsAllList(){
     $.ajax({
         type:'post',
-        url:'/ItemCount/search',
-        data:{type:'take'},
+        url:'/ItemCount/all',
         complete:function(){
             $('.mask').hide();
             $('.showL').hide();
         },
         success:function(data){
             if(data.status == 1){
-                var str = '';
-                $(data.data.item_list).each(function(i,e){
-					if(e.roc-0 > 50){
-						var roc = '<li class="red">'+e.roc+'%</li>'
-					}else{
-						var roc = '<li>'+e.roc+'%</li>'
-					}
-					if(e.sale-0 > 20000){
-						var sale = '<li class="red">'+e.sale+'</li>'
-					}else{
-						var sale = '<li>'+e.sale+'</li>'
-					}
-					str +='<ul><li>'+(i+1)+'</li><li  class="showGoodsName" data-tips="'+e.item_name+'"><a onclick="window.open(\''+e.link+'\')">'+e.item_name.substr(0,5)+'</a></li><li>'+e.take_num+'</li>'+sale+''+roc+'</ul>'
-				})
-                $('.showDivLeftUlContent').html(str);
-                var str1 = '<li><div>新券个数</div><div>【'+data.data.item_all_count.coupon_num+'】</div></li><li><div>商品总量</div><div>【'+data.data.item_all_count.item_num+'】</div></li><li><div>总计销量</div><div>【'+data.data.item_all_count.item_sale_sum+'】</div></li><li><div>平均转化率</div><div>【'+data.data.item_all_count.item_ratio_avg+'%】</div></li><li><div>平均佣金比例</div><div>【'+data.data.item_all_count.roc_avg+'%】</div></li>';
-                $('.showDivRightUl').html(str1);
+                var str = '<li><div class="showGoodsName" data-tips="新券个数是指今日全网新增的优惠券个数">新券个数</div><div>【<span class="counter">'+data.data.coupon_num+'</span>】</div></li><li><div class="showGoodsName" data-tips="商品总量:指截至到今日全网参与优惠券活动的总数量">商品总量</div><div>【<span class="counter">'+data.data.item_num+'</span>】</div></li><li><div class="showGoodsName" data-tips="总计销量:总计销量统计的是当日全网参与优惠券活动的所有商品的总计销量">总计销量</div><div>【<span class="counter">'+data.data.item_sale_sum+'</span>】</div></li><li><div class="showGoodsName" data-tips="平均转化率:指今日全网参与优惠券活动的所有商品的平均转化率,该指标可以用于跑单淘客在跑单前对自己商品有一个大致定位">平均转化率</div><div>【<span class="counter">'+data.data.item_ratio_avg+'</span>%】</div></li><li><div class="showGoodsName" data-tips="平均佣金比例:指全网商品去除掉极个别非正常优惠券商品之后计算的商品平均佣金比例,可以用于了解整个行业的平均佣金以及作为和商家谈佣金比例时的参考依据">平均佣金比例</div><div>【<span class="counter">'+data.data.roc_avg+'</span>%】</div></li>';
+                $('.showDivRightUl').html(str);
+				$('.counter').countUp();
             }else{
                 alertWMsg(data.msg)
             }
@@ -88,11 +58,40 @@ function goodsListload(){
         }
     })
 }
-function goodsListType(type){
+function goodsListType(){
+	var time = $('#selectTime').val();
+	switch(time)
+		{
+		case '0':
+			time = 'day';
+			break;
+		case '1':
+			time = 'week';
+			break;
+		default:
+			return alertMsg('选择排序方式时发生错误,请刷新页面后重试')
+			break;
+		}
+	var type = $('#selectType').val();
+    switch(type)
+        {
+		case '0':
+			type = 'take';
+			break;
+		case '1':
+			type = 'sale';
+			break;
+		case '2':
+			type = 'roc';
+			break;
+		default:
+			return alertMsg('选择排序方式时发生错误,请刷新页面后重试')
+			break;
+	}	
     $.ajax({
-        type:'get',
+        type:'post',
         url:'/ItemCount/search',
-        data:{type:type},
+        data:{type:type,date_type:time},
         beforeSend:function(){
             $('.mask').show();
             $('.showL').show();
@@ -104,7 +103,7 @@ function goodsListType(type){
         success:function(data){
             if(data.status == 1){
                 var str = '';
-                $(data.data.item_list).each(function(i,e){
+                $(data.data).each(function(i,e){
 					if(e.roc-0 > 50){
 						var roc = '<li class="red">'+e.roc+'%</li>'
 					}else{
@@ -115,7 +114,7 @@ function goodsListType(type){
 					}else{
 						var sale = '<li>'+e.sale+'</li>'
 					}
-                    str +='<ul><li>'+(i+1)+'</li><li  class="showGoodsName" data-tips="'+e.item_name+'"><a onclick="window.open(\''+e.link+'\')">'+e.item_name.substr(0,5)+'</a></li><li>'+e.take_num+'</li>'+sale+''+roc+'</ul>'
+                    str +='<ul><li>'+(i+1)+'</li><li  class="showGoodsName" data-tips="'+e.item_name+'"><a onclick="window.open(\''+e.link+'\')">'+e.item_name.substr(0,12)+'</a></li><li>'+e.take_num+'</li>'+sale+''+roc+'</ul>'
                 })
                 $('.showDivLeftUlContent').html(str);
             }else{

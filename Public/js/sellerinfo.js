@@ -10,7 +10,7 @@ $(function(){
     $.ajax({
         type:'post',
         url:'/Seller/modify',
-		data:{seller_id:'6'},
+		data:{post:post},
         success:function(data){
             if(data.status == 0){
                 alertWMsg(data.msg)
@@ -138,7 +138,7 @@ $(document).on('click','.sres',function(){
         }else{
             var user = {
                 modify : 'modify',
-				seller_id : '6',
+				post : post,
                 name : $('#sname').val(),
                 tel : $('#stel').val(),
                 qq : $('#sqq').val(),
@@ -150,7 +150,7 @@ $(document).on('click','.sres',function(){
     }else {
         var user = {
             modify : 'modify',
-			seller_id : '6',
+			post : post,
             name : $('#sname').val(),
             tel : $('#stel').val(),
             qq : $('#sqq').val(),

@@ -1,21 +1,31 @@
-.content{position: relative;padding: 40px 0;}
-.contentShowDiv{height: 450px;}
-.contentShowDivTop{width: 698px;height: 150px;padding: 0 50px;}
-.contentShowDivTop div{float: left}
-.contentShowDivTop div a {display: block}
-.contentShowDivTop div a:hover{text-decoration: none}
-.contentShowDivTopLeft {width: 300px;}
-.contentShowDivTopLeft a {height: 150px;font-size: 50px;line-height: 150px;text-align: center;color: #fff;background-color: #32CD32;border-radius: 10px;}
-.contentShowDivTopRight {width: 350px;margin-left: 48px}
-.contentShowDivTopRight a {height: 60px;font-size: 25px;line-height: 60px;text-align: center;color: #fff;background-color: #FFB90F;border-radius: 10px}
-.contentShowDivTopRight a:last-child{margin-top: 30px;background-color: #1C86EE;}
-.contentShowDivBottom {width: 698px;height: 260px;padding: 0 50px;margin-top: 20px}
-.contentShowDivBottomLeft,.contentShowDivBottomRight {width: 50%;float: left;}
-.contentShowDivBottom h2 {font-size: 30px;text-align: center;line-height: 70px;}
-.contentShowDivBottomLeftTable,.contentShowDivBottomUl{height: 190px;overflow: hidden}
-.contentShowDivBottomLeftTable table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666;text-align: center}
-.contentShowDivBottomLeftTable table{width: 100%;line-height: 30.49px;font-size: 16px}
-.contentShowDivBottomUl ul{list-style:none;width: 100%;text-align: center;}
-.contentShowDivBottomUl ul li a {font-size: 25px;line-height: 39px;cursor:pointer}
-.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.content{position: relative;padding: 20px 0;}
+.addNrMask{width: 100%;height: 100%;position: absolute;top:0;left: 0;background-color: rgba(0,0,0,0.4);display: none;z-index: 100000}
+.addNr,.addNr1{width: 600px;position: absolute;background-color: #fff;border-radius: 5px;height: 330px;top:-1000px;left: 50%;margin-top: -165px;margin-left: -300px;z-index: 100000}
+.close,.close1{width: 20px;position: absolute;top:5px;right: 5px;cursor: pointer}
+.addNrTheme {width:540px;margin: 10px auto;height: 30px;line-height: 30px;border: 1px solid #e2e2e2}
+.addNrTheme input {width: 535px;height: 25px;text-indent:10px;border: none}
+.addNr .edui-container{margin: 30px auto 20px;}
+.addNr1 .edui-container{margin: 15px auto;}
+.typeN { padding: 0 50px;text-align: right}
+.edui-popup-emotion {width: 400px !important;}
+.edui-tab-nav .edui-tab-item:last-child{display: none}
+.edui-body-container,.edui-body-container div{height: 160px ;line-height: 20px}
+.layui-layer-content {height:auto !important}
+.addNrBtn,.addNrBtn1 {height: 50px;font-size: 30px;line-height: 50px;width: 250px;margin: 0 auto;text-align: center;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
+.contentShowDiv{height: 470px;}
+.contentShowDivTap {height: 30px;border-bottom: 1px solid #e2e2e2;width: 718px;
+margin: 0 auto;}
+.contentShowDivTap .tap {display: inline-block;height: 100%;font-size: 20px;line-height: 30px;width: 50%;text-align:center;border: 1px solid #e2e2e2;float: left;border-bottom: none;cursor: pointer;box-sizing: border-box}
+.contentShowDivTap .tap:first-child{border-right: none}
+.contentShowDivTap .tapActive{background-color: #00B2EE;color: #fff;border: none}
+.contentShowDivTable {width: 718px;height: 400px;margin: 20px auto;overflow: hidden}
+.contentShowDivTable table,tr,td {border: 1px solid #e2e2e2;border-collapse:collapse;}
+.contentShowDivTable td {font-size: 16px;line-height: 34px;text-align: center}
+.contentShowDivTable td a {cursor:pointer}
+.contentShowDivTable table {width: 718px;}
+.contentShowDivTable table tr:nth-child(2n+1){background-color: #e6e6e6}
+.fixedBr{width: 28px;height: 150px;position: absolute;bottom: 60px;right: 0}
+.fixedBrImgtap img{width: 25px;margin-bottom: 5px;cursor: pointer}
+.bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right:1px solid #e2e2e2;border-collapse: collapse;}
 .bottomActive{color: #fff;background-color: #00B2EE;}
+.bottomLast{border-right: none}

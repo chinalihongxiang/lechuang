@@ -2,7 +2,7 @@ $(function(){
     $.ajax({
         type:'post',
         url:'/Promoter/modify',
-        data:{promoter_id:'7'},
+        data:{promoter_id:promoter_id},
         success:function(data){
             if(data.status == 0){
                 alertWMsg(data.msg)
@@ -189,7 +189,7 @@ $(document).on('click','.sres',function(){
         }else{
             var user = {
                 modify : 'modify',
-                promoter_id : '7',
+                promoter_id : promoter_id,
                 promoter_name : $('#sname').val(),
                 promoter_phone : $('#stel').val(),
                 promoter_qq : qq,
@@ -201,7 +201,7 @@ $(document).on('click','.sres',function(){
     }else {
         var user = {
             modify : 'modify',
-            promoter_id : '7',
+            promoter_id : promoter_id,
             promoter_name : $('#sname').val(),
             promoter_phone : $('#stel').val(),
             promoter_qq : qq,

@@ -55,7 +55,7 @@ function coutLoad (type){
 			if(data.status == 1){
 				var str = '';
 				$(data.data).each(function(i,e){
-					str +='<ul><li>'+(i+1)+'</li><li><a href="promoter_detail_page.html?promoter_id='+e.promoter_id+'">'+e.promoter_name+'</a></li><li>'+e.promoter_qq+'</li><li>'+e.item_sum+'</li><li>'+e.take_sum+'</li><li>'+e.sale_sum+'</li><li>'+e.roc_avg+'%</li></ul>';
+					str +='<ul><li>'+(i+1)+'</li><li>'+e.promoter_name+'</li><li>'+e.promoter_qq+'</li><li>'+e.item_sum+'</li><li>'+e.take_sum+'</li><li>'+e.sale_sum+'</li><li>'+e.roc_avg+'%</li></ul>';
 				})
 				$('.contentShowDivUl').html(str);                   
 			}else{

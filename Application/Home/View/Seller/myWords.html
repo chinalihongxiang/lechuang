@@ -8,39 +8,13 @@
 <link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
 <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
 <link rel="stylesheet" type="text/css" href="__CSS__/kkpager_blue.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/myWordsPage.css"/>
 <link rel="stylesheet" type="text/css" href="__JS__/editor/themes/default/_css/umeditor.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/skin/layer.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
-<style>
-    .content{position: relative;padding: 20px 0;}
-    .addNrMask{width: 100%;height: 100%;position: absolute;top:0;left: 0;background-color: rgba(0,0,0,0.4);display: none}
-    .addNr{width: 600px;position: absolute;background-color: #fff;border-radius: 5px;height: 330px;top:-1000px;left: 50%;margin-top: -165px;margin-left: -300px}
-    .typeN { padding: 0 50px;text-align: right}
-    .close{width: 20px;position: absolute;top:5px;right: 5px;cursor: pointer}
-    .edui-container{margin: 30px auto 20px}
-    .edui-popup-emotion {width: 400px !important;}
-    .edui-tab-nav .edui-tab-item:last-child{display: none}
-    .edui-body-container,.edui-body-container div{height: 160px}
-    .edui-body-container div{line-height: 16px}
-	.pageBtnWrap{float:right !important;margin-right:20px !important;}
-    .contentShowDiv{height: 448px;width: 758px;margin: 0 20px 20px;border: 1px solid #e2e2e2;}
-    .contentShowDivTable {height: 320px;width: 718px;margin: 20px auto 15px;}
-    .contentShowDivTable table{width: 100%;box-sizing:border-box;}
-    .contentShowDivTable table,td{border: 1px solid #e2e2e2;font-size: 16px;}
-	.contentShowDivTable table tr:first-child td{text-align:center}
-	.contentShowDivTable table tr td:last-child{text-align:center;width:20%}
-	.contentShowDivTable table tr td:first-child{width:25%}
-	.contentShowDivTable table tr{height:52px;line-height:16px}
-	.contentShowDivTable table tr td img {height:16px;}
-    .contentShowDivBtn,.addNrBtn {height: 50px;font-size: 30px;line-height: 50px;width: 250px;margin: 0 auto;text-align: center;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
-    .bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right:1px solid #e2e2e2;border-collapse: collapse;}
-    .bottomActive{color: #fff;background-color: #00B2EE;}
-    .bottomLast{border-right: none}
-	.bottomSilde {width: 33.5%;position: absolute;right: 0;bottom: 46px;border: 1px solid #e2e2e2;height: 96px;display: none;border-right:none}
-	.bottomSilde a:hover{ text-decoration: none}
-	.bottomSilde div:first-child{border-bottom: 1px solid #e2e2e2}
+<style type="text/css">
+.bottomSilde {width: 33.4%;position: absolute;right: 0;bottom: 48px;border: 1px solid #e2e2e2;height: 96px;display: none;border-right:none !important;}
+.bottomSilde a:hover{ text-decoration: none}
+.bottomSilde div:first-child{border-bottom: 1px solid #e2e2e2}
 </style>
 <body>
 <!--信息提示-->
@@ -96,8 +70,9 @@
         </div>
 </div>	
 </body>
-<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
-<script src="__JS__/enter.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
 <script src="__JS__/kkpager.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
@@ -105,195 +80,7 @@
 <script type="text/javascript" charset="utf-8" src="__JS__/editor/umeditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="__JS__/editor/editor_api.js"></script>
 <script type="text/javascript" src="__JS__/editor/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" charset="utf-8">
-    $(".contentShowDivTable").niceScroll({
-        cursorcolor:"#00B2EE",
-        cursoropacitymax:1,
-        hwacceleration:true,
-        touchbehavior:false,
-        sensitiverail:true,
-        hidecursordelay:1000,
-        bouncescroll:true,
-        cursorwidth:"5px",
-        cursorborder:"0",
-        cursorborderradius:"5px",
-        spacebarenabled:true,
-    });
-    var um = UM.getEditor('myEditor',{
-        toolbar:['emotion'],
-        //focus时自动清空初始化时的内容
-        autoClearinitialContent:true,
-        //关闭字数统计
-        wordCount:false,
-        //关闭elementPath
-        elementPathEnabled:false,
-        //默认的编辑区域高度
-    });
-    $('.addNrTime input').val(getNowFormatDate())
-    $('.contentShowDivBtn').on('click',function(){
-        $('.addNrMask').show();
-        $('.addNr').animate({top:'50%'},200)
-        document.body.onselectstart=document.body.ondrag=function(){
-            return true;
-        }
-    });
-    wordsLoad()
-	//关闭留言弹层	
-	$('.close').on('click',function(){
-		$('.addNr').animate({top:'-1000px'},200,function(){
-			$('.addNrMask').hide();
-			document.body.onselectstart=document.body.ondrag=function(){
-				return false;
-			}
-		})
-	})
-	$('.addNrBtn').on('click',function(){
-		var isShow = $("input[name='type']:checked").val();
-		var words = UM.getEditor('myEditor').getPlainTxt();
-		if(words.length == 0 || words == '请输入留言内容\n' || words == '\n'){		
-				$('.addNrMask').hide();
-				return alertMsg('留言内容不能为空');		
-		}else{
-			$('.addNr').animate({top:'-1000px'},200,function(){
-				$('.addNrMask').hide();
-				document.body.onselectstart=document.body.ondrag=function(){
-					return false;
-				}	
-				$.ajax({
-					url:'/Words/send',
-					type:'post',
-					data:{seller_id:'6',words: words,is_show:isShow},
-					success:function(data){
-						if(data.status == 1){
-							alertRMsg(data.msg)
-						}else{
-							alertWMsg(data.msg)
-						}
-					},
-					error:function(){
-						alertWMsg('链接超时,请稍后再试')
-					}			
-				})		
-			})
-		}	
-	})
-    function getNowFormatDate() {
-        var date = new Date();
-        var seperator1 = "-";
-        var seperator2 = ":";
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var strDate = date.getDate();
-        var strHours = date.getHours();
-        var strMinutes = date.getMinutes();
-        var strSeconds = date.getSeconds();
-        if (month >= 1 && month <= 9) {
-            month = "0" + month;
-        }
-        if (strDate >= 0 && strDate <= 9) {
-            strDate = "0" + strDate;
-        }
-        if(strHours < 10){
-            strHours = "0" + strHours;
-        }
-        if(strMinutes < 10){
-            strMinutes = "0" + strMinutes;
-        }
-        if(strSeconds < 10){
-            strSeconds = "0" + strSeconds;
-        }
-        var currentdate = year + seperator1 + month + seperator1 + strDate
-                + " " + strHours + seperator2 + strMinutes
-                + seperator2 + strSeconds;
-        return currentdate;
-    }
-	function wordsLoad(){
-		$.ajax({
-			url:'/words/myWords',
-			type:'post',
-			data:{seller_id:'6'},
-			success:function(data){
-				if(data.status == 1){
-					var  str = '<table><tr><td>发布时间</td><td>发布内容</td><td>私密/公开</td></tr>';
-					if(data.data.list.length > 0){
-						$(data.data.list).each(function(i,e){
-							var words = e.words.replace(/&amp;quot;/g,'"').replace(/&amp;lt;/g,'<').replace(/&amp;gt;/g,'>').replace(/\n/g,'');
-							if(e.is_show == '2'){
-								var  isShow = '公开';
-							}else{
-								var  isShow = '私密';
-							}
-							str += '<tr><td>'+e.create_time+'</td><td>'+words+'</td><td>'+isShow+'</td></tr>'
-						})
-					}else{
-						str += '<tr><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td></tr>'
-					}					
-					str +='</table>';
-					$('.contentShowDivTable').html(str);
-					//分页
-					var totalPage = Math.ceil(data.data.count/data.data.p_size);
-					var totalRecords = data.data.count;
-					var pageNo = data.data.p;						
-					kkpager.generPageHtml({
-						pno : pageNo,
-						//总页码
-						total : totalPage,
-						//总数据条数
-						totalRecords : totalRecords,
-						isGoPage:false,
-						isShowTotalPage:false,
-						isShowCurrPage:false,
-						mode : 'click',//默认值是link，可选link或者click
-						click : function(n){
-							this.selectPage(n);
-							wordspage(n);
-							return false;
-						}
-					})
-				}else{
-					alertWMsg(data.msg)
-				}				
-			},
-			error:function(){
-				alertWMsg('加载超时,请稍后再试')
-			}
-		})
-	}
-	function wordspage(n){
-		$.ajax({
-			url:'/words/myWords',
-			type:'post',
-			data:{seller_id:'6',p:n},
-			beforeSend:function(){
-				$('.mask,.showL').show();
-			},
-			complete:function(){
-				$('.mask,.showL').hide();
-			},
-			success:function(data){
-				if(data.status == 1){
-					var  str = '<table><tr><td>发布时间</td><td>发布内容</td><td>私密/公开</td></tr>'
-					$(data.data.list).each(function(i,e){
-						var words = e.words.replace(/&amp;quot;/g,'"').replace(/&amp;lt;/g,'<').replace(/&amp;gt;/g,'>').replace(/\n/g,'');
-						if(e.is_show == '2'){
-							var  isShow = '公开';
-						}else{
-							var  isShow = '私密';
-						}
-						str += '<tr><td>'+e.create_time+'</td><td>'+words+'</td><td>'+isShow+'</td></tr>'
-					})
-					str +='</table>';
-					$('.contentShowDivTable').html(str);
-			}else{
-					alertWMsg(data.msg)				
-				}
-			},
-			error:function(){
-				alertWMsg('加载超时,请稍后再试')
-			}		
-					
-		})
-	}
-	
-</script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/enter.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/sellerMyWords.js"></script>
 </html>

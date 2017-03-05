@@ -46,41 +46,5 @@
 	<script src="__JS__/seller.js" type="text/javascript" charset="utf-8"></script>
 	<script src="__JS__/jquery-form.js" type="text/javascript" charset="utf-8"></script>
 </html>
-<script>
-	$(function(){
 
-		//图片上传示例
-		$('.img_ipt').change(function(){
-
-			//创建form
-			var form_dom = document.createElement("form");
-
-			//设置form请求地址
-			form_dom.action = "/Seller/store_img_upload";
-
-			//设置form请求方式
-			form_dom.method = "post";
-
-			//设置form上传类型(文件上传)
-			form_dom.enctype = "multipart/form-data";
-
-			//添加form至document
-			document.body.appendChild(form_dom);
-
-			//选择添加了图片的input 放入form中
-			var form = $(form_dom);
-			$(this).appendTo(form);
-
-			//ajax
-			form.ajaxSubmit({
-				success:function(data){
-					form_dom.remove();
-					$('.theimg').attr('src',data.url);
-				}
-			});
-
-		})
-
-	}) 
-</script>
 

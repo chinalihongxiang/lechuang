@@ -1,8 +1,13 @@
-//ie 6~9 无法选中文字
 document.body.onselectstart=document.body.ondrag=function(){
 	return false;
 }
-$(function(){
+$(function(){	
+	if(GetQueryString('sellerId')){
+		window.localStorage.sellerId =  GetQueryString('sellerId');
+	}
+	if(GetQueryString('promoterId')){
+		window.localStorage.promoterId =  GetQueryString('promoterId');
+	}
 	//输入框选中效果
 	if($('#sname')){
 		$('#sname').focus();
@@ -117,23 +122,35 @@ function ShopId(str){
 }
 //链接验证
 function checkUrl(url){
-	if ((url.indexOf("http://")>=0 || url.indexOf("https://")>=0)&&(url.indexOf("taobao.com")>=0 || url.indexOf("tmall.com")>=0)){
+	if ((url.indexOf("http://")>=0 || url.indexOf("https://")>=0)){
 		return true;
 	}else{
 		return false;
 	}
 }
 function checkCouponUrl(url){
-	if ((url.indexOf("http://")>=0 || url.indexOf("https://")>=0)&&(url.indexOf("sellerId")>=0 || url.indexOf("sellerid")>=0 || url.indexOf("seller_id")>=0 || url.indexOf("seller_Id")>=0) && (url.indexOf("activityId")>=0 || url.indexOf("activityid")>=0 || url.indexOf("activity_id")>=0 || url.indexOf("activity_Id")>=0)){
+	if ((url.indexOf("http://")>=0 || url.indexOf("https://")>=0)&&(url.indexOf("sellerId")>=0 || url.indexOf("sellerid")>=0 || url.indexOf("post")>=0 || url.indexOf("post")>=0) && (url.indexOf("activityId")>=0 || url.indexOf("activityid")>=0 || url.indexOf("activity_id")>=0 || url.indexOf("activity_Id")>=0)){
 		return true;
 	}else{
 		return false;
 	}
 }
-//获取url里面的参数
+//获取当前url里面的参数
 function GetQueryString(name){
      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
+}
+//获取url中的参数
+function getParams(url,key){
+	var url = url.replace('?','&').split('&');
+	var paramsObj = {};
+	for(var i = 0, iLen = url.length; i < iLen; i++){
+		var param = url[i].split('=');
+		paramsObj[param[0]] = param[1];
+	}
+	if(key){
+		return paramsObj[key];
+	}
 }
 	

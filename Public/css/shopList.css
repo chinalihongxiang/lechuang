@@ -27,6 +27,7 @@ h3{font-size: 30px;text-align: center;line-height: 50px;border-bottom: 1px solid
 .fileUp input {width: 140px;height: 140px !important;border-radius: 0px !important;opacity: 0;cursor: pointer;position: absolute;top: 0;left: 0;z-index: 10;}
 .fileUp span {width: 140px;font-size: 14px;color: #fff;text-align: center;height: 30px;line-height: 30px;background-color: rgba(0,0,0,0.4);position: absolute;left: 0;bottom: 0}
 .shopList{width:100%;height: 400px;overflow: hidden}
+.shopList .line {width: 795px}
 .shopList .line div{width: 33.33%;height: 40px;line-height: 40px;font-size: 16px;text-align: center;border-bottom: 1px solid #666;float: left}
 .shopList .line:first-child div { height: 50px;line-height: 50px;font-size: 25px;}
 .shopList .line div:last-child{display: flex;justify-content: space-around}
@@ -34,5 +35,9 @@ h3{font-size: 30px;text-align: center;line-height: 50px;border-bottom: 1px solid
 .shopListEd{background-color: #32CD32}
 .shopListDel{background-color: #FF3030}
 .addShopBtn{height:30px;margin: 10px auto;line-height: 30px;text-align: center;font-size: 16px;width: 300px;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
-.bottom{width: 50%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;}
+.bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right: 1px solid #e2e2e2;}
 .bottomActive{color: #fff;background-color: #00B2EE;}
+.bottomLast{border-right: none}
+.bottomSilde {width: 33.5%;position: absolute;right: 0;bottom: 48px;border: 1px solid #e2e2e2;height: 96px;display: none;border-right:none;}
+.bottomSilde a:hover{ text-decoration: none}
+.bottomSilde div:first-child{border-bottom: 1px solid #e2e2e2}
