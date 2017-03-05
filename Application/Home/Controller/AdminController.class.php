@@ -62,6 +62,15 @@ class AdminController extends IndexController {
 			if( $value['type'] == 1 ) $value['user_name'] = M('promoter')->where(array('promoter_id'=>$value['user_id']))->getField('promoter_name');
 			if( $value['type'] == 2 ) $value['user_name'] = M('seller')->where(array('seller_id'=>$value['user_id']))->getField('seller_name');
 			$value['create_time'] = intdate($value['create_time']);
+
+			$value['content'] = htmlspecialchars($value['content']);
+
+			$value['content'] = str_replace(array("\r\n", "\r", "\n"), "<br>", $value['content']);
+
+			if( strpos($value['content'],'img') != 8 ){
+				$value['content'] = substr($value['content'], strpos($value['content'],'img') - 8);
+			}
+
 			$list[$key] = $value;
 		}
 

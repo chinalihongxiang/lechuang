@@ -210,6 +210,17 @@ class WordsController extends IndexController {
 					'user_type'=> $value['type'],
 					'type'     => 'dislike_num',
 				))->count();
+			
+			$value['content'] = htmlspecialchars($value['content']);
+
+			$value['content'] = str_replace(array("\r\n", "\r", "\n"), "<br>", $value['content']);
+
+			if( strpos($value['content'],'img') != 8 ){
+				$value['content'] = substr($value['content'], strpos($value['content'],'img') - 8);
+			}
+
+			$value['content'] = str_replace("lt;a", "lt;span", $value['content']);
+
 			$list[$key] = $value;
 		}
 
@@ -258,7 +269,7 @@ class WordsController extends IndexController {
     * params
     * $files
     */
-    public function store_img_upload(){
+    public function img_upload(){
 
         $path = 'words/';
 
@@ -288,9 +299,11 @@ class WordsController extends IndexController {
         } else {
             //返回图片路径
             echo json_encode(array(
-                    'status' => 1,
-                    'url'    => "/Uploads"."/".$res['pic']['savepath'].$res['pic']['savename']
-                ));   
+            		'state'    => 'SUCCESS',
+            		'url'      => "/Uploads"."/".$res['upfile']['savepath'].$res['upfile']['savename'],
+            		'title'    => $res['upfile']['savename'],
+            		'original' => $res['upfile']['savename']
+            	));
         }
 
     }

@@ -25,6 +25,119 @@ class PromoterController extends IndexController{
         $this->display();
     }
 
+    //黑名单查询页面
+    public function blacklistPage(){
+        $this->display();
+    }
+
+    //黑名单查询接口
+    public function blacklist(){
+
+        //lianzun
+        //zFdqGF1DtOS5YXft
+
+        $info = I('info') ? I('info') : $this->ajax_res(0,'请输入商户id,或店铺名,或卖家昵称,或店铺卖家ID');
+
+        $arr = array(
+                'search'      => $info,
+                'shop_id'     => '',
+                'name'        => '',
+                'seller_id'   => '',
+                'seller_name' => '',
+                'list'        => '',
+            );
+
+        require_once 'ldapi.php';
+
+        $aop = new \LdApi('lianzun','zFdqGF1DtOS5YXft','ldtui-bbs');
+
+        $result = $aop->get('getblackshop.php',$arr);
+
+        if( $result->code == 0 ) $this->ajax_res(0,$result->message);
+
+        $this->ajax_res(1,$result->message);
+
+    }
+
+    //淘客上传群和网站
+    public function upGroupWeb(){
+        $this->display();
+    }
+
+    //淘客上传网站
+    public function upWeb(){
+
+        //web_name web_link type 1-是2-否 item_link web_desc promoter_id
+
+        //淘客信息
+        $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
+        if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
+        $arr['promoter_id'] = $promoter_info['promoter_id'];
+
+        $arr['web_name'] = I('web_name') ? I('web_name') : $this->ajax_res(0,'请上传网站名称');
+
+        $arr['web_link'] = I('web_link') ? I('web_link') : $this->ajax_res(0,'请上传网站链接');
+
+        $arr['type'] = I('type') ? I('type') : $this->ajax_res(0,'请上传类型');
+
+        if( I('type') == 1 ){
+            $arr['item_link'] =  I('item_link') ? I('item_link') : $this->ajax_res(0,'请填写上传商品链接');
+        }
+
+        $arr['web_desc'] = I('web_desc') ? I('web_desc') : $this->ajax_res(0,'请填写网站简介');
+
+        if( M('promoter_web')->where(array(
+                'web_link' => $arr['web_link']
+            ))->count() ){
+            $res = M('promoter_web')->where(array(
+                'web_link' => $arr['web_link']
+            ))->save($arr);
+            $this->ajax_res(1,'上传成功');
+        }
+
+        $arr['create_time'] = time();
+
+        if( M('promoter_web')->add($arr) ) $this->ajax_res(1,'上传成功');
+
+        $this->ajax_res(0,'上传失败');
+
+    }
+
+    //淘客上传QQ群
+    public function upGroup(){
+
+        //group_name check_qq get_qq desc promoter_id
+
+        //淘客信息
+        $promoter_info = M('promoter')->where(array('promoter_id'=>I('promoter_id')))->find();
+        if( !$promoter_info ) $this->ajax_res(0,'找不到该淘客');
+        $arr['promoter_id'] = $promoter_info['promoter_id'];
+
+        $arr['group_name'] = I('group_name') ? I('group_name') : $this->ajax_res(0,'请上传群名称');
+
+        $arr['check_qq'] = I('check_qq') ? I('check_qq') : $this->ajax_res(0,'请上传审核群QQ');
+
+        $arr['get_qq'] = I('get_qq') ? I('get_qq') : $this->ajax_res(0,'请上传采集群QQ');
+
+        $arr['desc'] = I('desc') ? I('desc') : $this->ajax_res(0,'请上传QQ群简介');
+
+        if( M('promoter_group')->where(array(
+                'get_qq' => $arr['get_qq']
+            ))->count() ){
+            $res = M('promoter_group')->where(array(
+                'get_qq' => $arr['get_qq']
+            ))->save($arr);
+            $this->ajax_res(1,'上传成功');
+        }
+
+        $arr['create_time'] = time();
+
+        if( M('promoter_group')->add($arr) ) $this->ajax_res(1,'上传成功');
+
+        $this->ajax_res(0,'上传失败');
+
+    }
+
     //淘客主界面接口
     public function enter_info(){
         
@@ -149,7 +262,7 @@ class PromoterController extends IndexController{
         //本次获得的优惠券
         $coupon_list = $coupon_id_list ? M('coupon')->where(array(
                 'coupon_id' => array('in',$coupon_id_list)
-            ))->select() : [];
+            ))->order('status asc')->select() : [];
 
         //本次获得的商品
         foreach ($coupon_list as $key => $value) {
