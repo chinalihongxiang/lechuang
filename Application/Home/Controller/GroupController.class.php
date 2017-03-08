@@ -168,16 +168,20 @@ class GroupController extends IndexController {
 		//条件
 		$where = array(
 				'today_new_coupon_num' 	  => array(array('gt',100),array('lt',200)),
-				'today_repeat_coupon_num' => array('lt',30),
-				'today_roc_avg'           => array('lt',100)
+				'today_roc_avg'           => array('lt',50),
+				'today_repeat_coupon_num' => array('lt',10)
 			);
 
 		//字段
-		$field = '*,50*(today_all_take/today_new_coupon_num*1000) + 50*today_roc_avg as point
-			';
+		$field = '*';
 
 		//排序
-		$order = 'point desc';
+		if( I('type') == 'today_all_take' ) $order = 'today_all_take desc';
+		if( I('type') == 'today_all_sale' ) $order = 'today_all_sale desc';
+		if( I('type') == 'today_roc_avg' ) $order = 'today_roc_avg desc';
+		if( I('type') == 'today_new_coupon_num' ) $order = 'today_new_coupon_num desc';
+		if( I('type') == 'today_repeat_coupon_num' ) $order = 'today_repeat_coupon_num desc';
+		
 
 		$list = M('group')->field($field)->where($where)->order($order)->limit( ($p-1)*$p_size , $p_size )->select();
 

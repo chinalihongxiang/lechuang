@@ -103,4 +103,85 @@ class AdminController extends IndexController {
 
 	}
 
+	//群列表
+	public function groupList(){
+
+		$p = I('p') ? I('p') : 1;
+		$p_size = 10;
+
+		//总数
+		$count = M('promoter_group')->count();
+
+		$list = M('promoter_group')->order('create_time desc')->limit( ($p-1)*$p_size , $p_size )->select();
+
+		$list = $list ? $list : [];
+
+		//返回数据
+		$this->ajax_res(1,'返回成功',$list);
+
+	}
+
+	//网站列表
+	public function webList(){
+
+		$p = I('p') ? I('p') : 1;
+		$p_size = 10;
+
+		//总数
+		$count = M('promoter_web')->count();
+
+		$list = M('promoter_web')->order('create_time desc')->limit( ($p-1)*$p_size , $p_size )->select();
+
+		$list = $list ? $list : [];
+
+		//返回数据
+		$this->ajax_res(1,'返回成功',$list);
+
+	}
+
+	//店铺审核列表
+	public function storeList(){
+
+		$p = I('p') ? I('p') : 1;
+		$p_size = 10;
+
+		$where = array(
+				'status' => 2
+			);
+
+		//总数
+		$count = M('store')->where($where)->count();
+
+		//取出最新五条公开留言
+		$list = M('store')->where($where)->order('create_time desc')->limit( ($p-1)*$p_size , $p_size )->select();
+
+		foreach ($list as $key => $value) {
+			$value['pics'] = M('store_voucher')->where(array(
+					'store_id' => $value['store_id']
+				))->select();
+			$list[$key] = $value;
+		}
+
+		$list = $list ? $list : [];
+
+		//返回数据
+		$this->ajax_res(1,'返回成功',$list);
+
+	}
+
+	//审核通过接口
+	public function storeVoucher(){
+
+		if( !I('store_id') || !M('store')->find(I('store_id')) ) $this->ajax_res(0,'店铺非法');
+
+		M('store')->where(array(
+				'store_id' => I('store_id')
+			))->save(array(
+				'status' => I('status')
+			));
+
+		$this->ajax_res(1,'审核成功');
+
+	}
+
 }
