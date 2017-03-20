@@ -1,4 +1,7 @@
 $(function () {	
+	document.body.onselectstart=document.body.ondrag=function(){
+		return true;
+	}
 	$('#sname').focus();
 	$('#sname').parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 0.2px 0.2px #00B2EE','transition':'all .3s'})	
 	$('.content ul li .input').on('focus',function () {
@@ -137,7 +140,7 @@ function submit () {
 			type:"post",
 			url:"",
 			async:true,
-			data:{name:name,tel:tel,qq:qq,email:email,idCode:idCode,pwd:hex_md5(pwd),introduce:introduce},
+			data:{name:name,tel:tel,qq:qq,email:email,idCode:idCode,pwd:hex_md5(pwd),introduce:introduce,promoter_code:GetQueryString('code')},
 			success:function (data) {
 				if(data.status == 1){
 					alertRMsg(data.msg)

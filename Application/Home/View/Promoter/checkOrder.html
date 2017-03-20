@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
+    <title>订单检测</title>
+</head>
+<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+<style type="text/css">
+    .content{padding: 20px 0;width: 650px;height:490px;margin: 20px auto;}
+    .contentShowDiv{height: 400px;}
+    .line{width: 600px;padding: 0 20px;}
+    .line div {display: inline-block;height: 40px;}
+    .line h2 {width: 550px;margin: 0 auto 10px;border-bottom: 1px solid #e2e2e2;font-size: 25px;line-height: 30px}
+    .line .title {font-size: 16px;width: 100px;text-align: right}
+    .line p {font-size:16px;margin-top:20px;word-wrap:break-word;line-height:20px;}
+    .line p  a {color:#1E90FF;cursor:pointer}
+    .line .upload_file input{border: none;width: 240px;height: 34px;text-indent: 15px;font-size: 14px}
+    .searchBtn {width:150px;height:50px;text-align: center;line-height:40px;font-size: 20px;color: #fff;background-color: #00B2EE;border-radius: 5px;cursor: pointer;margin: 0 0 0 85px;}
+    .results{width: 580px;height: 330px;margin:0 auto;border: 1px solid #e2e2e2;padding: 10px;}
+    #echarts{width: 600px;height: 250px;}
+</style>
+<body>
+<!--信息提示-->
+<div class="mask">
+    <div class="show">
+        <div class="showMsg"></div>
+        <div class="showBtn">确定</div>
+    </div>
+    <div class="showR">
+        <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+        <div class="showRBtn">确定</div>
+    </div>
+    <div class="showW">
+        <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+        <div class="showWBtn">确定</div>
+    </div>
+	<div class="showL">
+        <img src="__IMG__/loading.png" alt="">
+        <p>数据处理中,请稍后...</p>
+    </div>
+</div>
+<div class="content">
+    <div class="contentShowDiv">
+		<form action="http://123.207.39.107:80/order_exam/upload_file" method="post" accept-charset="utf-8" id="myform" enctype = "multipart/form-data"> 
+			<div class="line"><h2>订单检测</h2></div>
+			<div class="line"><div class="title">选择文件:</div><div class="upload_file"><input type="file" class="input" id="file" name="file"><input type="hidden" class="input" name="id" id="promoter_id"></div><div class="searchBtn">提交</div></div>
+		</form>
+		<div class="results">
+		  
+        </div>     
+    </div>
+</div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/jquery-form.js" type="text/javascript" charset="utf-8" async defer></script>
+<!--<script src="__JS__/blacklistPage.js" type="text/javascript" charset="utf-8"></script>-->
+<script type="text/javascript" charset="utf-8">
+$('.searchBtn').on('click',function(){
+    window.keywords = $('#file').val();
+	if(!GetQueryString('promoterId')){
+		return alertWMsg('用户信息拉取失败')
+	}	
+    $('#promoter_id').val(GetQueryString('promoterId'));
+    if(keywords.length == 0 || keywords == $('#file').attr('placeholder')){
+        return alertMsg('提交内容不能为空')
+    }
+	/*
+    if (navigator.userAgent.indexOf("MSIE")!=-1) {
+        var objUrl=keywords;
+    }else{
+        return alertMsg('您的浏览器不支持,请使用ie上传')
+    }
+    if (objUrl.split('.')[objUrl.split('.').length-1] == 'xls' || objUrl.split('.')[objUrl.split('.').length-1] == 'xlsx') {*/
+				myFormSubmit();
+    /*}else{
+        alertMsg('上传文件必须是xls或者xlsx格式的文件')
+    }*/
+})
+function myFormSubmit(){
+var option = {
+		async:'true',
+		beforeSend:function(){
+			$('.mask,.showL').show();	
+		},
+		complete:function(){
+			$('.mask,.showL').hide();
+		},
+		success:function(data){			
+			if(data.code == 1){
+				if (data.beat - 0 > 50){
+					var beat = '恭喜你超越了'+data.beat+'%的同行,好棒啊!';
+				}else{
+					var beat = '恭喜你超越了'+data.beat+'%的同行,好尴尬啊!';
+				}
+				alertMsg(beat);
+				if(data.state == 1){
+					var str = '<table><tr><td>1<td>2<td>3<td>4<td>5<tr><td>'+data.score1+'/('+data.hs1+')<td>'+data.score2+'/('+data.hs2+')<td>'+data.score3+'/('+data.hs3+')<td>'+data.score4+'/('+data.hs4+')<td>'+data.score5+'/('+data.hs5+')<td>';
+				}else{
+					var str = '<p>本次得分'+data.total_score+'</p><a class=invite>查看更多请点击邀请一位好友注册淘友记</a>';
+				}
+				$('.results').html(str)
+			}else if(data.code == 0){
+				alertWMsg(data.msg)
+			}
+		},
+		error:function(){
+		   alertWMsg('连接失败')
+		}
+	}
+	$('#myform').ajaxSubmit(option)
+}
+$(document).on('click','.invite',function(){
+	$.ajax({
+		url:'/admin/makeCode',
+		data:{promoter_code:GetQueryString('promoterId')},
+		success:function(data){
+			if(data.status == 1){
+				var str = '您的邀请链接为:<a onclick="window.open(\'http://taoyouji666.com/userInfo/promoter_register?code='+data.code+'\')">http://taoyouji666.com/userInfo/promoter_register?code='+data.code+'</a>'
+				$('.results').append(str);
+			}else{
+				alertWMsg(data.msg)
+			}
+		},
+		error:function(){
+			alertWMsg('连接超时')
+		}	
+	})
+})
+
+</script>
+</html>

@@ -1,0 +1,17 @@
+.content{position: relative;padding: 20px 0;margin:20px auto;width: 650px;height:530px}
+.contentShowDiv{height: 400px;}
+.line{width: 600px;padding: 0 20px;}
+.line div {display: inline-block;margin-left: 260px;width: 165px;height: 38px;border: 1px solid #e2e2e2;border-radius: 2px;}
+.line h2 {width: 550px;margin: 0 auto 20px;border-bottom: 1px solid #e2e2e2;font-size: 25px;line-height: 30px}
+.line h2 span{font-size: 12px;line-height: 12px}
+.line .title {font-size: 16px;width: 100px;text-align: right}
+.line p {padding-left:30px}
+.line div input{border: none;width: 160px;height: 35px;text-indent: 15px;font-size: 14px;line-height: 35px}
+.searchBtn {width:120px;height:40px;display:inline-block;text-align: center;line-height:50px;font-size: 20px;color: #fff;background-color: #00B2EE;border-radius: 5px;cursor: pointer;vertical-align: top;margin-left: 30px;}
+.myGroup{width: 600px;height: 320px;margin: 20px auto 10px;}
+.myGroup table{width: 100%}
+.myGroup table,tr,td{border: 1px solid #e2e2e2;line-height: 28px;font-size: 16px;text-align: center}
+.myGroup table tr:first-child{background-color:#e6e6e6;}
+.myGroup table tr td:nth-child(2){min-width:90px}
+.infoTextAndGoPageBtnWrap {display:none}
+.pageBtnWrap {margin-left:230px}

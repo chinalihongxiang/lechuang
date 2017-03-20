@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
+    <title>提交群或网站</title>
+</head>
+<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/upGroupWeb.css"/>
+<link rel="stylesheet" type="text/css" href="__JS__/editor/themes/default/_css/umeditor.css"/>
+<body>
+<!--信息提示-->
+<div class="mask">
+    <div class="show">
+        <div class="showMsg"></div>
+        <div class="showBtn">确定</div>
+    </div>
+    <div class="showR">
+        <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+        <div class="showRBtn">确定</div>
+    </div>
+    <div class="showW">
+        <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+        <div class="showWBtn">确定</div>
+    </div>
+</div>
+<div class="content">
+    <div class="contentShowDiv">
+        <div class="addChoose">
+            <button class="addWebBtn">提交采集站</button>
+            <button class="addGroupBtn">提交采集群</button>
+        </div>
+        <div class="addDiv"></div>
+        <div class="addWeb">
+            <div class="line"><h2>提交采集站（例：大淘客）</h2></div>
+            <div class="line">
+                <div class="title">网站名称:</div>
+                <div><input type="text" class="input" value="请输入网站名称" placeholder="请输入网站名称" id="webName"></div>
+            </div>
+            <div class="line">
+                <div class="title">网站链接:</div>
+                <div><input type="text" class="input" value="请输入网站链接" placeholder="请输入网站链接" id="webLink"></div>
+            </div>
+            <div class="line">
+                <div class="title">是否可提交商品:</div>
+                <div><input type="radio" name="isUp" id="Up" checked="checked" value="1" /><label for="Up">是</label></div>
+                <div><input type="radio" name="isUp" id="noUp" value="0"/><label for="noUp">否</label></div>
+            </div>
+            <div class="line webUpLink">
+                <div class="title">上传商品地址:</div>
+                <div><input type="text" class="input" value="如果不可提交就不需要输入,如果可提交,请上传网站上传商品地址" placeholder="如果不可提交就不需要输入,如果可提交,请上传网站上传商品地址" id="webUlink"></div>
+            </div>
+            <div class="line">
+                <div class="title">网站简介:</div>
+                <div><input type="text" class="input" value="请输入网站简介包括网站日均uv,日均pv等更加详细的介绍" placeholder="请输入网站简介包括网站日均uv,日均pv等更加详细的介绍" id="webInt"></div>
+            </div>
+			tips:如果您的采集站未被收录至淘友记,您可以将您的采集站在此处提交给我们,我们审核后将发布至淘友记推送给万千放单淘客.
+            <button class="webBtn">提交</button>
+        </div>
+        <div class="addGroup">
+            <div class="line"><h2>提交采集群</h2></div>
+            <div class="line">
+                <div class="title">QQ群名称:</div>
+                <div><input type="text" class="input" value="请输入QQ群名称" placeholder="请输入QQ群名称" id="groupName"></div>
+            </div>
+            <div class="line">
+                <div class="title">审核群号码:</div>
+                <div><input type="text" class="input" value="请输入采集群商品库群号即平时采集群采集商品的审核群" placeholder="请输入采集群商品库群号即平时采集群采集商品的审核群" id="groupQQ1"></div>
+            </div>
+            <div class="line">
+                <div class="title">采集群号码:</div>
+                <div><input type="text" class="input" value="请输入可以进入的采集群群号" placeholder="请输入可以进入的采集群群号" id="groupQQ2"></div>
+            </div>
+            <div class="line">
+                <div class="title">QQ群简介:</div>
+                <div><input type="text" class="input" value="请输入QQ群简介包括采集群规模，采集人数，采集群采集商品主要类目等详细信息" placeholder="请输入QQ群简介包括采集群规模，采集人数，采集群采集商品主要类目等详细信息" id="groupInt"></div>
+            </div>
+			tips:如果您的采集群未被录入至淘友记,您可以在此处向我们提交您的采集群.如果您发现了好的采集群也欢迎您随时向我们提交.我们将您的采集群分享给更多的放单淘客.
+            <button class="groupBtn">提交</button>
+        </div>
+    </div>
+</div>
+</body>
+</body>
+<script src="__JS__/lib/jquery.min.js"></script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/upGroupWeb.js" type="text/javascript" charset="utf-8"></script>
+</html>

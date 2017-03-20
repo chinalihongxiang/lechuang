@@ -3,10 +3,10 @@ document.body.onselectstart=document.body.ondrag=function(){
 }
 $(function(){	
 	if(GetQueryString('sellerId')){
-		window.localStorage.sellerId =  GetQueryString('sellerId');
+		window.localStorage.sellerId =  GetQueryString('sellerId');		
 	}
 	if(GetQueryString('promoterId')){
-		window.localStorage.promoterId =  GetQueryString('promoterId');
+		window.localStorage.promoterId =  GetQueryString('promoterId');	
 	}
 	//输入框选中效果
 	if($('#sname')){
@@ -153,4 +153,231 @@ function getParams(url,key){
 		return paramsObj[key];
 	}
 }
-	
+function getpromoterId(callback){
+	if(window.localStorage.promoterId || GetQueryString('promoterId')){
+		if(callback){
+			callback();
+		}
+	}else{
+		return alertWMsg('用户信息拉取失败,如果多次失败,请联系淘友记客服')
+	}
+}
+//分页
+function pageLoad(count,p_size,p,click){
+	var totalPage = Math.ceil(count/p_size);
+	var totalRecords = count;
+	var pageNo = p;
+	kkpager.generPageHtml({
+		pno : pageNo,
+		//总页码
+		total : totalPage,
+		//总数据条数
+		totalRecords : totalRecords,
+		isGoPage:true,
+		isShowTotalPage:true,
+		isShowCurrPage:true,
+		mode : 'click',//默认值是link，可选link或者click
+		click : function(n){			
+			this.selectPage(n);
+			window.p = n;
+			click(n)
+			return false;
+		} 
+	},true)  
+}
+//右下fixed图标切换
+$('.fixedBrImgtap img').on('mouseenter', function () {
+	var src = $(this).attr('src');
+	var srcN = src.split('.png')[0]+'_h.png';
+	$(this).attr('src',srcN);
+	$(this).one('mouseleave', function () {
+		$(this).attr('src',src);
+	})
+})
+//右下fixed图标提示
+$(document).on('mouseenter', '.fixedBrImgtap',function(){
+    layer.tips($(this).attr('data-tips'),this,{
+        tips: [4, 'rgba(0,178,238,1)'],
+        time: 0,
+        area:['80px']
+    });
+});
+$(document).on('mouseleave','.fixedBrImgtap', function(){
+    layer.closeAll('tips');
+});
+//分享弹层
+//实例化分享富文本框
+if($('#myEditor1').length != '0'){
+	var um1 = UM.getEditor('myEditor1',{
+		toolbar:['emotion image'],
+		//focus时自动清空初始化时的内容
+		autoClearinitialContent:true,
+		//关闭字数统计
+		wordCount:false,
+		//关闭elementPath
+		elementPathEnabled:false,
+		//默认的编辑区域高度
+	});
+}
+//分享弹层
+$('.share').on('click',function(){
+	$('.addNrMask').show();
+	$('.addNr1').animate({top:'50%'},200)
+	document.body.onselectstart=document.body.ondrag=function(){
+		return true;
+	}
+});
+//关闭分享弹层
+$('.close1').on('click',function(){
+	$('.addNr1').animate({top:'-1000px'},200,function(){
+		$('.addNrMask').hide();
+		document.body.onselectstart=document.body.ondrag=function(){
+			return false;
+		}
+	})
+})
+$('.addNrBtn1').on('click',function(){
+		document.body.onselectstart=document.body.ondrag=function(){
+			return false;
+		}
+	var theme = $('.addNrTheme input').val();
+	var content = UM.getEditor('myEditor1').getPlainTxt();
+	if(theme.length == 0 || theme == '主题(对商品进行简单描述)'){
+		return alertMsg('分享主题不能为空');	
+	}else if(content.length == 0 || content == '请输入正式的买家群文案模板,支持图片+文字同时粘贴,输入框内暂不支持图片显示,但不影响实际效果\n' || content == '\n'){		
+			$('.addNrMask').hide();
+			return alertMsg('分享内容不能为空');
+	}else{
+		$.ajax({
+				url:'/Words/share',
+				type:'post',
+				data:{promoter_id:GetQueryString('promoterId') || window.localStorage.promoterId,title: theme,content:content},
+				success:function(data){
+					if(data.status == 1){
+						alertRMsg(data.msg)
+					}else{
+						alertWMsg(data.msg)
+					}
+				},
+				error:function(){
+					alertWMsg('链接超时,请稍后再试')
+				}			
+			})		
+	}
+})
+//分享 主题input效果
+$('.addNrTheme .input').on('focus',function () {
+	if($(this).val() == $(this).attr('placeholder')){
+		$(this).val('')
+	}
+	$(this).parent('div').css({'borderColor':'#00B2EE','boxShadow':'0 0 5px #00B2EE','transition':'all .3s'})
+})
+$('.addNrTheme .input').on('blur',function () {
+	if($(this).val().length == 0){
+		$(this).val($(this).attr('placeholder'))
+	}
+	$(this).parent('div').css({'borderColor':'#E2E2E2','boxShadow':'none'})
+})
+//留言弹层
+//实例化留言富文本框
+if($('#myEditor').length != '0'){
+	var um = UM.getEditor('myEditor',{
+		toolbar:['emotion'],
+		//focus时自动清空初始化时的内容
+		autoClearinitialContent:true,
+		//关闭字数统计
+		wordCount:false,
+		//关闭elementPath
+		elementPathEnabled:false,
+		//默认的编辑区域高度
+	});
+}
+$('.message').on('click',function(){
+	$('.addNrMask').show();
+	$('.addNr').animate({top:'50%'},200)
+	document.body.onselectstart=document.body.ondrag=function(){
+		return true;
+	}
+});
+//打开留言板块
+$(document).on('click','.mesMore',function () {
+	$('.mesDiv').animate({right:'0px'},200)
+	$('.mesMore').hide();
+})
+//关闭留言板块
+$('.mesDivclose img').on('click',function(){
+    $('.mesDiv').animate({right:'-500px'},200, function () {
+        $('.mesMore').show();            
+    })
+})
+//打开留言弹层
+$('.addN').on('click',function(){
+	$('.addNrMask').show();
+	$('.addNr').animate({top:'50%'},200)
+	document.body.onselectstart=document.body.ondrag=function(){
+		return true;
+	}
+});
+//关闭留言弹层
+$('.close').on('click',function(){
+	$('.addNr').animate({top:'-1000px'},200,function(){
+		$('.addNrMask').hide();
+		document.body.onselectstart=document.body.ondrag=function(){
+			return false;
+		}
+	})
+})
+$('.addNrBtn').on('click',function(){
+	var isShow = $("input[name='type']:checked").val();
+	var words = UM.getEditor('myEditor').getPlainTxt();
+	if(words.length == 0 || words == '请输入留言内容\n' || words == '\n'){		
+			$('.addNrMask').hide();
+			return alertMsg('留言内容不能为空');		
+	}else{
+		$('.addNr').animate({top:'-1000px'},200,function(){
+			$('.addNrMask').hide();
+			document.body.onselectstart=document.body.ondrag=function(){
+				return false;
+			}	
+			$.ajax({
+				url:'/Words/send',
+				type:'post',
+				data:{promoter_id:GetQueryString('promoterId') || window.localStorage.promoterId,words: words,is_show:isShow},
+				success:function(data){
+					if(data.status == 1){
+						alertRMsg(data.msg)
+					}else{
+						alertWMsg(data.msg)
+					}
+				},
+				error:function(){
+					alertWMsg('链接超时,请稍后再试')
+				}			
+			})		
+		})
+	}	
+})
+function addMsg(){
+	$.ajax({
+		url:'/words/show',
+		success:function(data){
+			if(data.status == 1){
+				var str = '<ul>';
+				$(data.data).each(function(i,e){
+					if(e.type == '1'){
+						var type = '淘客 '+e.user_name;
+					}else{
+						var type = '商户 '+e.user_name;
+					}
+					var words = e.words.replace(/&amp;quot;/g,'"').replace(/&amp;lt;/g,'<').replace(/&amp;gt;/g,'>').replace(/\n/g,'');
+					str += '<li><div class="mesDivConinfo clearfix"><div>'+type+'</div><div>'+e.create_time+'</div></div><h5>'+words+'</h5></li>'
+				});
+				str += '</ul>';
+				$('.mesDivCon').html(str);
+			}
+			else{
+				alertWMsg(data.msg);
+			}
+		}
+	})
+}

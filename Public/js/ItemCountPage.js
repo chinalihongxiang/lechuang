@@ -1,5 +1,6 @@
-$(function(){
-    $('#selectType,#selectTime').chosen({disable_search:true}).change(function(){       
+getpromoterId(ItemCountLoad);    
+function ItemCountLoad(){
+	$('#selectType,#selectTime').chosen({disable_search:true}).change(function(){       
         goodsListType();
     });
     $(".showDivLeftUlContent").niceScroll({
@@ -17,25 +18,25 @@ $(function(){
     });
     goodsListType();
 	goodsAllList();
-})
+	$(document).on('mouseenter', '.showGoodsName',function(){
+		layer.tips($(this).attr('data-tips'),this,{
+			tips: [3, 'rgba(0,0,0,0.7)'],
+			time: 0,
+			area:['232px']
+		});
+	});
+	$(document).on('mouseenter', '.showTips',function(){
+		layer.tips($(this).attr('data-tips'),this,{
+			tips: [2, 'rgba(0,0,0,0.7)'],
+			time: 0,
+			area:['232px']
+		});
+	});
+	$(document).on('mouseleave','.showGoodsName,.showTips', function(){
+		layer.closeAll('tips');
+	});
+}
 
-$(document).on('mouseenter', '.showGoodsName',function(){
-    layer.tips($(this).attr('data-tips'),this,{
-        tips: [3, 'rgba(0,0,0,0.7)'],
-        time: 0,
-        area:['232px']
-    });
-});
-$(document).on('mouseenter', '.showTips',function(){
-    layer.tips($(this).attr('data-tips'),this,{
-        tips: [2, 'rgba(0,0,0,0.7)'],
-        time: 0,
-        area:['232px']
-    });
-});
-$(document).on('mouseleave','.showGoodsName,.showTips', function(){
-    layer.closeAll('tips');
-});
 function goodsAllList(){
     $.ajax({
         type:'post',
@@ -46,7 +47,7 @@ function goodsAllList(){
         },
         success:function(data){
             if(data.status == 1){
-                var str = '<li><div class="showGoodsName" data-tips="新券个数是指今日全网新增的优惠券个数">新券个数</div><div>【<span class="counter">'+data.data.coupon_num+'</span>】</div></li><li><div class="showGoodsName" data-tips="商品总量:指截至到今日全网参与优惠券活动的总数量">商品总量</div><div>【<span class="counter">'+data.data.item_num+'</span>】</div></li><li><div class="showGoodsName" data-tips="总计销量:总计销量统计的是当日全网参与优惠券活动的所有商品的总计销量">总计销量</div><div>【<span class="counter">'+data.data.item_sale_sum+'</span>】</div></li><li><div class="showGoodsName" data-tips="平均转化率:指今日全网参与优惠券活动的所有商品的平均转化率,该指标可以用于跑单淘客在跑单前对自己商品有一个大致定位">平均转化率</div><div>【<span class="counter">'+data.data.item_ratio_avg+'</span>%】</div></li><li><div class="showGoodsName" data-tips="平均佣金比例:指全网商品去除掉极个别非正常优惠券商品之后计算的商品平均佣金比例,可以用于了解整个行业的平均佣金以及作为和商家谈佣金比例时的参考依据">平均佣金比例</div><div>【<span class="counter">'+data.data.roc_avg+'</span>%】</div></li>';
+                var str = '<li><div class="showGoodsName" data-tips="新券个数是指今日全网新增的优惠券个数">新券个数</div><div>【<span class="counter">'+data.data.coupon_num+'</span>】</div></li><li><div class="showGoodsName" data-tips="商品总量:指截至到今日全网参与优惠券活动的总数量">商品总量</div><div>【<span class="counter">'+data.data.item_num+'</span>】</div></li><li><div class="showGoodsName" data-tips="总计销量:总计销量统计的是当日全网参与优惠券活动的所有商品的总计销量">总计销量</div><div>【<span class="counter">'+data.data.item_sale_sum+'</span>】</div></li><li><div class="showGoodsName" data-tips="平均转化率:指今日全网参与优惠券活动的所有商品的平均转化率,该指标可以用于跑单淘客在跑单前对自己商品有一个大致定位">平均转化率</div><div>【<span class="counter">'+data.data.roc_avg+'</span>%】</div></li><li><div class="showGoodsName" data-tips="平均佣金比例:指全网商品去除掉极个别非正常优惠券商品之后计算的商品平均佣金比例,可以用于了解整个行业的平均佣金以及作为和商家谈佣金比例时的参考依据">平均佣金比例</div><div>【<span class="counter">'+data.data.item_ratio_avg+'</span>%】</div></li>';
                 $('.showDivRightUl').html(str);
 				$('.counter').countUp();
             }else{

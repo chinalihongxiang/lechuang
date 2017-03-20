@@ -1,0 +1,11 @@
+.content{position: relative;padding: 40px 0;width: 650px;height:490px}
+.contentShowDiv{height: 400px;}
+.line{width: 600px;padding: 0 20px;}
+.line div {display: inline-block;height: 40px;width: 80%;}
+.line h2 {width: 550px;margin: 0 auto 20px;border-bottom: 1px solid #e2e2e2;font-size: 25px;line-height: 30px}
+.line .title {font-size: 16px;width: 100px;text-align: right}
+.line p {font-size:16px;margin-top:20px;word-wrap:break-word;line-height:20px;}
+.line p  a {color:#1E90FF;cursor:pointer}
+.line div:last-child {margin-left: 30px;width: 445px;height: 38px;border: 1px solid #e2e2e2;border-radius: 2px;line-height: 38px;}
+.line div:last-child input{border: none;width: 440px;height: 34px;text-indent: 15px;font-size: 14px}
+.searchBtn {width:150px;height:50px;display:block;text-align: center;line-height:50px;font-size: 20px;color: #fff;background-color: #00B2EE;border-radius: 5px;cursor: pointer;margin: 20px auto 0;}

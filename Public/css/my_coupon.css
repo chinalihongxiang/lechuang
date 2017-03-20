@@ -9,10 +9,11 @@
 .searchInput{margin-right:100px;width: 500px}
 .searchInput input{width: 495px}
 .searchBtn{margin-left: 70px;}
+#kkpager{height:40px;}
 .pageBtnWrap{float:right !important;margin:10px 20px !important;}
 .contentShowDivBottom{height: 355px;margin-top: 20px;overflow:hidden;padding: 0 20px;}
 .contentShowDivBottom table,tr,td{border: 1px solid #E2E2E2;collapse: 1px;color: #666;text-align: center;word-break: keep-all;}
-.contentShowDivBottom table,tr,td a{cursor:pointer}
+.contentShowDivBottom table,tr,td a{cursor:pointer;color:#f08080}
 .contentShowDivBottom table{line-height: 30.9px;font-size: 16px;min-width: 758px}
 .bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right: 1px solid #e2e2e2;}
 .bottomActive{color: #fff;background-color: #00B2EE;}

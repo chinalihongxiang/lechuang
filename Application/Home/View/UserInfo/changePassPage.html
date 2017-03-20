@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
+		<title>密码修改</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/seller.css"/>
+	<style type="text/css" media="screen">
+		.content ul{height: 250px;margin-top:100px}
+	</style>
+	<body>
+		<div class="mask">
+			<div class="show">
+				<div class="showMsg"></div>
+				<div class="showBtn">确定</div>
+			</div>
+			<div class="showR">
+				<div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+				<div class="showRBtn">确定</div>
+			</div>
+			<div class="showW">
+				<div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+				<div class="showWBtn">确定</div>
+			</div>
+		</div>
+		<div class="content">
+			<ul>
+				<li><div class="lititle">邮箱：</div><div><input type="text"class="input" id="semail" /></div><button id="sendcode">点击发送验证码</button></li>
+				<li><div class="lititle">验证码：</div><div><input type="text"class="input" id="sidcode" /></div></li>
+				<li><div class="lititle">密码：</div><div><input type="password"class="input" id="spwd" /></div><div>请填写数字与字母组合</div></li>
+				<li><div class="lititle">确认密码：</div><div><input type="password"class="input" id="sspwd" /></div><div>务必保证两次输入的密码一致</div></li>
+			</ul>
+			<button class="sres">确认修改</button>
+		</div>
+	</body>
+	<script src="__JS__/lib/jquery.min.js"></script>
+	<script src="__JS__/md5.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		$('#sendcode').on('click',function () {
+			var _this = $(this);
+			window.email = $('#semail').val();
+			if(email.length == 0){
+				return alertMsg('邮箱不能为空')
+			}else if(!checkEmail(email)){
+				return alertMsg('邮箱格式不正确,请输入正确的邮箱')
+			}
+			$.ajax({
+				type:"post",
+				url:"/UserInfo/send_code",
+				async:true,
+				data:{email:email},
+				success:function (data) {
+					if(data.status == 1){
+						sendCode(_this);
+					}else{
+						alertWMsg(data.msg)
+					}
+				},
+				error:function () {
+					alertWMsg('连接超时,请稍后再试')
+				}
+			});
+		})
+		$('#spwd').on('blur',function () {
+			window.pwd = $('#spwd').val();
+			if(pwd.length == 0){
+				$(this).parent('div').next('div').html('密码不能为空')
+				$(this).parent('div').next('div').css('color','red');	
+			}else if(!checkPwd(pwd)){
+				$(this).parent('div').next('div').html('密码必须为6-16位数字、字母的组合');
+				$(this).parent('div').next('div').css('color','red');
+			}else{
+				$(this).parent('div').next('div').html('<img src="../../../public/img/icon1.png" style="width: 16px;vertical-align: middle;margin-right: 5px;">可以修改');
+				$(this).parent('div').next('div').css('color','#444');				
+			}
+		})
+		$('#sspwd').on('keyup',function () {
+			window.spwd = $('#sspwd').val();
+			if(spwd.length == 0){
+				$(this).parent('div').next('div').html('密码不能为空')
+				$(this).parent('div').next('div').css('color','red');	
+			}else if(spwd != pwd){
+				$(this).parent('div').next('div').html('两次密码输入不相同');
+				$(this).parent('div').next('div').css('color','red');
+			}else{
+				$(this).parent('div').next('div').html('<img src="../../../public/img/icon1.png" style="width: 16px;vertical-align: middle;margin-right: 5px;">可以修改');
+				$(this).parent('div').next('div').css('color','#444');				
+			}
+		})
+		$('.sres').on('click',function(){
+			submit();
+		})
+		$(window).on('keydown',function(e){
+			var e = window.event || e;
+			if(e.keyCode == '13'){
+				submit();
+			}
+		})
+	//提交注册
+	function submit () {
+		window.email = $('#semail').val();
+		window.idCode = $('#sidcode').val();
+		window.pwd = $('#spwd').val();
+		window.spwd = $('#sspwd').val();
+		if(email.length == 0){
+			return alertWMsg('邮箱不能为空');
+		}else if(idCode.length == 0){
+			return alertWMsg('验证码不能为空');
+		}else if( !window.pwd || !window.spwd ){
+			return alertWMsg('密码格式不正确')
+		}else if(pwd != spwd){
+			return alertWMsg('两次输入的密码不相同');
+		}else{
+			$.ajax({
+				type:"post",
+				url:"/userInfo/changePass",
+				async:true,
+				data:{email:email,idCode:idCode,new_pass:hex_md5(pwd),type:'promoter'},
+				success:function (data) {
+					if(data.status == 1){
+						alertRMsg(data.msg)
+					}else{
+						alertWMsg(data.msg)
+					}
+				},
+				error:function () {
+					alertWMsg('链接超时,请稍后再试')
+				}
+			});
+		}
+	}
+	</script>
+</html>

@@ -1,4 +1,5 @@
-$(function(){
+getpromoterId(couponLoad);  
+function couponLoad(){
 	$(".contentShowDivBottom").niceScroll({
 		cursorcolor:"#00B2EE",
 		cursoropacitymax:1,
@@ -26,12 +27,7 @@ $(function(){
 	})
 	window.p = 1;
 	load(p);
-	if(window.localStorage.promoterId){
-		window.promoter_id = window.localStorage.promoterId;
-	}else{
-		return alertWMsg('用户信息拉取失败,如果多次失败,请联系淘友记客服')
-	}
-})
+}
 function load(n){
 		$.ajax({
 		type:'post',
@@ -41,10 +37,14 @@ function load(n){
 		success:function(data){
 			if(data.status == 1){
 				$('.mask,.showL').hide();
-				var str = '<table><tr><td>优惠券金额</td><td>状态</td><td>任务结束时间</td><td>已领取</td><td>商品名称</td><td>销量</td><td>转化率</td></tr>';
-				$(data.data.coupon_list).each(function(i,e){
-					str +='<tr><td>'+e.price+'元</td><td>'+e.status+'</td><td>'+e.end_time+'</td><td>'+e.take_num+'</td><td><a onclick="window.open(\''+e.link+'\')">'+e.item_name.substr(0,15)+'</a></td><td>'+e.sale+'</td><td>'+e.roc+'%</td></tr>'
-				})
+				var str = '<table><tr><td>优惠券金额</td><td>状态</td><td>任务结束时间</td><td>已领取</td><td>商品名称</td><td>销量增量</td><td>转化率</td></tr>';
+				if(data.data.coupon_list.length > 0){
+					$(data.data.coupon_list).each(function(i,e){
+						str +='<tr><td><a onclick="window.open(\''+e.coupon_link+'\')">'+e.price+'元</a></td><td>'+e.status+'</td><td>'+e.end_time+'</td><td>'+e.take_num+'</td><td><a onclick="window.open(\''+e.link+'\')">'+e.item_name.substr(0,15)+'</a></td><td>'+e.sale+'</td><td>'+e.roc+'%</td></tr>'
+					})				
+				}else{
+					str +='<tr><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td></tr>';
+				}
 				str +='</table>';
 				$('.contentShowDivBottom').html(str)
 				var totalPage = Math.ceil(data.data.count/data.data.p_size);
@@ -123,11 +123,11 @@ $(document).on('click','.searchBtn',function(){
 		beforeSend:function(){$('.mask,.showL').show();},
 		success:function(data){
 				$('.mask,.showL').hide();
-			if(data.status == 1){
+			if(data.status == 1){				
 				var str = '<table><tr><td>优惠券金额</td><td>状态</td><td>任务结束时间</td><td>已领取</td><td>商品名称</td><td>销量</td><td>转化率</td></tr>';
 				if(data.data.coupon_list.length > 0){
 					$(data.data.coupon_list).each(function(i,e){
-						str +='<tr><td>'+e.price+'元</td><td>'+e.status+'</td><td>'+e.end_time+'</td><td>'+e.take_num+'</td><td><a onclick="window.open(\''+e.link+'\')">'+e.item_name.substr(0,15)+'</a></td><td>'+e.sale+'</td><td>'+e.roc+'%</td></tr>'
+						str +='<tr><td><a onclick="window.open(\''+e.coupon_link+'\')">'+e.price+'元</a></td><td>'+e.status+'</td><td>'+e.end_time+'</td><td>'+e.take_num+'</td><td><a onclick="window.open(\''+e.link+'\')">'+e.item_name.substr(0,15)+'</a></td><td>'+e.sale+'</td><td>'+e.roc+'%</td></tr>'
 					})				
 				}else{
 					str +='<tr><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td><td>暂无数据</td></tr>';

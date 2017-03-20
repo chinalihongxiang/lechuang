@@ -9,8 +9,8 @@
 .edui-body-container,.edui-body-container div{height: 160px}
 .edui-body-container div{line-height: 16px}
 .pageBtnWrap{float:right !important;margin-right:20px !important;}
-.contentShowDiv{height: 448px;width: 758px;margin: 0 20px 20px;border: 1px solid #e2e2e2;}
-.contentShowDivTable {height: 320px;width: 718px;margin: 20px auto 15px;}
+.contentShowDiv{height: 448px;width: 738px;margin: 0 20px 20px;border: 1px solid #e2e2e2;}
+.contentShowDivTable {height: 320px;width: 698px;margin: 20px auto 15px;}
 .contentShowDivTable table{width: 100%;box-sizing:border-box;}
 .contentShowDivTable table,td{border: 1px solid #e2e2e2;font-size: 16px;}
 .contentShowDivTable table tr:first-child td{text-align:center}

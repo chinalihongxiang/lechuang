@@ -50,7 +50,7 @@
 .GoodsDetailDivClose {position: absolute;right: 5px;top: 5px;cursor: pointer}
 .GoodsDetailDivClose img {width: 20px;}
 .GoodsDetailDivShow h2 {width: 80%;margin-left:10%;font-size: 18px;text-align: center;border: 1px solid #e2e2e2;line-height: 30px;box-sizing: border-box;}
-.GoodsDetailDivShowD {width: 80%;margin-left:10%;font-size: 16px;border: 1px solid #e2e2e2;box-sizing:border-box;height: 280px;border-top:none;overflow: hidden;line-height: 20px}
+.GoodsDetailDivShowD {width: 80%;margin-left:10%;font-size: 16px;border: 1px solid #e2e2e2;box-sizing:border-box;height: 280px;border-top:none;overflow-y: scroll;line-height: 20px}
 .GoodsDetailDivShowCopy,.GoodsDetailDivShowPraise,.GoodsDetailDivShowbad{width:80px;text-align:center;background-color: #00B2EE;font-size: 16px;line-height: 30px;border-radius: 3px;color: #fff;float: right;margin-right: 70px;margin-top: 15px;cursor: pointer}
 .fixedBr{width: 28px;height: 150px;position: absolute;bottom: 60px;right: 0}
 .fixedBrImgtap img{width: 25px;margin-bottom: 5px;cursor: pointer}

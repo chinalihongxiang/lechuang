@@ -16,7 +16,7 @@
 #selectTime,#selectTime_chosen{display:none !important}
 .contentShowDivRight{width: 297px;float: left;border-left: 1px solid #E2E2E2;;height: 100%;text-align: center}
 .contentShowDivRight h2{font-size: 30px;text-align: center;padding: 25px 0;}
-.showDivRightUl{list-style: none;text-align: left;padding: 2px 30px 0;}
+.showDivRightUl{list-style: none;text-align: left;padding: 2px 40px 0 20px;}
 .showDivRightUl li{margin-bottom: 22px;background-color: #66CD00;box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.3)}
 .showDivRightUl li div {display: inline-block;font-size: 16px;padding: 25px 0;}
 .showDivRightUl li div:first-child{width: 120px;text-indent: 20px}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
+    <title>淘客监控的采集群</title>
+</head>
+<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/searchGroupPage.css"/> 
+<link rel="stylesheet" type="text/css" href="__CSS__/kkpager_blue.css"/>
+<link rel="stylesheet" type="text/css" href="__JS__/editor/themes/default/_css/umeditor.css"/>
+<body>
+<!--信息提示-->
+<div class="mask">
+    <div class="show">
+        <div class="showMsg"></div>
+        <div class="showBtn">确定</div>
+    </div>
+    <div class="showR">
+        <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+        <div class="showRBtn">确定</div>
+    </div>
+    <div class="showW">
+        <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+        <div class="showWBtn">确定</div>
+    </div>
+	<div class="showL">
+		<img src="__IMG__/loading.png" alt="">
+		<p>拼命加载中...</p>
+	</div>
+</div>
+<div class="content">
+    <div class="contentShowDiv">
+        <div class="line"><h2>我监控的采集群<span>（24小时内数据）</span></h2></div>
+        <div class="line"><div><input type="text" class="input" value="请输入要查询的群号码" placeholder="请输入要查询的群号码" id="keywords"></div><button class="searchBtn">查询</button></div>
+		<div class="myGroup">            
+        </div>
+		<div class="line"><p>tips:建议监控时长在24小时以上,以便得到更精准的数据</p></div>
+		<div id=kkpager></div>
+    </div>
+</div>
+</body>
+<script src="__JS__/lib/jquery.min.js"></script>
+<script src="__JS__/lib/layer.min.js"></script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/kkpager.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/searchGroupPage.js" type="text/javascript" charset="utf-8"></script>
+</html>

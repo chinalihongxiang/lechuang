@@ -1,0 +1,16 @@
+.content{padding:0;width:560px;padding:10px;height:730px}
+.enter{height:200px}
+.mesDivCon{height: 420px;width: 540px;border: 1px solid #e2e2e2;margin: 0px auto 10px;overflow: hidden}
+.mesDiv p {font-size: 14px;padding:0 10px;line-height: 16px}
+.mesDiv p a {font-size: 16px; color: #00B2EE;float: right}
+.mesDivCon ul{list-style-type: none;width: 520px;height: 400px;margin: 10px auto}
+.mesDivCon ul li {max-height: 80px;overflow: hidden;border-bottom: 1px solid #e2e2e2;padding-bottom: 5px;margin-bottom: 5px;width:520px}
+.mesDivConinfo {height: 15px;}
+.mesDivConinfo div {display: inline-block;}
+.mesDivConinfo div:nth-child(1){float: left;color:blue}
+.mesDivConinfo div:nth-child(2){float: right}
+.mesDivCon ul li h5 {font-size: 14px;line-height: 16px;}
+.mesDivCon ul li h6 {text-align: right}
+.typeN {text-align:left;font-size:16px;margin:20px 0;display:inline-block;padding:0;} 
+.typeN input{vertical-align:text-top;}
+.addNrBtn{font-size:20px;width:100px;line-height:30px;height:30px;float:right;margin-top:40px}

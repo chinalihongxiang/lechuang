@@ -16,9 +16,24 @@
 		.left ul,.right ul {padding-left: 24px;margin-top: 50px;font-size: 20px;line-height:35px;list-style:square outside url(__IMG__/icon1.png) !important;}
 	</style>
 	<body>
+		<!--信息提示-->
+		<div class="mask">
+			<div class="show">
+				<div class="showMsg"></div>
+				<div class="showBtn">确定</div>
+			</div>
+			<div class="showR">
+				<div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+				<div class="showRBtn">确定</div>
+			</div>
+			<div class="showW">
+				<div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+				<div class="showWBtn">确定</div>
+			</div>
+		</div>
 		<div class="content">
 			<div class="left">
-				<a href="/UserInfo/seller_register">商户</a>
+				<a onclick="alertMsg('商户端暂不提供注册,请耐心等待')">商户</a>
 				<ul>
 					<li>注册商家必须有一家及以上店铺，淘宝天猫均可</li>
 					<li>淘友记不是数据的生产者，只是数据的搬运工</li>

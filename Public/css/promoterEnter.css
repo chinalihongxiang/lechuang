@@ -12,20 +12,28 @@
 .edui-body-container,.edui-body-container div{height: 160px ;line-height: 20px}
 .layui-layer-content {height:auto !important}
 .addNrBtn,.addNrBtn1 {height: 50px;font-size: 30px;line-height: 50px;width: 250px;margin: 0 auto;text-align: center;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
-.contentShowDiv{height: 470px;}
-.contentShowDivTap {height: 30px;border-bottom: 1px solid #e2e2e2;width: 718px;
-margin: 0 auto;}
+.contentShowDiv{height: 440px;}
+.contentShowDivTap {height: 30px;border-bottom: 1px solid #e2e2e2;width: 718px;margin: 0 auto;}
 .contentShowDivTap .tap {display: inline-block;height: 100%;font-size: 20px;line-height: 30px;width: 50%;text-align:center;border: 1px solid #e2e2e2;float: left;border-bottom: none;cursor: pointer;box-sizing: border-box}
+.contentShowDivTap .tap span {font-size:12px}
 .contentShowDivTap .tap:first-child{border-right: none}
 .contentShowDivTap .tapActive{background-color: #00B2EE;color: #fff;border: none}
-.contentShowDivTable {width: 718px;height: 400px;margin: 20px auto;overflow: hidden}
+.contentShowDivTap .tapActive span{color:#fff}
+.contentShowDivTable {width: 718px;height: 400px;margin: 10px auto;overflow: hidden;position:relative}
 .contentShowDivTable table,tr,td {border: 1px solid #e2e2e2;border-collapse:collapse;}
 .contentShowDivTable td {font-size: 16px;line-height: 34px;text-align: center}
 .contentShowDivTable td a {cursor:pointer}
+.contentShowDivTable tr td:first-child{width:245px}
 .contentShowDivTable table {width: 718px;}
 .contentShowDivTable table tr:nth-child(2n+1){background-color: #e6e6e6}
+.contentShowDivTable span{position:absolute;bottom:0px;}
 .fixedBr{width: 28px;height: 150px;position: absolute;bottom: 60px;right: 0}
 .fixedBrImgtap img{width: 25px;margin-bottom: 5px;cursor: pointer}
 .bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right:1px solid #e2e2e2;border-collapse: collapse;}
 .bottomActive{color: #fff;background-color: #00B2EE;}
 .bottomLast{border-right: none}
+.infoTextAndGoPageBtnWrap{display:none}
+.pageBtnWrap{float:right !important;}
+.order{cursor:pointer;}
+.orderActive{color:red}
+#kkpager{height:20px}

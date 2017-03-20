@@ -38,13 +38,14 @@ $(function () {
         //关闭elementPath
         elementPathEnabled:false,
         //默认的编辑区域高度
-    });
+        //图片上传配置区
+    })
     //留言板模块滑出
     $('.mesDiv').animate({right:'0px'},200, function () {
 		addMsg();
         setInterval('addMsg()',2000)
     })
-    $(".GoodsDetailDivShowD,.mesDivCon ul li,.mesDivCon").niceScroll({
+    $(".mesDivCon ul li,.mesDivCon").niceScroll({
         cursorcolor:"#00B2EE",
         cursoropacitymax:1,
         hwacceleration:true,

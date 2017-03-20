@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
     <title>我的优惠券</title>
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.min.css">
+<link rel="stylesheet" href="__CSS__/lib/chosen.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/kkpager_blue.css"/>
 <link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
 <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
 <link rel="stylesheet" type="text/css" href="__CSS__/my_coupon.css"/>
-<link rel="stylesheet" type="text/css" href="__CSS__/kkpager_blue.css"/>
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js"></script>
-<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__JS__/editor/themes/default/_css/umeditor.css"/>
 <body>
 <!--信息提示-->
 <div class="mask">
@@ -34,6 +32,25 @@
     </div>
 </div>
 <div class="content">
+	<div class="addNrMask">
+		<div class="addNr">
+			<img class="close" src="__IMG__/close.png" alt="">
+			<div class="addNrTime"><input type="hidden"/></div>
+			<script type="text/plain" id="myEditor" style="width:540px;height:160px;">此处大家可以畅所欲言,吹牛逼,侃大山,晒收入,等等,暂不支持广告哦</script>
+			<div class="typeN">
+				<input type="radio" name="type" id="open" checked="checked" value="2"><label for="open">公开</label>
+				<input type="radio" name="type" id="secret" value="1"><label for="secret">隐私</label>
+			</div>
+			<div class="addNrBtn">留言</div>
+		</div>
+		<div class="addNr1">
+			<img class="close1" src="__IMG__/close.png" alt="">
+			<div class="addNrTime1"><input type="hidden"/></div>
+			<div class="addNrTheme"><input type="text" class="input" value="主题(对商品进行简单描述)" placeholder="主题(对商品进行简单描述)"/></div>
+			<script type="text/plain" id="myEditor1" style="width:540px;height:160px;">此处请点击上方图片按钮上传图片,不支持直接文字+图片(发现的不给通过哟)!程序猿正在努力实现中....</script>
+			<div class="addNrBtn1">分享</div>
+		</div>
+	</div>
     <div class="contentShowDiv">
         <div class="contentShowDivTop">
             <div class="contentShowDivTopAdd">
@@ -54,7 +71,7 @@
                     <td>任务结束时间</td>
                     <td>已领取</td>
                     <td>商品名称</td>
-                    <td>销量</td>
+                    <td>销量增量</td>
                     <td>转化率</td>
                 </tr>
                 <tr>
@@ -70,9 +87,23 @@
         </div>
     </div>
 	<div id="kkpager"></div>
+	<div class="fixedBr">
+		<div class="fixedBrImgtap" data-tips="商品统计数据榜"><a href="../Promoter/item_count.html"><img src="__IMG__/top.png" alt=""></a></div>
+		<div class="fixedBrImgtap" data-tips="商品搜索"><a href="../Promoter/item_details.html"><img src="__IMG__/search.png" alt=""></a></div>
+		<!--<div class="fixedBrImgtap message" data-tips="留言"><img src="__IMG__/message.png" alt=""></div>-->
+		<div class="fixedBrImgtap share" data-tips="好单分享"><img src="__IMG__/share.png" alt=""></div>
+	</div>
     <a href="enter.html"><div class="bottom">主页面</div></a><a href="my_coupon.html"><div class="bottom bottomActive">我的优惠券</div></a><a href="../words/page.html"><div class="bottom  bottomLast">淘客交流</div></a>
 </div>
 </body>
+<script src="__JS__/lib/jquery.min.js"></script>
+<script src="__JS__/lib/chosen.jquery.min.js"></script>
+<script src="__JS__/lib/jquery.nicescroll.min.js"></script>
+<script src="__JS__/lib/layer.min.js"></script>
+<script type="text/javascript" src="__JS__/editor/third-party/template.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/editor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/editor/editor_api.js"></script>
+<script type="text/javascript" src="__JS__/editor/lang/zh-cn/zh-cn.js"></script>
 <script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
 <script src="__JS__/kkpager.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="__JS__/my_coupon.js" type="text/javascript" charset="utf-8"></script>

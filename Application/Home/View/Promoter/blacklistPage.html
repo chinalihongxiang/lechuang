@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome" />
+    <title>黑名单查询</title>
+</head>
+<link rel="stylesheet" type="text/css" href="__CSS__/reset.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/blacklistPage.css"/>
+<body>
+<!--信息提示-->
+<div class="mask">
+    <div class="show">
+        <div class="showMsg"></div>
+        <div class="showBtn">确定</div>
+    </div>
+    <div class="showR">
+        <div class="showRMsg clearfix"><div><img src="__IMG__/success.png"/></div><p></p></div>
+        <div class="showRBtn">确定</div>
+    </div>
+    <div class="showW">
+        <div class="showWMsg clearfix"><div><img src="__IMG__/failed.png"/></div><p></p></div>
+        <div class="showWBtn">确定</div>
+    </div>
+	<div class="showL">
+        <img src="__IMG__/loading.png" alt="">
+        <p>查询中,请稍后...</p>
+    </div>
+</div>
+<div class="content">
+    <div class="contentShowDiv">
+            <div class="line"><h2>黑名单查询</h2></div>
+            <div class="line"><div class="title">查询关键词:</div><div><input type="text" class="input" value="请输入要查询的店铺ID,或店铺名称,或店铺卖家ID,或卖家昵称" placeholder="请输入要查询的店铺ID,或店铺名称,或店铺卖家ID,或卖家昵称" id="keywords"></div></div>
+            <button class="searchBtn">查询</button>
+			<div class="line results">
+			</div>
+    </div>
+</div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="__JS__/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="__JS__/blacklistPage.js" type="text/javascript" charset="utf-8"></script>
+</html>

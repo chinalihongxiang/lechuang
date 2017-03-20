@@ -18,7 +18,29 @@
 .content{width: 800px;height: 540px;border: 1px solid #e2e2e2;box-sizing:border-box;padding: 40px;margin:20px auto;}
 .bottom{width: 33.33%;height: 48px;text-align: center;line-height: 50px;font-size: 30px;display: inline-block;cursor: pointer;color: #666;background-color: #eee;box-sizing: border-box;border-right: 1px solid #e2e2e2;}
 .bottomActive{color: #fff;background-color: #00B2EE;}
+.bottom span{color:red;font-size:14px;display:inline-block;vertical-align:top;line-height:30px}
 .bottomLast{border-right: none}
+.bottomSilde {width: 33.4%;position: absolute;right: 0;bottom: 46px;border: 1px solid #e2e2e2;height: 96px;display: none;border-right:none !important;}
+.bottomSilde a:hover{ text-decoration: none}
+.bottomSilde div:first-child{border-bottom: 1px solid #e2e2e2}
+.edui-dialog-image .edui-image-item .edui-image-pic{position:absolute;left:0 !important,;top:0 !important;width:100%;height:100%}
+.GoodsDetailDivShowD img:nth-child(n+2),#myEditor1 img:nth-child(n+2){display:none}
+.GoodsDetailDivShowD img,#myEditor1 img{width:200px}
+.fixedBr{width: 28px;height: 150px;position: absolute;bottom: 60px;right: 0}
+.fixedBrImgtap img{width: 25px;margin-bottom: 5px;cursor: pointer}
+.addNrMask{width: 100%;height: 100%;position: absolute;top:0;left: 0;background-color: rgba(0,0,0,0.4);display: none;z-index: 100000}
+.addNr,.addNr1{width: 600px;position: absolute;background-color: #fff;border-radius: 5px;height: 330px;top:-1000px;left: 50%;margin-top: -165px;margin-left: -300px;z-index: 100000}
+.close,.close1{width: 20px;position: absolute;top:5px;right: 5px;cursor: pointer}
+.addNrTheme {width:540px;margin: 10px auto;height: 30px;line-height: 30px;border: 1px solid #e2e2e2}
+.addNrTheme input {width: 535px;height: 25px;text-indent:10px;border: none}
+.addNr .edui-container{margin: 30px auto 20px;}
+.addNr1 .edui-container{margin: 15px auto;}
+.typeN { padding: 0 50px;text-align: right}
+.edui-popup-emotion {width: 400px !important;}
+.edui-tab-nav .edui-tab-item:last-child{display: none}
+.edui-body-container,.edui-body-container div{height: 160px ;line-height: 20px}
+.layui-layer-content {height:auto !important}
+.addNrBtn,.addNrBtn1 {height: 50px;font-size: 30px;line-height: 50px;width: 250px;margin: 0 auto;text-align: center;background-color: #00B2EE;color: #fff;border-radius: 5px;cursor: pointer}
 @keyframes LoadImg
 {
     from {transform:rotate(0deg);}

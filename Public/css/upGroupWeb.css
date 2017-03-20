@@ -1,0 +1,20 @@
+hr{height: 1px;background-color: #e2e2e2;margin: 20px 0;}
+.content{position: relative;padding: 20px 0;width: 650px;height:510px;margin:10px auto;}
+.contentShowDiv{height: 478px;overflow: hidden}
+.line{width: 600px;padding: 0 18px;}
+.line div {display: inline-block;height: 40px;width: 80%;}
+.line h2 {width: 535px;margin: 0 auto 20px;border-bottom: 1px solid #e2e2e2;font-size: 25px;line-height: 30px}
+.line .title {font-size: 16px;width: 130px;text-align: right}
+.line div:last-child {margin-left: 30px;width: 400px;height: 38px;border: 1px solid #e2e2e2;border-radius: 2px;line-height: 38px;}
+.addWeb .line:nth-child(4) div:last-child{width: auto;height: 38px;border:none;line-height: 38px;}
+.addWeb .line:nth-child(4) input{vertical-align: text-bottom}
+/*.contentShowDiv .line:nth-child(4) label{font-size: 16px;}*/
+.addWeb .line:nth-child(4) div:nth-child(2){width: auto;margin-left: 30px}
+.line div:last-child .input{border: none;width: 395px;height: 32px;text-indent: 15px;font-size: 14px}
+.webBtn,.groupBtn,.addChoose button {width:150px;height:50px;display:block;text-align: center;line-height:50px;font-size: 20px;color: #fff;background-color: #00B2EE;border-radius: 5px;cursor: pointer;margin: 0 auto;}
+.groupBtn{margin-top: 52px}
+.addChoose button{margin: 0 50px;}
+.addChoose {text-align: center}
+.addChoose button {display: inline-block}
+.addWeb,.addGroup,.addDiv{border: 1px solid #e2e2e2;width: 620px;margin: 10px auto;padding: 20px 0;display: none;height: 375px}
+.addDiv{display: block}
